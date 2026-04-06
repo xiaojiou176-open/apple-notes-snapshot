@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>v0.1.9 release notes | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Release notes for Apple Notes Snapshot v0.1.9, covering the proof page, front-door tightening, and launchd/state-truth hardening."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/v0.1.9/" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="v0.1.9 release notes | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Release notes for Apple Notes Snapshot v0.1.9, covering the proof page, front-door tightening, and launchd/state-truth hardening."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/v0.1.9/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="v0.1.9 release notes page for Apple Notes Snapshot" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="v0.1.9 release notes | Apple Notes Snapshot" />
+    <meta
+      name="twitter:description"
+      content="Release notes for Apple Notes Snapshot v0.1.9, covering the proof page, front-door tightening, and launchd/state-truth hardening."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">v0.1.9 release notes</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../../">Home</a>
+          <a href="../">Release history</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases/tag/v0.1.9">GitHub release</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <a href="../">Release history</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">v0.1.9 release notes</span>
+      </nav>
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Public truth, tightened</span>
+        <h1>v0.1.9 turns the repo’s strongest traits into a cleaner public contract.</h1>
+        <p>
+          This release does not expand Apple Notes Snapshot into a bigger platform. It makes the
+          existing control-room, proof, and scheduler story easier to trust: the public truth is
+          synced, the proof trail is centralized, and disabled launchd labels on the current host
+          no longer block install from self-recovering.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Highlights</h2>
+        <ul>
+          <li>Added a public proof page for repo-side gates, GitHub-controlled evidence, live same-machine surfaces, and trust boundaries.</li>
+          <li>Tightened the front door so the control-room story stays first and builder surfaces stay second-lane.</li>
+          <li>Hardened launchd install against disabled-label host state.</li>
+          <li>Stopped lock-contention skip paths from polluting the state ledger as <code>aborted</code>.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Why it matters</h2>
+        <p>
+          This release closes the gap between “the repo is strong” and “the public surface proves
+          it cleanly.” In plain language: it is easier to see what is real, what is local-only,
+          and what is already verified without reading the whole repo by hand.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Keep going</h2>
+        <ul>
+          <li><a href="../../proof/">Proof page</a></li>
+          <li><a href="../../quickstart/">Quickstart</a></li>
+          <li><a href="../../for-agents/">For Agents</a></li>
+          <li><a href="../../security/">Security and privacy</a></li>
+          <li><a href="../">Release history</a></li>
+        </ul>
+      </section>
+      </main>
+
+      <footer class="footer">
+        Compare this tag with the earlier <a href="../v0.1.8/">v0.1.8 release notes</a> or go back
+        to the <a href="../">release history</a>.
+      </footer>
+    </div>
+  </body>
+</html>

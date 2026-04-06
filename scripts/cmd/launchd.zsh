@@ -78,12 +78,51 @@ EOF
   chmod 755 "$shim_path"
 }
 
+launchd_remove_tree() {
+  local target="$1"
+  if [[ -z "$target" ]]; then
+    return 0
+  fi
+  if [[ ! -e "$target" && ! -L "$target" ]]; then
+    return 0
+  fi
+
+  "$RM_BIN" -rf -- "$target" 2>/dev/null || true
+  if [[ ! -e "$target" && ! -L "$target" ]]; then
+    return 0
+  fi
+
+  if command -v python3 >/dev/null 2>&1; then
+    python3 - "$target" <<'PY' >/dev/null 2>&1 || true
+import pathlib
+import shutil
+import sys
+
+target = pathlib.Path(sys.argv[1])
+try:
+    if target.is_symlink() or target.is_file():
+        target.unlink()
+    elif target.exists():
+        shutil.rmtree(target)
+except Exception:
+    raise SystemExit(1)
+PY
+  fi
+
+  if [[ ! -e "$target" && ! -L "$target" ]]; then
+    return 0
+  fi
+
+  sleep 1
+  "$RM_BIN" -rf -- "$target"
+}
+
 launchd_prepare_runtime_repo() {
   local runtime_root="$1"
   local target_repo="$2"
   local preferred_python="${3:-}"
 
-  rm -rf -- "$runtime_root"
+  launchd_remove_tree "$runtime_root" || die "failed to remove runtime repo root: $runtime_root"
   "$MKDIR_BIN" -p -- "$runtime_root"
 
   local entry=""
@@ -110,7 +149,7 @@ launchd_sync_runtime_venv() {
     return 0
   fi
 
-  rm -rf -- "$runtime_venv"
+  launchd_remove_tree "$runtime_venv" || die "failed to remove runtime venv: $runtime_venv"
   "$MKDIR_BIN" -p -- "${runtime_venv:h}"
   cp -R "$source_venv" "$runtime_venv"
 }
@@ -121,12 +160,12 @@ launchd_link_runtime_dir() {
 
   "$MKDIR_BIN" -p -- "${link_path:h}" "$target_path"
   if [[ -L "$link_path" ]]; then
-    rm -f -- "$link_path"
+    "$RM_BIN" -f -- "$link_path"
   elif [[ -d "$link_path" ]]; then
     cp -R "${link_path}/." "$target_path/" 2>/dev/null || true
-    rm -rf -- "$link_path"
+    launchd_remove_tree "$link_path" || die "failed to replace runtime link path: $link_path"
   elif [[ -e "$link_path" ]]; then
-    rm -f -- "$link_path"
+    "$RM_BIN" -f -- "$link_path"
   fi
   ln -s "$target_path" "$link_path"
 }
@@ -135,6 +174,12 @@ launchd_label_safe_name() {
   local raw_label="$1"
   raw_label="${raw_label//[^A-Za-z0-9._-]/_}"
   printf '%s' "$raw_label"
+}
+
+launchd_service_loaded() {
+  local domain="$1"
+  local label="$2"
+  launchctl print "$domain/$label" >/dev/null 2>&1
 }
 
 launchd_retire_instance() {
@@ -157,8 +202,9 @@ launchd_retire_instance() {
     launchctl bootout "$domain/$label" >/dev/null 2>&1 || true
   fi
   launchctl disable "$domain/$label" >/dev/null 2>&1 || true
-  rm -f -- "$plist_path"
-  rm -rf -- "$launchd_bridge_dir" "$runtime_repo_root"
+  "$RM_BIN" -f -- "$plist_path"
+  launchd_remove_tree "$launchd_bridge_dir" || die "failed to remove launchd bridge dir: $launchd_bridge_dir"
+  launchd_remove_tree "$runtime_repo_root" || die "failed to remove runtime repo root: $runtime_repo_root"
 }
 
 cmd_install_help() {
@@ -340,9 +386,13 @@ cmd_install() {
 
   if [[ "$do_load" -eq 1 ]]; then
     launchctl bootout "$domain" "$plist_target_path" >/dev/null 2>&1 || true
-    launchctl bootstrap "$domain" "$plist_target_path"
     launchctl enable "$domain/$LABEL"
-    launchctl kickstart -k "$domain/$LABEL"
+    if ! launchctl bootstrap "$domain" "$plist_target_path"; then
+      launchd_service_loaded "$domain" "$LABEL" || return $?
+    fi
+    # RunAtLoad on the plist already starts the first run after bootstrap.
+    # Avoid a second immediate kickstart that can race the first run and leave
+    # a duplicate "already running" ledger entry behind.
   fi
 
   if [[ "$web_enable" -eq 1 ]]; then
@@ -407,9 +457,12 @@ cmd_install() {
     fi
     if [[ "$do_load" -eq 1 ]]; then
       launchctl bootout "$domain" "$web_plist_target_path" >/dev/null 2>&1 || true
-      launchctl bootstrap "$domain" "$web_plist_target_path"
       launchctl enable "$domain/$WEB_LABEL"
-      launchctl kickstart -k "$domain/$WEB_LABEL"
+      if ! launchctl bootstrap "$domain" "$web_plist_target_path"; then
+        launchd_service_loaded "$domain" "$WEB_LABEL" || return $?
+      fi
+      # RunAtLoad on the web plist is enough after bootstrap; avoid a redundant
+      # second kickstart against the same just-bootstrapped service.
     fi
   else
     if [[ "$do_unload" -eq 1 ]] && [[ -f "$WEB_PLIST_TARGET_PATH" ]]; then

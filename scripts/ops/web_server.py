@@ -31,14 +31,17 @@ def env_bool(name, default=False):
     return value.strip().lower() in ("1", "true", "yes", "y", "on")
 
 def parse_csv(value):
-    if not value:
-        return []
-    return [item.strip() for item in value.split(",") if item.strip()]
+    return web_policy_helpers.parse_csv(value)
 
 # ------------------------------
 # Constants
 # ------------------------------
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.ops import web_policy_helpers, web_surface_helpers  # noqa: E402
+
 WEB_ROOT = REPO_ROOT / "web"
 WEB_NOTESCTL_OVERRIDE = os.getenv("NOTES_SNAPSHOT_WEB_NOTESCTL", "").strip()
 NOTESCTL_CANDIDATES = []
@@ -72,14 +75,7 @@ if MAX_TAIL_LINES < 1:
 
 SAFE_NOTESCTL_ARG_RE = re.compile(r"^[A-Za-z0-9._/-]+$")
 SAFE_STATIC_PATH_RE = re.compile(r"^[A-Za-z0-9._/-]+$")
-STATIC_CONTENT_TYPES = {
-    ".css": "text/css; charset=utf-8",
-    ".html": "text/html; charset=utf-8",
-    ".js": "application/javascript; charset=utf-8",
-    ".json": "application/json; charset=utf-8",
-    ".svg": "image/svg+xml",
-    ".txt": "text/plain; charset=utf-8",
-}
+STATIC_CONTENT_TYPES = web_surface_helpers.STATIC_CONTENT_TYPES
 
 ACTION_TIMEOUTS = {
     "setup": 420,
@@ -126,90 +122,22 @@ DEFAULT_ACTION_COOLDOWNS = {
 }
 
 def parse_allow_ips(raw):
-    if not raw:
-        return [], None
-    allow = []
-    for entry in parse_csv(raw):
-        if entry in ("localhost", "loopback"):
-            allow.append(ipaddress.ip_network("127.0.0.1/32"))
-            allow.append(ipaddress.ip_network("::1/128"))
-            continue
-        try:
-            allow.append(ipaddress.ip_network(entry, strict=False))
-            continue
-        except Exception:
-            pass
-        try:
-            addr = ipaddress.ip_address(entry)
-            if addr.version == 4:
-                allow.append(ipaddress.ip_network(f"{addr}/32"))
-            else:
-                allow.append(ipaddress.ip_network(f"{addr}/128"))
-        except Exception:
-            return None, f"invalid_allow_ip:{entry}"
-    return allow, None
+    return web_policy_helpers.parse_allow_ips(raw)
 
 def normalize_client_ip(addr):
-    try:
-        ip = ipaddress.ip_address(addr)
-        if ip.version == 6 and ip.ipv4_mapped:
-            ip = ip.ipv4_mapped
-        return ip
-    except Exception:
-        return None
+    return web_policy_helpers.normalize_client_ip(addr)
 
 def parse_scopes(raw):
-    scopes = {item.lower() for item in parse_csv(raw)}
-    if not scopes or "all" in scopes:
-        return None, None
-    unknown = sorted(scopes - ALL_SCOPES)
-    if unknown:
-        return None, f"invalid_scopes:{','.join(unknown)}"
-    return scopes, None
+    return web_policy_helpers.parse_scopes(raw, ALL_SCOPES)
 
 def parse_action_allowlist(raw):
-    actions = {item.strip().lower() for item in parse_csv(raw)}
-    if not actions or "all" in actions:
-        return None, None
-    unknown = sorted(actions - ALL_ACTIONS)
-    if unknown:
-        return None, f"invalid_actions:{','.join(unknown)}"
-    return actions, None
+    return web_policy_helpers.parse_action_allowlist(raw, ALL_ACTIONS)
 
 def parse_action_cooldowns(raw, defaults):
-    if not raw:
-        return dict(defaults), None
-    lowered = raw.strip().lower()
-    if lowered in ("0", "off", "none", "disable", "disabled"):
-        return {}, None
-    cooldowns = {}
-    for entry in parse_csv(raw):
-        if "=" not in entry:
-            return None, f"invalid_cooldown:{entry}"
-        action, value = [item.strip().lower() for item in entry.split("=", 1)]
-        if action not in ALL_ACTIONS:
-            return None, f"invalid_cooldown_action:{action}"
-        if not value.isdigit():
-            return None, f"invalid_cooldown_value:{entry}"
-        sec = int(value)
-        if sec < 0:
-            return None, f"invalid_cooldown_value:{entry}"
-        if sec == 0:
-            continue
-        cooldowns[action] = sec
-    return cooldowns, None
+    return web_policy_helpers.parse_action_cooldowns(raw, defaults, ALL_ACTIONS)
 
 def validate_action_scopes(action_allowlist, token_scopes):
-    if action_allowlist is None or token_scopes is None:
-        return None
-    missing = []
-    for action in action_allowlist:
-        required = ACTION_SCOPES.get(action)
-        if required and required not in token_scopes:
-            missing.append(f"{action}:{required}")
-    if missing:
-        return f"action_scope_mismatch:{','.join(sorted(missing))}"
-    return None
+    return web_policy_helpers.validate_action_scopes(action_allowlist, token_scopes, ACTION_SCOPES)
 
 ALLOW_IPS, ALLOW_IPS_ERROR = parse_allow_ips(WEB_ALLOW_IPS_RAW)
 TOKEN_SCOPES, TOKEN_SCOPES_ERROR = parse_scopes(WEB_TOKEN_SCOPES_RAW)
@@ -222,53 +150,30 @@ ACTION_LAST_RUN = {}
 ACTION_COOLDOWN_LOCK = threading.Lock()
 
 def compute_allowed_actions():
-    if WEB_READONLY:
-        return []
-    if ACTION_ALLOWLIST is None:
-        actions = set(ALL_ACTIONS)
-    else:
-        actions = set(ACTION_ALLOWLIST)
-    if TOKEN_SCOPES is None:
-        return sorted(actions)
-    allowed = []
-    for action in actions:
-        required = ACTION_SCOPES.get(action)
-        if required and required in TOKEN_SCOPES:
-            allowed.append(action)
-    return sorted(allowed)
+    return web_policy_helpers.compute_allowed_actions(
+        WEB_READONLY,
+        ACTION_ALLOWLIST,
+        ALL_ACTIONS,
+        TOKEN_SCOPES,
+        ACTION_SCOPES,
+    )
 
 def check_rate_limit(client_ip):
-    if WEB_RATE_LIMIT_MAX <= 0 or WEB_RATE_LIMIT_WINDOW_SEC <= 0:
-        return None
-    now = time.monotonic()
-    with RATE_LIMIT_LOCK:
-        bucket = RATE_LIMIT_BUCKETS.get(client_ip)
-        if bucket is None:
-            bucket = deque()
-            RATE_LIMIT_BUCKETS[client_ip] = bucket
-        cutoff = now - WEB_RATE_LIMIT_WINDOW_SEC
-        while bucket and bucket[0] < cutoff:
-            bucket.popleft()
-        if len(bucket) >= WEB_RATE_LIMIT_MAX:
-            retry_after = int(max(1, WEB_RATE_LIMIT_WINDOW_SEC - (now - bucket[0])))
-            return retry_after
-        bucket.append(now)
-    return None
+    return web_policy_helpers.check_rate_limit(
+        client_ip,
+        WEB_RATE_LIMIT_MAX,
+        WEB_RATE_LIMIT_WINDOW_SEC,
+        RATE_LIMIT_BUCKETS,
+        RATE_LIMIT_LOCK,
+    )
 
 def check_action_cooldown(action):
-    if not ACTION_COOLDOWNS:
-        return None
-    cooldown = ACTION_COOLDOWNS.get(action)
-    if not cooldown:
-        return None
-    now = time.monotonic()
-    with ACTION_COOLDOWN_LOCK:
-        last = ACTION_LAST_RUN.get(action, 0)
-        elapsed = now - last if last else None
-        if elapsed is not None and elapsed < cooldown:
-            return int(max(1, cooldown - elapsed))
-        ACTION_LAST_RUN[action] = now
-    return None
+    return web_policy_helpers.check_action_cooldown(
+        action,
+        ACTION_COOLDOWNS,
+        ACTION_LAST_RUN,
+        ACTION_COOLDOWN_LOCK,
+    )
 
 def resolve_notesctl():
     for candidate in NOTESCTL_CANDIDATES:
@@ -470,110 +375,34 @@ def filter_since(path, since_minutes, max_lines=MAX_TAIL_LINES):
     return {"ok": True, "lines": list(lines)}
 
 def sanitize_ref(value):
-    if not value:
-        return ""
-    if not re.match(r"^[A-Za-z0-9._/-]+$", value):
-        return None
-    return value
+    return web_policy_helpers.sanitize_ref(value)
 
 def parse_bool(value):
-    if isinstance(value, bool):
-        return value
-    if isinstance(value, (int, float)):
-        return value != 0
-    if isinstance(value, str):
-        return value.strip().lower() in ("1", "true", "yes", "y", "on")
-    return False
+    return web_policy_helpers.parse_bool(value)
 
 def clamp_int(value, default, min_value, max_value):
-    number = safe_int(value, default)
-    if number < min_value:
-        return min_value
-    if number > max_value:
-        return max_value
-    return number
+    return web_policy_helpers.clamp_int(value, default, min_value, max_value, safe_int)
 
 def normalize_static_request_path(raw_path):
-    if raw_path is None:
-        return None
-    try:
-        path = unquote(str(raw_path).split("?", 1)[0].split("#", 1)[0])
-    except Exception:
-        return None
-    if any(char in path for char in ("\x00", "\r", "\n")):
-        return None
-    path = path.lstrip("/")
-    if not path:
-        return "index.html"
-    if not SAFE_STATIC_PATH_RE.fullmatch(path):
-        return None
-    pure_path = PurePosixPath(path)
-    if pure_path.is_absolute():
-        return None
-    if any(part in ("", ".", "..") for part in pure_path.parts):
-        return None
-    return pure_path.as_posix()
+    return web_surface_helpers.normalize_static_request_path(raw_path, SAFE_STATIC_PATH_RE)
 
 def build_static_file_index(base_dir):
-    base_path = Path(base_dir)
-    if not base_path.is_dir():
-        return {}
-    base_real = base_path.resolve()
-    index = {}
-    for path in base_real.rglob("*"):
-        if not path.is_file():
-            continue
-        resolved = path.resolve()
-        try:
-            relative = resolved.relative_to(base_real).as_posix()
-        except ValueError:
-            continue
-        index[relative] = resolved
-    return index
+    return web_surface_helpers.build_static_file_index(base_dir)
 
 def resolve_static_path(base_dir, raw_path):
-    static_index = build_static_file_index(base_dir)
-    default_path = static_index.get("index.html")
-    relative_path = normalize_static_request_path(raw_path)
-    if relative_path is None:
-        return default_path
-    return static_index.get(relative_path) or default_path
+    return web_surface_helpers.resolve_static_path(base_dir, raw_path, SAFE_STATIC_PATH_RE)
 
 def static_content_type(path):
-    return STATIC_CONTENT_TYPES.get(path.suffix.lower(), "application/octet-stream")
+    return web_surface_helpers.static_content_type(path)
 
 def extract_token_from_request(handler, parsed):
-    auth_header = handler.headers.get("Authorization", "")
-    if auth_header.lower().startswith("bearer "):
-        token = auth_header[7:].strip()
-        if token:
-            return token
-    token = handler.headers.get("X-Notes-Token", "").strip()
-    if token:
-        return token
-    params = parse_qs(parsed.query or "")
-    return (params.get("token") or [""])[0].strip()
+    return web_surface_helpers.extract_token_from_request(handler, parsed)
 
 def normalize_host(host):
-    value = (host or "").strip()
-    if value in ("", "127.0.0.1", "localhost", "::1"):
-        return "127.0.0.1", None
-    if not WEB_ALLOW_REMOTE:
-        return "127.0.0.1", "remote_blocked"
-    if WEB_REQUIRE_TOKEN and not WEB_TOKEN:
-        return None, "token_required"
-    return value, None
+    return web_policy_helpers.normalize_host(host, WEB_ALLOW_REMOTE, WEB_TOKEN, WEB_REQUIRE_TOKEN)
 
 def is_ip_allowed(client_ip):
-    if not ALLOW_IPS:
-        return True
-    ip = normalize_client_ip(client_ip)
-    if not ip:
-        return False
-    for network in ALLOW_IPS:
-        if ip in network:
-            return True
-    return False
+    return web_policy_helpers.is_ip_allowed(client_ip, ALLOW_IPS)
 
 def read_json_body(handler):
     length = safe_int(handler.headers.get("Content-Length", "0"), 0)
@@ -703,63 +532,44 @@ class NotesHandler(BaseHTTPRequestHandler):
         scope = READ_SCOPES.get(parsed.path, "read")
         if not self.require_access(parsed, scope):
             return
-        if parsed.path == "/api/health":
-            return self.respond_json({"ok": True})
-
-        if parsed.path == "/api/status":
-            return self.respond_notesctl_json("status_json")
-
-        if parsed.path == "/api/log-health":
-            params = parse_qs(parsed.query)
-            tail_lines = clamp_int(params.get("tail", ["200"])[0], 200, 1, MAX_TAIL_LINES)
-            return self.respond_notesctl_json("log_health_json", options={"tail": tail_lines})
-
-        if parsed.path == "/api/doctor":
-            return self.respond_notesctl_json("doctor_json")
-
-        if parsed.path == "/api/metrics":
-            params = parse_qs(parsed.query)
-            tail_lines = clamp_int(params.get("tail", ["120"])[0], 120, 1, MAX_TAIL_LINES)
-            log_dir = os.getenv(
-                "NOTES_SNAPSHOT_LOG_DIR",
-                DEFAULT_LOG_DIR,
-            )
-            state_dir = os.getenv("NOTES_SNAPSHOT_STATE_DIR", DEFAULT_STATE_DIR)
-            metrics_path = os.path.join(state_dir, "metrics.jsonl")
-
-            result = load_metrics_jsonl(metrics_path, tail_lines)
+        plan = web_surface_helpers.build_read_route_plan(
+            parsed.path,
+            parsed.query,
+            max_tail_lines=MAX_TAIL_LINES,
+            default_state_dir=DEFAULT_STATE_DIR,
+            environ=os.environ,
+            clamp_int=clamp_int,
+        )
+        kind = plan.get("kind")
+        if kind == "json":
+            return self.respond_json(plan["payload"])
+        if kind == "notesctl_json":
+            return self.respond_notesctl_json(plan["command"], options=plan.get("options"))
+        if kind == "metrics":
+            result = load_metrics_jsonl(plan["metrics_path"], plan["tail"])
             if not result.get("ok"):
                 return self.respond_json(result, status=500)
-
             payload = {
                 "ok": True,
-                "file": metrics_path,
-                "tail": tail_lines,
+                "file": plan["metrics_path"],
+                "tail": plan["tail"],
                 "entries": result["entries"],
                 "errors": result["errors"],
             }
             return self.respond_json(payload)
-
-        if parsed.path == "/api/recent-runs":
-            params = parse_qs(parsed.query)
-            tail_count = clamp_int(params.get("tail", ["20"])[0], 20, 1, 200)
-            return self.respond_notesctl_json("aggregate_json", options={"tail": tail_count})
-
-        if parsed.path == "/api/access":
-            payload = {
-                "ok": True,
-                "require_token": WEB_REQUIRE_TOKEN,
-                "require_token_for_static": WEB_REQUIRE_TOKEN_FOR_STATIC,
-                "readonly": WEB_READONLY,
-                "token_scopes": sorted(TOKEN_SCOPES) if TOKEN_SCOPES is not None else ["all"],
-                "actions_allowlist": sorted(ACTION_ALLOWLIST) if ACTION_ALLOWLIST is not None else ["all"],
-                "actions_effective": compute_allowed_actions(),
-                "rate_limit_window_sec": WEB_RATE_LIMIT_WINDOW_SEC,
-                "rate_limit_max": WEB_RATE_LIMIT_MAX,
-                "action_cooldowns": ACTION_COOLDOWNS,
-            }
+        if kind == "access":
+            payload = web_surface_helpers.build_access_payload(
+                WEB_REQUIRE_TOKEN,
+                WEB_REQUIRE_TOKEN_FOR_STATIC,
+                WEB_READONLY,
+                TOKEN_SCOPES,
+                ACTION_ALLOWLIST,
+                ACTION_COOLDOWNS,
+                compute_allowed_actions,
+                WEB_RATE_LIMIT_WINDOW_SEC,
+                WEB_RATE_LIMIT_MAX,
+            )
             return self.respond_json(payload)
-
         return self.respond_json({"ok": False, "error": "not_found"}, status=404)
 
     def respond_notesctl_json(self, command_name, extra_env=None, options=None):

@@ -2,21 +2,25 @@
 
 Apple Notes Snapshot is the local-first backup control room for Apple Notes on
 macOS. Keep the upstream `notes-exporter` engine, then add path-aware exports,
-`launchd` scheduling, visible health checks, a **token-gated Local Web API**,
-**AI-assisted diagnostics**, and a **stdio-first MCP surface** so humans and
-MCP-aware coding agents can inspect the same local backup state without
-turning the workflow into a hosted service.
+`launchd` scheduling, visible health checks, and a calmer recovery path when
+the local backup loop drifts.
+
+If you want builder-facing surfaces after the control room already makes sense,
+the repo also ships **AI-assisted diagnostics**, a **token-gated Local Web
+API**, and a **stdio-first MCP surface** so humans and MCP-aware coding agents
+can inspect the same local backup state without turning the workflow into a
+hosted service.
 
 [Start the 3-step quickstart](https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/) |
 [Compare with upstream](https://xiaojiou176-open.github.io/apple-notes-snapshot/compare/) |
+[Browse release history](https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/) |
+[Open the proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/) |
+[Get support or routing help](https://xiaojiou176-open.github.io/apple-notes-snapshot/support/)
+
 [AI Diagnose](https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/) |
 [Local Web API](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/) |
 [MCP Provider](https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/) |
-[For Codex / Claude Code builders](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/) |
-[Builder integration pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/integration-pack/) |
-[Public skills pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/public-skills/) |
-[Browse release history](https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/) |
-[Get support and community links](https://xiaojiou176-open.github.io/apple-notes-snapshot/community/)
+[For Codex / Claude Code builders](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/)
 
 [![Trusted CI](https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml/badge.svg)](https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml)
 [![Latest Release](https://img.shields.io/github/v/release/xiaojiou176-open/apple-notes-snapshot?display_name=tag&color=1d4ed8)](https://github.com/xiaojiou176-open/apple-notes-snapshot/releases)
@@ -41,6 +45,11 @@ turning the workflow into a hosted service.
 >
 > Not the goal: cloud sync, team collaboration, or two-way write-back into
 > Apple Notes.
+
+If you want the shortest public evidence trail after that first pass, open the
+[proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/).
+It collects the repo-owned gates, the GitHub-controlled release and Pages
+evidence, and the current same-machine boundary in one place.
 
 Star or follow releases if you want a visible, reviewable local backup control
 room instead of another opaque automation snippet.
@@ -71,6 +80,10 @@ Fail fast:
   public [troubleshooting guide](https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/).
 - The full, authoritative guide lives at
   [docs/quickstart](https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/).
+- The public
+  [proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/)
+  shows the repo-side gates, live-surface checks, and trust boundary in one
+  place.
 - Maintainer-grade verification lives later in
   [Proof and verification](#proof-and-verification); it is not required for the
   first successful snapshot.
@@ -290,6 +303,12 @@ export NOTES_SNAPSHOT_WEB_TOKEN="<long-random-token>"
 This repository ships with repo-owned verification commands instead of asking
 you to trust screenshots alone. These are maintainer / contributor gates, not
 required for the first successful snapshot.
+
+If you want the shorter public-facing evidence page first, open the
+[proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/).
+It keeps the repo-side gates, GitHub-controlled delivery facts, and live
+same-machine boundary in one place. The ladder below remains the
+maintainer-grade verification contract.
 
 Core gates:
 
