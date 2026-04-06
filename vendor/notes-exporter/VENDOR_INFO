@@ -1,0 +1,11 @@
+source = https://github.com/storizzi/notes-exporter.git
+requested_ref = v1.3.0
+ref = v1.3.0
+resolved_commit = 3043f28d3cba4712e7452261f0ef44da1031f892
+commit = 3043f28d3cba4712e7452261f0ef44da1031f892
+updated_at = 2026-03-24T18:57:47-0700
+patch_dir = 
+patch_list = 
+patch_hash = 
+base_match_status = exact-upstream-ref-with-source-only-filter
+source_only_filters = __pycache__,.pytest_cache,*.pyc,*.pyo,tests/test_results.txt
