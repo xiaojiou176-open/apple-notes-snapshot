@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Troubleshooting | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Use the Apple Notes Snapshot troubleshooting guide for permission prompts, launchd edge cases, stale runs, and local Web console access issues."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Troubleshooting | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Use the Apple Notes Snapshot troubleshooting guide for permission prompts, launchd edge cases, stale runs, and local Web console access issues."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Troubleshooting page for Apple Notes Snapshot" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Troubleshooting | Apple Notes Snapshot" />
+    <meta
+      name="twitter:description"
+      content="Use the Apple Notes Snapshot troubleshooting guide for permission prompts, launchd edge cases, stale runs, and local Web console access issues."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">Troubleshooting</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="../quickstart/">Quickstart</a>
+          <a href="../local-api/">Local Web API</a>
+          <a href="../support/">Support</a>
+          <a href="../community/">Community</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">Troubleshooting</span>
+      </nav>
+
+      <main id="main-content">
+
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">When the first run is not boring yet</span>
+        <h1>Use the shortest diagnostic path before opening an issue.</h1>
+        <p>
+          This page is meant for the first frustrating ten minutes: permissions did not appear,
+          launchd is not loaded, or the Web console is not behaving the way you expected.
+        </p>
+      </section>
+
+      <section class="cards section">
+        <article class="card">
+          <h2>Snapshots landed in the wrong place</h2>
+          <p>
+            Check <code>config/notes_snapshot.env</code> first. If you never changed it, the default
+            export destination is <code>$HOME/iCloudDrive/NotesSnapshots</code>.
+          </p>
+          <pre tabindex="0"><code># review the runtime config
+config/notes_snapshot.env</code></pre>
+        </article>
+        <article class="card">
+          <h2>Permission prompt never appeared</h2>
+          <p>Run one manual snapshot first. The first `run --no-status` is the moment macOS can ask for Apple Notes and AppleScript access.</p>
+          <pre tabindex="0"><code>./notesctl run --no-status</code></pre>
+        </article>
+        <article class="card">
+          <h2>Scheduler looks missing</h2>
+          <p>Reinstall the launchd job and verify the current checkout path is the one you expect.</p>
+          <pre tabindex="0"><code>./notesctl install --minutes 30 --load
+./notesctl doctor</code></pre>
+        </article>
+        <article class="card">
+          <h2>Health looks stale</h2>
+          <p>Check whether the last success is old or missing, then inspect logs and doctor output before assuming the exporter broke.</p>
+          <pre tabindex="0"><code>./notesctl status --full
+./notesctl verify
+./notesctl log-health --tail 200</code></pre>
+        </article>
+      </section>
+
+      <section class="page-card">
+        <h2>Web console access problems</h2>
+        <ul>
+          <li>Keep it on loopback by default</li>
+          <li>Set `NOTES_SNAPSHOT_WEB_TOKEN` before enabling it</li>
+          <li>Use the doctor and access-policy surfaces before widening the bind address</li>
+          <li>Read the <a href="../local-api/">Local Web API guide</a> if your same-machine workflow also depends on the JSON endpoints</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>`launchd` is loaded, but there is still no successful snapshot</h2>
+        <p>
+          Treat this as a three-layer mismatch instead of a single mystery status. The config layer
+          can be valid, `launchd` can be loaded, and the local state ledger can still be empty if
+          the first manual export never completed successfully.
+        </p>
+        <pre tabindex="0"><code>./notesctl status --full
+./notesctl run --no-status
+./notesctl verify</code></pre>
+        <p>
+          If <code>verify</code> still says <code>no last_success record</code>, the scheduler is
+          not the only thing to inspect yet. Finish one manual export first so the ledger has a
+          successful baseline.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>You moved the checkout after installing the scheduler</h2>
+        <p>
+          Reinstall the launchd job when the checkout path changes. The path-aware runtime mirror
+          and scheduler bridge must be pointed at the current checkout, not the old location.
+        </p>
+        <pre tabindex="0"><code>./notesctl install --minutes 30 --load
+./notesctl rebuild-dev-env
+./notesctl doctor</code></pre>
+        <p>
+          Use the rebuild step when you also rely on the repo-owned verification environment or the
+          optional local Web console.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Web token or scope settings do not match the action you need</h2>
+        <p>
+          The local Web console is intentionally strict. If the console looks online but actions are
+          missing or blocked, inspect the token and allowlist contract before you assume the server
+          is broken.
+        </p>
+        <pre tabindex="0"><code>./notesctl doctor --json
+
+# review these settings in config/notes_snapshot.env
+# NOTES_SNAPSHOT_WEB_TOKEN
+# NOTES_SNAPSHOT_WEB_TOKEN_SCOPES
+# NOTES_SNAPSHOT_WEB_ACTIONS_ALLOW
+# NOTES_SNAPSHOT_WEB_READONLY</code></pre>
+        <p>
+          Keep the Web surface on loopback unless you have a clear reason to widen it. A narrower
+          token and action allowlist is the safer default.
+        </p>
+        <p>
+          If you want the browser/API contract spelled out before changing config, open the
+          <a href="../local-api/">Local Web API guide</a> or run <code>./notesctl audit --json</code>.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>AI Diagnose is only showing the deterministic fallback</h2>
+        <p>
+          That is the expected baseline when no AI provider is configured. The command still works
+          as a deterministic diagnosis layer, but AI-assisted inference only appears after you opt
+          into a supported provider.
+        </p>
+        <pre tabindex="0"><code>./notesctl ai-diagnose
+
+# optional Switchyard-backed provider settings in config/notes_snapshot.env
+# NOTES_SNAPSHOT_AI_ENABLE=1
+# NOTES_SNAPSHOT_AI_PROVIDER=gemini
+# NOTES_SNAPSHOT_AI_MODEL=gemini-2.5-flash
+# NOTES_SNAPSHOT_AI_BASE_URL=http://127.0.0.1:4010</code></pre>
+        <p>
+          AI Diagnose remains advisory even when a provider is configured. The canonical truth still
+          comes from <code>status</code>, <code>doctor</code>, <code>verify</code>, and
+          <code>log-health</code>.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>You just ran clean-cache, and now status looks empty again</h2>
+        <p>
+          That can be a normal cleaned-checkout baseline. <code>clean-cache</code> removes
+          repo-local rebuildables and disposable-generated support files under
+          <code>.runtime-cache/</code>, so the local state ledger may look empty again until you
+          rebuild the maintainer environment and record another successful snapshot.
+        </p>
+        <pre tabindex="0"><code>./notesctl rebuild-dev-env
+./notesctl status --full
+./notesctl run --no-status
+./notesctl verify
+./notesctl doctor</code></pre>
+        <p>
+          This cleanup lane does not delete exported snapshots under
+          <code>NOTES_SNAPSHOT_ROOT_DIR</code>. It only resets repo-local support surfaces.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Runtime residue is living outside the repo root</h2>
+        <p>
+          Treat repo-local cleanup and machine-level residue as two different closets. Repo-local
+          rebuildables live under <code>.runtime-cache/</code>. Repo-owned machine-level residue
+          lives under the current repo-managed machine cache root.
+        </p>
+        <pre tabindex="0"><code>./notesctl runtime-audit
+./notesctl clean-runtime --dry-run
+./notesctl clean-runtime</code></pre>
+        <p>
+          <code>runtime-audit</code> is the safe first look. It reports both current roots and
+          legacy migration roots so you can see whether stale launchd/runtime/browser/vendor
+          residue is still hanging around from an older path contract.
+        </p>
+        <p>
+          The persistent isolated browser root is reported, but it is not part of TTL/cap cleanup.
+          Only disposable browser temp state under <code>browser/tmp/</code> is cleanup-eligible.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Browser automation cannot find or attach to the isolated Chrome instance</h2>
+        <p>
+          The browser contract here is strict on purpose. This repo no longer shares the default
+          Chrome root. It keeps its own isolated browser root, with one on-disk profile dir fixed
+          to <code>Profile 1</code> and the display name still set to
+          <code>apple-notes-snapshot</code>.
+        </p>
+        <pre tabindex="0"><code>./notesctl browser-bootstrap
+./notesctl browser-open
+./notesctl browser-contract
+
+# config/notes_snapshot.env
+# NOTES_SNAPSHOT_BROWSER_PROVIDER=chrome
+# NOTES_SNAPSHOT_BROWSER_ROOT=&lt;repo-owned-browser-root&gt;
+# NOTES_SNAPSHOT_CHROME_USER_DATA_DIR=&lt;repo-owned-browser-root&gt;/chrome-user-data
+# NOTES_SNAPSHOT_CHROME_PROFILE_NAME=apple-notes-snapshot</code></pre>
+        <p>
+          <code>browser-bootstrap</code> is the one-time copy step from the default Chrome root.
+          <code>browser-open</code> is the single-instance launcher/attacher. After that,
+          automation should attach over CDP instead of second-launching the same root. If the env
+          is missing, the profile is absent, or another Chrome instance already owns the configured
+          CDP port, the contract fails fast instead of drifting into the wrong browser session.
+        </p>
+        <p>
+          Do not treat <code>browser-bootstrap</code> as a routine sync command. Once you add or
+          refresh logins inside the isolated repo-owned root, rerunning bootstrap would replace that
+          isolated root from the default Chrome root again.
+        </p>
+        <p>
+          The default CDP port is <code>9337</code>. If your machine already uses that port for a
+          different local tool, choose a deliberate override before launching this repo-owned
+          instance, for example:
+        </p>
+        <pre tabindex="0"><code>NOTES_SNAPSHOT_CHROME_CDP_PORT=9347 ./notesctl browser-open
+NOTES_SNAPSHOT_CHROME_CDP_PORT=9347 ./notesctl browser-contract --json</code></pre>
+      </section>
+
+      <section class="page-card">
+        <h2>You are trying to compare local verification with CI</h2>
+        <p>
+          Local maintainer verification and GitHub CI are related, but they are not the same lane.
+          Local verification helps you reproduce the repo-owned gates on your Mac. GitHub CI for
+          this repository runs on GitHub-hosted runners, not on a local self-hosted runner.
+        </p>
+        <pre tabindex="0"><code>./notesctl rebuild-dev-env
+./.runtime-cache/dev/venv/bin/python -m pre_commit run --all-files
+PYTHON_BIN=./.runtime-cache/dev/venv/bin/python scripts/checks/ci_gate.sh</code></pre>
+        <p>
+          If local verification is green and a pull request still fails, treat that as a repo or
+          CI-environment mismatch to inspect, not as proof that this repo expects you to run CI on
+          your own machine.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Still blocked?</h2>
+        <p>
+          If this page did not get you unstuck, use the public
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/q-a">Q&amp;A discussion</a>.
+          Open a bug issue only when you can provide a reproducible repository or runtime failure.
+        </p>
+        <p>
+          If you want an advisory explanation before opening anything, try
+          <code>./notesctl ai-diagnose</code> and then compare it with the deterministic output from
+          <code>status</code>, <code>doctor</code>, and <code>log-health</code>.
+        </p>
+        <p>
+          If you are debugging the workflow from an MCP host, use <code>./notesctl mcp</code> so
+          the host reads the same local diagnostics contract instead of screen-scraping the Web
+          console.
+        </p>
+      </section>
+
+      </main>
+      <footer class="footer">
+        If the problem is really "I have not done the first successful run yet", go back to the
+        <a href="../quickstart/">quickstart</a>. If the problem is "should I use this at all?",
+        read the <a href="../compare/">comparison page</a>.
+      </footer>
+    </div>
+  </body>
+</html>

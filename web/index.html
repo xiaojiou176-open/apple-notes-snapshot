@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title id="page-title" data-i18n="ui.title">Notes Snapshot Console</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient">
+      <span class="orb orb--a"></span>
+      <span class="orb orb--b"></span>
+      <span class="orb orb--c"></span>
+      <span class="gridline"></span>
+    </div>
+
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="badge" data-i18n="ui.badgeLocal">LOCAL</div>
+          <h1 data-i18n="ui.title">Notes Snapshot Console</h1>
+          <p data-i18n="ui.heroSummary">Deterministic local Web console for Apple Notes exports, without requiring a bundled desktop app.</p>
+        </div>
+        <div class="actions">
+          <label class="locale-picker" for="locale-switcher">
+            <span id="locale-label" data-i18n="locale.labelText">Language</span>
+            <select id="locale-switcher" aria-describedby="locale-label">
+              <option value="en" data-i18n="locale.option.en">English</option>
+              <option value="zh-CN" data-i18n="locale.option.zhCN">Simplified Chinese</option>
+            </select>
+          </label>
+          <div class="connection" id="connection-status">offline</div>
+          <button id="refresh" class="btn" data-i18n="ui.refresh">Refresh</button>
+          <div class="timestamp">
+            <span data-i18n="ui.lastUpdate">Last update</span>
+            <span id="last-updated">--</span>
+          </div>
+        </div>
+      </header>
+      <div class="banner banner--hidden" id="system-banner" role="status" aria-live="polite" aria-atomic="true"></div>
+      <div class="sr-only" id="action-announcer" aria-live="polite" aria-atomic="true"></div>
+      <section class="card card--wide" id="onboarding-card" hidden>
+        <div class="card__header">
+          <h2 id="onboarding-title" data-i18n="ui.firstRunGuidance">First-Run Guidance</h2>
+          <span class="pill pill--sub" id="onboarding-pill">--</span>
+        </div>
+        <p id="onboarding-summary" data-i18n="message.firstRunSummary">
+          Build one successful snapshot first, then treat the rest of the control room as ongoing operations.
+        </p>
+        <ol class="list" id="onboarding-steps">
+          <li data-i18n="onboarding.stepRun">Run ./notesctl run --no-status so macOS can surface the first permission prompts.</li>
+          <li data-i18n="onboarding.stepVerify">Run ./notesctl verify to confirm the local state ledger now has a successful baseline.</li>
+          <li data-i18n="onboarding.stepDoctor">Run ./notesctl doctor if the state still looks empty or warnings remain.</li>
+        </ol>
+        <div class="hint" id="onboarding-hint" data-i18n-html="message.firstRunHintHtml">
+          Need the full checklist? Open the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a> or the
+          <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/">troubleshooting guide</a>.
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card card--wide" id="status-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.snapshotStatus">Snapshot Status</h2>
+            <span class="pill" id="health-pill">--</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <span data-i18n="ui.status">Status</span>
+              <strong id="status-value">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.exitCode">Exit Code</span>
+              <strong id="exit-code">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.lastSuccess">Last Success</span>
+              <strong id="last-success">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.lastRun">Last Run</span>
+              <strong id="last-run">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.age">Age</span>
+              <strong id="age-sec">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.launchd">Launchd</span>
+              <strong id="launchd-state">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.triggerSource">Trigger Source</span>
+              <strong id="trigger-source">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.failureReason">Failure Reason</span>
+              <strong id="failure-reason">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.healthScore">Health Score</span>
+              <strong id="health-score">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.schema">Schema</span>
+              <strong id="schema-version">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.runId">Run ID</span>
+              <strong id="run-id">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.interval">Interval</span>
+              <strong id="interval-min">--</strong>
+            </div>
+          </div>
+          <div class="callout" id="schema-warning"></div>
+          <div class="list-wrap">
+            <h3 data-i18n="ui.healthSummary">Health Summary</h3>
+            <ul id="health-summary" class="list">
+              <li data-i18n="emptyState.healthSummary">Health summary not loaded yet.</li>
+            </ul>
+          </div>
+          <div class="list-wrap">
+            <h3 data-i18n="ui.stateLayers">State Layers</h3>
+            <ul id="state-layers" class="list"></ul>
+          </div>
+          <div class="list-wrap">
+            <h3 data-i18n="ui.healthReasonCodes">Health Reason Codes</h3>
+            <ul id="health-reasons" class="list"></ul>
+          </div>
+          <div class="phases" id="phases-bars"></div>
+        </article>
+
+        <article class="card" id="log-health-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.logHealth">Log Health</h2>
+            <span class="pill pill--sub" id="log-health-pill">--</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <span data-i18n="ui.totalErrors">Total Errors</span>
+              <strong id="log-errors-total">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.stdout">Stdout</span>
+              <strong id="log-errors-stdout">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.stderr">Stderr</span>
+              <strong id="log-errors-stderr">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.launchdErr">Launchd Err</span>
+              <strong id="log-errors-launchd">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.pattern">Pattern</span>
+              <strong id="log-pattern">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.tailLines">Tail Lines</span>
+              <strong id="log-tail-lines">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.tailConfig">Tail Config</span>
+              <input id="log-health-tail" type="number" min="50" max="2000" value="200" data-i18n-aria-label="ui.tailConfig" aria-label="Tail Config" />
+            </div>
+          </div>
+          <div class="hint" id="log-health-hint"></div>
+        </article>
+
+        <article class="card" id="doctor-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.doctor">Doctor</h2>
+            <span class="pill pill--sub" id="doctor-pill">--</span>
+          </div>
+          <p id="doctor-summary" class="hint" data-i18n="emptyState.doctorSummary">
+            Doctor summary not loaded yet.
+          </p>
+          <div class="doctor-grid">
+            <div>
+              <h3 data-i18n="ui.dependencies">Dependencies</h3>
+              <ul id="doctor-deps" class="list"></ul>
+            </div>
+            <div>
+              <h3 data-i18n="ui.warnings">Warnings</h3>
+              <ul id="doctor-warnings" class="list"></ul>
+            </div>
+          </div>
+          <div class="doctor-meta">
+            <div class="metric">
+              <span data-i18n="ui.repoRoot">Repo Root</span>
+              <strong id="doctor-repo">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.vendorDir">Vendor Dir</span>
+              <strong id="doctor-vendor">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.stateDir">State Dir</span>
+              <strong id="doctor-state">--</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card--wide" id="metrics-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.recentMetrics">Recent Metrics</h2>
+            <span class="pill pill--sub" id="metrics-pill">--</span>
+          </div>
+          <div class="form-grid form-grid--wide">
+            <label>
+              <span data-i18n="ui.runIdFilter">Run ID Filter</span>
+              <input id="metrics-run-id" type="text" placeholder="run_id contains..." data-i18n-placeholder="ui.placeholderRunIdContains" />
+            </label>
+          </div>
+          <div class="table" id="metrics-table"></div>
+        </article>
+
+        <article class="card" id="recent-runs-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.recentRuns">Recent Runs</h2>
+            <span class="pill pill--sub" id="recent-runs-pill">--</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <span data-i18n="ui.recentRunsCount">Recent Runs</span>
+              <strong id="recent-runs-count">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.successes">Successes</span>
+              <strong id="recent-runs-success">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.failures">Failures</span>
+              <strong id="recent-runs-failed">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.latestStatus">Latest Status</span>
+              <strong id="recent-runs-latest-status">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.topFailure">Top Failure</span>
+              <strong id="recent-runs-top-failure">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.recentTrend">Recent Trend</span>
+              <strong id="recent-runs-trend">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.currentStreak">Current Streak</span>
+              <strong id="recent-runs-streak">--</strong>
+            </div>
+          </div>
+          <div class="list-wrap">
+            <h3 data-i18n="ui.runChangeSummary">Run / Change Summary</h3>
+            <ul id="recent-runs-change-summary" class="list"></ul>
+          </div>
+          <div class="list-wrap">
+            <h3 data-i18n="ui.triggerSources">Trigger Sources</h3>
+            <ul id="recent-runs-trigger-sources" class="list"></ul>
+          </div>
+          <div class="list-wrap">
+            <h3 data-i18n="ui.failureClusters">Failure Clusters</h3>
+            <ul id="recent-runs-failure-clusters" class="list"></ul>
+          </div>
+        </article>
+
+        <article class="card" id="access-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.accessPolicy">Access Policy</h2>
+            <span class="pill pill--sub" id="access-pill">--</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <span data-i18n="ui.requireToken">Require Token</span>
+              <strong id="access-require-token">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.staticToken">Static Token</span>
+              <strong id="access-require-static">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.readonly">Readonly</span>
+              <strong id="access-readonly">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.tokenScopes">Token Scopes</span>
+              <strong id="access-scopes">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.actionsAllowlist">Actions Allowlist</span>
+              <strong id="access-actions-allow">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.rateLimit">Rate Limit</span>
+              <strong id="access-rate-limit">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.cooldowns">Cooldowns</span>
+              <strong id="access-cooldowns">--</strong>
+            </div>
+          </div>
+          <div class="list-wrap">
+            <h3 data-i18n="ui.effectiveActions">Effective Actions</h3>
+            <ul id="access-actions" class="list"></ul>
+          </div>
+          <div class="hint">
+            <span data-i18n="message.accessTip">Tip: use minimal scopes + allowlist (ex: scopes=read,run and actions=run) to shrink exposure.</span>
+          </div>
+        </article>
+
+        <article class="card" id="actions-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.quickActions">Quick Actions</h2>
+            <span class="pill pill--sub" id="actions-pill" data-i18n="pill.ready">ready</span>
+          </div>
+          <div class="button-grid">
+            <button class="btn btn--ghost" data-action="setup" data-i18n="ui.perfectSetup">Perfect Setup</button>
+            <button class="btn btn--ghost" data-action="run" data-i18n="ui.runSnapshot">Run Snapshot</button>
+            <button class="btn btn--ghost" data-action="verify" data-i18n="ui.verify">Verify</button>
+            <button class="btn btn--ghost" data-action="fix" data-i18n="ui.fastFix">Fast Fix</button>
+            <button class="btn btn--ghost" data-action="self-heal" data-i18n="ui.selfHeal">Self Heal</button>
+            <button class="btn btn--ghost" data-action="permissions" data-i18n="ui.permissions">Permissions</button>
+          </div>
+        </article>
+
+        <article class="card" id="schedule-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.scheduler">Scheduler</h2>
+            <span class="pill pill--sub" id="schedule-pill" data-i18n="pill.launchd">launchd</span>
+          </div>
+          <div class="form-grid">
+            <label>
+              <span data-i18n="ui.minutes">Minutes</span>
+              <input id="install-minutes" type="number" min="1" max="120" value="30" />
+            </label>
+            <label>
+              <span data-i18n="ui.intervalSec">Interval (sec)</span>
+              <input id="install-interval" type="number" min="60" max="7200" placeholder="optional" data-i18n-placeholder="ui.placeholderOptional" />
+            </label>
+            <label class="toggle">
+              <input id="install-load" type="checkbox" checked />
+              <span data-i18n="ui.loadAfterInstall">Load after install</span>
+            </label>
+            <label class="toggle">
+              <input id="install-web" type="checkbox" checked />
+              <span data-i18n="ui.keepWebAlive">Keep Web UI alive</span>
+            </label>
+          </div>
+          <div class="button-row">
+            <button class="btn btn--ghost" data-action="install" data-i18n="ui.install">Install</button>
+            <button class="btn btn--ghost" data-action="ensure" data-i18n="ui.ensure">Ensure</button>
+            <button class="btn btn--ghost" data-action="unload" data-i18n="ui.unload">Unload</button>
+          </div>
+        </article>
+
+        <article class="card card--wide" id="vendor-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.vendorSync">Vendor Sync</h2>
+            <span class="pill pill--sub" id="vendor-pill" data-i18n="pill.safe">safe</span>
+          </div>
+          <div class="form-grid form-grid--wide">
+            <label>
+              <span data-i18n="ui.vendorRef">Ref (tag/branch/sha)</span>
+              <input id="vendor-ref" type="text" placeholder="v1.3.0" data-i18n-placeholder="ui.placeholderVendorRef" />
+            </label>
+            <label class="toggle">
+              <input id="vendor-dry-run" type="checkbox" />
+              <span data-i18n="ui.patchDryRun">Patch dry-run</span>
+            </label>
+            <label class="toggle">
+              <input id="vendor-commit" type="checkbox" />
+              <span data-i18n="ui.autoCommit">Auto commit</span>
+            </label>
+          </div>
+          <div class="button-row">
+            <button class="btn btn--ghost" data-action="update-vendor" data-i18n="ui.updateVendor">Update Vendor</button>
+          </div>
+        </article>
+
+        <article class="card card--wide" id="logs-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.logViewer">Log Viewer</h2>
+            <span class="pill pill--sub" id="logs-pill" data-i18n="pill.tail">tail</span>
+          </div>
+          <div class="form-grid form-grid--wide">
+            <label>
+              <span data-i18n="ui.logType">Log Type</span>
+              <select id="log-type">
+                <option value="stdout" data-i18n="options.logType.stdout">stdout</option>
+                <option value="stderr" data-i18n="options.logType.stderr">stderr</option>
+                <option value="launchd" data-i18n="options.logType.launchd">launchd</option>
+                <option value="webui" data-i18n="options.logType.webui">webui</option>
+              </select>
+            </label>
+            <label>
+              <span data-i18n="ui.tailLines">Tail Lines</span>
+              <input id="log-tail" type="number" min="20" max="2000" value="200" />
+            </label>
+            <label>
+              <span data-i18n="ui.sinceMinutes">Since Minutes</span>
+              <input id="log-since" type="number" min="1" max="1440" placeholder="optional" data-i18n-placeholder="ui.placeholderOptional" />
+            </label>
+            <label>
+              <span data-i18n="ui.rotateScope">Rotate Scope</span>
+              <select id="rotate-scope">
+                <option value="all" data-i18n="options.rotateScope.all">all</option>
+                <option value="stdout" data-i18n="options.rotateScope.stdout">stdout</option>
+                <option value="stderr" data-i18n="options.rotateScope.stderr">stderr</option>
+                <option value="launchd" data-i18n="options.rotateScope.launchd">launchd</option>
+                <option value="webui" data-i18n="options.rotateScope.webui">webui</option>
+                <option value="metrics" data-i18n="options.rotateScope.metrics">metrics</option>
+                <option value="structured" data-i18n="options.rotateScope.structured">structured</option>
+              </select>
+            </label>
+            <div class="button-row">
+              <button class="btn btn--ghost" data-action="logs" data-i18n="ui.fetchLogs">Fetch Logs</button>
+              <button class="btn btn--ghost" data-action="rotate-logs" data-i18n="ui.rotateLogs">Rotate Logs</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card--wide" id="output-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.actionOutput">Action Output</h2>
+            <span class="pill pill--sub" id="output-pill" data-i18n="pill.idle">idle</span>
+          </div>
+          <pre class="console" id="action-output" tabindex="0" data-i18n="emptyState.noActionsYet">No actions yet.</pre>
+        </article>
+      </section>
+    </main>
+
+    <script src="i18n.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

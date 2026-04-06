@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Common Apple Notes Snapshot questions answered | FAQ</title>
+    <meta
+      name="description"
+      content="Answers to common Apple Notes Snapshot questions about local-first behavior, launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/faq/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="FAQ | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Answers to common Apple Notes Snapshot questions about local-first behavior, launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/faq/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot FAQ card answering common questions about the local-first backup control room" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Common Apple Notes Snapshot questions answered" />
+    <meta
+      name="twitter:description"
+      content="Answers to common Apple Notes Snapshot questions about local-first behavior, launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/faq/" }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this a cloud backup service?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Apple Notes Snapshot is a local backup workflow that helps you run, schedule, and inspect exports on your own Mac."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it replace upstream notes-exporter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It wraps upstream with a repo-owned operations layer so recurring snapshots are safer and easier to understand."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can it sync changes back into Apple Notes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This repository is for snapshotting and exporting, not two-way sync."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need the Web console?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. notesctl is the supported human entrypoint. The Web console is optional, local, and useful when you want a control-room view."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between the Local Web API and MCP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Local Web API comes from ./notesctl web and is a token-gated same-machine browser and HTTP surface. MCP comes from ./notesctl mcp and is a stdio-first host-to-tooling contract for MCP-aware agents. Neither is a public OpenAPI or hosted control plane."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where are snapshots written by default?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The runtime config lives in config/notes_snapshot.env. If you keep the defaults, snapshots are written to $HOME/iCloudDrive/NotesSnapshots. Uncomment NOTES_SNAPSHOT_ROOT_DIR before the first run if you want a different destination."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">FAQ</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="../quickstart/">Quickstart</a>
+          <a href="../local-api/">Local Web API</a>
+          <a href="../compare/">Compare</a>
+          <a href="../support/">Support</a>
+          <a href="../releases/">Releases</a>
+          <a href="../security/">Security</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">FAQ</span>
+      </nav>
+
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Common questions</span>
+        <h1>The short answers people usually need before they star or clone.</h1>
+        <p>
+          This page is for the "what is it really?" moment. Each answer is intentionally direct so
+          you can quickly decide whether the repository fits your workflow.
+        </p>
+      </section>
+
+      <section class="faq-list section">
+        <div class="section__header">
+          <span class="section__eyebrow">Quick answers</span>
+          <h2>Start with the short answer before you dive deeper.</h2>
+        </div>
+        <article class="faq-item">
+          <h3>Is this a backup service?</h3>
+          <p>
+            It is a local backup workflow, not a hosted backup service. The project helps you run,
+            schedule, and inspect exports on your own Mac.
+          </p>
+        </article>
+        <article class="faq-item">
+          <h3>Does it replace upstream notes-exporter?</h3>
+          <p>
+            No. It wraps upstream with a repo-owned operations layer so recurring snapshots are
+            safer and easier to understand.
+          </p>
+        </article>
+        <article class="faq-item">
+          <h3>Can it sync changes back into Apple Notes?</h3>
+          <p>No. This repository is for snapshotting and exporting, not two-way sync.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Do I need the Web console?</h3>
+          <p>
+            No. `notesctl` is the supported human entrypoint. The Web console is optional, local,
+            and useful when you want a control-room view.
+          </p>
+        </article>
+        <article class="faq-item">
+          <h3>What is the difference between the Local Web API and MCP?</h3>
+          <p>
+            The <a href="../local-api/">Local Web API</a> comes from <code>./notesctl web</code>
+            and is a token-gated same-machine browser and HTTP surface. The
+            <a href="../mcp/">MCP Provider</a> comes from <code>./notesctl mcp</code> and is a
+            stdio-first host-to-tooling contract for MCP-aware agents. Neither one is a public
+            OpenAPI or hosted control plane.
+          </p>
+        </article>
+        <article class="faq-item">
+          <h3>Where are snapshots written by default?</h3>
+          <p>
+            The runtime config lives in <code>config/notes_snapshot.env</code>. If you keep the
+            defaults, snapshots are written to <code>$HOME/iCloudDrive/NotesSnapshots</code>.
+            Uncomment <code>NOTES_SNAPSHOT_ROOT_DIR</code> before the first run if you want a
+            different destination.
+          </p>
+        </article>
+        <article class="faq-item">
+          <h3>Why are there lock files and state files?</h3>
+          <p>
+            They are the workflow's dashboard instruments. Think of them like a flight recorder:
+            they tell you what happened, whether the last run succeeded, and whether another run is
+            already in progress.
+          </p>
+        </article>
+        <article class="faq-item">
+          <h3>What happens if the checkout path changes?</h3>
+          <p>
+            Reinstall the scheduler so the path-aware launchd surface points at the new checkout.
+            Rebuild the local environment too if you use the repo-owned verification gates or the
+            optional Web console.
+          </p>
+          <pre><code>./notesctl install --minutes 30 --load
+./notesctl rebuild-dev-env</code></pre>
+        </article>
+        <article class="faq-item">
+          <h3>Can I expose the Web console remotely?</h3>
+          <p>
+            The project is designed to stay local-first. If you deliberately bind it beyond loopback,
+            set a strong token, review the action allowlist, and read the security summary first.
+          </p>
+        </article>
+      </section>
+
+      <section class="page-card">
+        <h2>Still not answered?</h2>
+        <p>
+          Use the public <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/q-a">Q&amp;A discussion</a>
+          if your real question is setup, permission prompts, or scheduler troubleshooting.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Need the next route, not another answer?</h2>
+        <ul>
+          <li><a href="../compare/">Compare</a> if you are still deciding between upstream and the wrapper</li>
+          <li><a href="../support/">Support routing</a> if you want the right help lane before posting</li>
+          <li><a href="../community/">Community</a> if you want ideas, show-and-tell, or announcements</li>
+          <li><a href="../releases/">Release history</a> if you want the tag-by-tag public story</li>
+          <li><a href="../media/share-kit/">Share kit</a> if you want the short public explanation assets</li>
+        </ul>
+      </section>
+      </main>
+
+      <footer class="footer">
+        If your question is really "should I use this or upstream?", go to the
+        <a href="../compare/">comparison page</a>. If your question is "how do I start?",
+        use the <a href="../quickstart/">quickstart</a>. If your question is "which builder/API
+        surface fits me?", open <a href="../local-api/">Local Web API</a> or
+        <a href="../for-agents/">For Agents</a>. If your question is "what should I post next?",
+        use the <a href="../media/external-launch-prep/">external launch prep packet</a>.
+      </footer>
+    </div>
+  </body>
+</html>

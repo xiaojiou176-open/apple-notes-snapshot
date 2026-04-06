@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>v0.1.0 release notes | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Release notes for Apple Notes Snapshot v0.1.0, the initial public launch of the local-first Apple Notes snapshot workflow."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/v0.1.0/" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="v0.1.0 release notes | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Release notes for Apple Notes Snapshot v0.1.0, the initial public launch of the local-first Apple Notes snapshot workflow."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/v0.1.0/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="v0.1.0 release notes page for Apple Notes Snapshot" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="v0.1.0 release notes | Apple Notes Snapshot" />
+    <meta
+      name="twitter:description"
+      content="Release notes for Apple Notes Snapshot v0.1.0, the initial public launch of the local-first Apple Notes snapshot workflow."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">v0.1.0 release notes</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../../">Home</a>
+          <a href="../">Release history</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases/tag/v0.1.0">GitHub release</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <a href="../">Release history</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">v0.1.0 release notes</span>
+      </nav>
+
+      <main id="main-content">
+
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Initial public launch</span>
+        <h1>v0.1.0 introduced Apple Notes Snapshot as a public project.</h1>
+        <p>
+          Apple Notes Snapshot is a local-first macOS workflow that wraps the upstream
+          <code>notes-exporter</code> project with scheduling, health checks, logs, and an optional
+          local Web console.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Who should use it</h2>
+        <ul>
+          <li>People who want recurring Apple Notes snapshots on macOS.</li>
+          <li>Users who want visibility into freshness, failures, and scheduler state.</li>
+          <li>Anyone who prefers a reviewable local workflow over ad hoc shell snippets.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>What was included in v0.1.0</h2>
+        <ul>
+          <li>A conversion-focused README.</li>
+          <li>A GitHub Pages docs surface.</li>
+          <li>Hero, comparison, architecture, run-flow, and social-preview assets.</li>
+          <li>Repo-owned CI, CodeQL, contribution, and security guidance.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Known boundaries</h2>
+        <ul>
+          <li>Not a cloud service.</li>
+          <li>Not a two-way sync engine.</li>
+          <li>Not a cross-platform promise.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Verification highlights</h2>
+        <p>The repo-owned verification path at launch was:</p>
+        <pre><code>./notesctl rebuild-dev-env
+./.runtime-cache/dev/venv/bin/python -m pre_commit run --all-files
+PYTHON_BIN=./.runtime-cache/dev/venv/bin/python scripts/checks/ci_gate.sh</code></pre>
+      </section>
+
+      <section class="page-card">
+        <h2>Keep going</h2>
+        <ul>
+          <li><a href="../../">Docs site</a></li>
+          <li><a href="../../quickstart/">Quickstart</a></li>
+          <li><a href="../../compare/">Compare page</a></li>
+          <li><a href="../../faq/">FAQ</a></li>
+          <li><a href="../../security/">Security summary</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/q-a">Q&amp;A discussion</a></li>
+        </ul>
+      </section>
+
+      </main>
+      <footer class="footer">
+        Continue to <a href="../v0.1.1/">v0.1.1</a> or return to the
+        <a href="../">release history</a>.
+      </footer>
+    </div>
+  </body>
+</html>

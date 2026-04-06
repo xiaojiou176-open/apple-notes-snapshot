@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Run Apple Notes Snapshot in 3 steps on macOS | Quickstart</title>
+    <meta
+      name="description"
+      content="Run Apple Notes Snapshot on macOS in 3 steps and about 3 minutes, then use fail-fast checks, troubleshooting, and maintainer verification only when you need them."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Run Apple Notes Snapshot in 3 steps on macOS | Quickstart" />
+    <meta
+      property="og:description"
+      content="Run Apple Notes Snapshot on macOS in 3 steps and about 3 minutes, then use fail-fast checks, troubleshooting, and maintainer verification only when you need them."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot quickstart card showing the local-first Apple Notes backup control room" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Run Apple Notes Snapshot in 3 steps on macOS" />
+    <meta
+      name="twitter:description"
+      content="Run Apple Notes Snapshot on macOS in 3 steps and about 3 minutes, then use fail-fast checks, troubleshooting, and maintainer verification only when you need them."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "Quickstart", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">Quickstart</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="../compare/">Compare</a>
+          <a href="../local-api/">Local Web API</a>
+          <a href="../faq/">FAQ</a>
+          <a href="../security/">Security</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">Quickstart</span>
+      </nav>
+
+      <main id="main-content">
+
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">3 steps, about 3 minutes</span>
+        <h1>Run Apple Notes Snapshot in 3 steps on macOS.</h1>
+        <p>
+          Treat this page like a first-flight checklist: confirm where snapshots will be written,
+          allow the first export, then wire in the scheduler and health checks. The first run may
+          trigger Apple Notes or AppleScript permission prompts, so this is not marketed as a
+          one-minute shortcut.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Prerequisites</h2>
+        <ul>
+          <li>macOS with Apple Notes.app available</li>
+          <li>AppleScript / `osascript` access</li>
+          <li>`launchctl` for recurring snapshots</li>
+          <li>Python 3 only if you want repo-owned verification or the optional local Web console</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>What this page covers, and what it does not</h2>
+        <p>
+          This is the authority for the first successful snapshot. It covers the public
+          3-step path, the most useful fail-fast checks, and the next docs to open if something
+          blocks you. It does not ask you to rebuild the maintainer environment before the first
+          export works.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Fail fast before you call it broken</h2>
+        <ul>
+          <li><code>./notesctl --help</code> should show the recommended first-run chain.</li>
+          <li><code>./notesctl permissions</code> should show the macOS permission checklist.</li>
+          <li><code>./notesctl verify</code> will fail with <code>no last_success record</code> until you finish the first manual export.</li>
+          <li>If the permission prompt never appears, use the <a href="../troubleshooting/">troubleshooting guide</a> before you assume the scheduler is wrong.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Before the first run, know where snapshots will land</h2>
+        <p>
+          The runtime configuration surface is <code>config/notes_snapshot.env</code>. If you keep
+          the defaults, snapshots are written to <code>$HOME/iCloudDrive/NotesSnapshots</code>.
+          If that is not where you want your backups, uncomment
+          <code>NOTES_SNAPSHOT_ROOT_DIR</code> before the first manual run.
+        </p>
+        <pre><code># edit this file if you want a different export destination
+config/notes_snapshot.env
+
+# default path if you leave the config unchanged
+$HOME/iCloudDrive/NotesSnapshots</code></pre>
+      </section>
+
+      <section class="page-card">
+        <h2>The 3-step path</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>Review the runtime config</h3>
+            <p>
+              Keep the default export path if it already fits you, or change it before the first
+              snapshot so your backups start in the right place.
+            </p>
+            <pre><code># review or edit config/notes_snapshot.env
+# default export destination:
+# $HOME/iCloudDrive/NotesSnapshots</code></pre>
+          </div>
+          <div class="step">
+            <h3>Run one export manually</h3>
+            <p>
+              The first run is the moment macOS can surface Apple Notes / AppleScript permission
+              prompts. It also proves the exporter works before scheduling it.
+            </p>
+            <pre><code>./notesctl run --no-status</code></pre>
+          </div>
+          <div class="step">
+            <h3>Install the scheduler, then verify health</h3>
+            <p>
+              This is where the workflow becomes a real control room instead of a one-off command.
+            </p>
+            <pre><code>./notesctl install --minutes 30 --load
+./notesctl verify
+./notesctl doctor</code></pre>
+          </div>
+        </div>
+        <img
+          src="../assets/run-flow.gif"
+          alt="Three-step run flow showing rebuild, first export, and scheduler verification"
+          style="margin-top: 22px"
+        />
+      </section>
+
+      <section class="page-card">
+        <h2>Maintainer-grade verification lives after the first successful snapshot</h2>
+        <p>
+          The first successful snapshot does not require the repo-owned development environment.
+          Rebuild it only when you want maintainer-grade verification commands or the optional
+          local Web console.
+        </p>
+        <pre><code>./notesctl rebuild-dev-env
+./.runtime-cache/dev/venv/bin/python -m pre_commit run --all-files
+PYTHON_BIN=./.runtime-cache/dev/venv/bin/python scripts/checks/ci_gate.sh</code></pre>
+        <p>
+          Maintainer verification expects a local Python 3.11+ toolchain. The rebuild command
+          recreates <code>.runtime-cache/dev/venv</code> from scratch before you run the repo-owned
+          verification gates.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>The optional Web console is not required for the first successful snapshot</h2>
+        <p>
+          The console is local by default. Keep it local unless you have a clear reason to expose
+          more surface area, rebuild the repo-owned environment first, and set a token before you
+          enable it.
+        </p>
+        <pre><code>export NOTES_SNAPSHOT_WEB_TOKEN="&lt;long-random-token&gt;"
+./notesctl install --minutes 30 --load --web
+./notesctl web</code></pre>
+        <p>
+          If your workflow is browser- or HTTP-shaped after setup, the same process also exposes
+          the token-gated <a href="../local-api/">Local Web API</a> for same-machine reads.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>What to do after setup</h2>
+        <div class="proof-grid">
+          <div class="proof-card">
+            <h3>Check runtime health</h3>
+            <pre><code>./notesctl status --full
+./notesctl verify
+./notesctl doctor</code></pre>
+          </div>
+          <div class="proof-card">
+            <h3>Keep the runtime config visible</h3>
+            <pre><code>config/notes_snapshot.env
+
+# default export destination:
+# $HOME/iCloudDrive/NotesSnapshots</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-card">
+        <h2>Need help?</h2>
+        <p>
+          If a permission prompt, scheduler behavior, or first-run failure blocks you, use the
+          public <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/q-a">Q&amp;A thread</a>
+          so the next user can benefit from the answer too.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Moved the checkout to a new path?</h2>
+        <p>
+          Reinstall the scheduler so the path-aware launchd surface points at the current checkout.
+          If you also use the repo-owned verification environment or the optional Web console,
+          rebuild that environment too.
+        </p>
+        <pre><code>./notesctl install --minutes 30 --load
+./notesctl rebuild-dev-env</code></pre>
+      </section>
+
+      </main>
+      <footer class="footer">
+        Need the bigger picture first? Go back to the <a href="../">landing page</a>, compare the
+        wrapper against upstream on the <a href="../compare/">compare page</a>, or read the
+        <a href="../releases/">release history</a>.
+      </footer>
+    </div>
+  </body>
+</html>

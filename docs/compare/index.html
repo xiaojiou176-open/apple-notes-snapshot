@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Compare with upstream | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, a token-gated Local Web API, AI-assisted diagnostics, a read-only MCP surface, and a local Web console."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/compare/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Compare with upstream | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, a token-gated Local Web API, AI-assisted diagnostics, a read-only MCP surface, and a local Web console."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/compare/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot compare card for the local-first Apple Notes backup control room" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Compare Apple Notes Snapshot with upstream" />
+    <meta
+      name="twitter:description"
+      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, a token-gated Local Web API, AI-assisted diagnostics, a read-only MCP surface, and a local Web console."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "Compare", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/compare/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">Compare with upstream</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="../quickstart/">Quickstart</a>
+          <a href="../support/">Support</a>
+          <a href="../releases/">Releases</a>
+          <a href="../ai-diagnose/">AI Diagnose</a>
+          <a href="../local-api/">Local Web API</a>
+          <a href="../mcp/">MCP Provider</a>
+          <a href="../faq/">FAQ</a>
+          <a href="../security/">Security</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">Compare with upstream</span>
+      </nav>
+
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">The honest comparison</span>
+        <h1>Use upstream for the engine. Use this repo for the control room.</h1>
+        <p>
+          If all you need is one export right now, the upstream project may already be enough.
+          Apple Notes Snapshot earns its keep when you want the workflow to stay observable,
+          schedulable, and easier to recover later.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <img
+          src="../assets/upstream-vs-snapshot.png"
+          alt="Comparison card between upstream notes-exporter and Apple Notes Snapshot"
+        />
+      </section>
+
+      <section class="page-card">
+        <h2>Decision table</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Choose upstream only</th>
+              <th>Choose Apple Notes Snapshot</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Do you only need a one-time export?</td>
+              <td>Yes</td>
+              <td>No, you want recurring snapshots</td>
+            </tr>
+            <tr>
+              <td>Do you care about freshness, failure reason, and logs?</td>
+              <td>Not much</td>
+              <td>Yes, operational visibility matters</td>
+            </tr>
+            <tr>
+              <td>Do you want a local control plane around the exporter?</td>
+              <td>No</td>
+              <td>Yes, CLI + optional Web console</td>
+            </tr>
+            <tr>
+              <td>Do you want a reviewable wrapper around path changes and scheduler setup?</td>
+              <td>Not necessary</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Do you want AI-assisted diagnosis around backup health?</td>
+              <td>No, deterministic status alone is enough</td>
+              <td>Yes, an operator next-step assistant would help</td>
+            </tr>
+            <tr>
+              <td>Do you want MCP-aware agents to inspect local backup state?</td>
+              <td>No, no agent-facing surface is needed</td>
+              <td>Yes, a read-only MCP contract is useful</td>
+            </tr>
+            <tr>
+              <td>Do you want a token-gated same-machine browser/API lane?</td>
+              <td>No, CLI plus logs are enough</td>
+              <td>Yes, the Local Web API is useful</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="page-card">
+        <h2>What this repo adds</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Scheduling</h3>
+            <p>`launchd` install, ensure, reload, and path-aware reinstall flows.</p>
+          </article>
+          <article class="card">
+            <h3>Health surface</h3>
+            <p>`status`, `verify`, `doctor`, log health, and metrics make the workflow inspectable.</p>
+          </article>
+          <article class="card">
+            <h3>Operational safety</h3>
+            <p>Locks, state files, log rotation, vendor provenance, and token-aware local Web actions.</p>
+          </article>
+          <article class="card">
+            <h3>AI Diagnose</h3>
+            <p>An advisory explanation layer for status, doctor, log-health, and recent-run evidence.</p>
+          </article>
+          <article class="card">
+            <h3>Read-only MCP surface</h3>
+            <p>A stdio-first way for MCP-aware hosts to inspect the same local backup facts without a fake hosted API.</p>
+          </article>
+          <article class="card">
+            <h3>Local Web API</h3>
+            <p>A token-gated same-machine browser/API lane for status, doctor, recent-runs, and access-policy reads.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page-card">
+        <h2>What this repo does not try to add</h2>
+        <ul>
+          <li>No cloud sync</li>
+          <li>No team collaboration surface</li>
+          <li>No two-way Apple Notes editing</li>
+          <li>No write-capable MCP surface in v1</li>
+          <li>No claim that the upstream engine is replaced or obsolete</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>What to open next</h2>
+        <ul>
+          <li><a href="../quickstart/">Quickstart</a> if you already know the wrapper is the right fit</li>
+          <li><a href="../faq/">FAQ</a> if you still need short answers before you clone</li>
+          <li><a href="../support/">Support routing</a> if your next step is help, Q&amp;A, or a bug report</li>
+          <li><a href="../releases/">Release history</a> if you want the tagged story versus current main</li>
+          <li><a href="../media/share-kit/">Share kit</a> if you want a short public explanation without hype</li>
+        </ul>
+      </section>
+      </main>
+
+      <footer class="footer">
+        Ready to try the wrapper? Follow the <a href="../quickstart/">quickstart</a> or inspect the
+        public repo on <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>. If your workflow is browser- or HTTP-shaped, open the
+        <a href="../local-api/">Local Web API guide</a>. If you are packaging a public update, use
+        the <a href="../media/external-launch-prep/">external launch prep packet</a>.
+      </footer>
+    </div>
+  </body>
+</html>

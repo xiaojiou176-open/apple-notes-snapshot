@@ -1,0 +1,57 @@
+<svg width="1280" height="900" viewBox="0 0 1280 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="900" rx="36" fill="#F7F3EA"/>
+  <rect x="28" y="28" width="1224" height="844" rx="32" fill="url(#bg)" stroke="#D6E7E5"/>
+  <text x="82" y="112" fill="#0B5E59" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">APPLE NOTES SNAPSHOT ARCHITECTURE</text>
+  <text x="82" y="176" fill="#122027" font-family="Helvetica, Arial, sans-serif" font-size="38" font-weight="700">A local control room around</text>
+  <text x="82" y="226" fill="#122027" font-family="Helvetica, Arial, sans-serif" font-size="38" font-weight="700">Apple Notes backups</text>
+  <text x="82" y="268" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="20">Keep upstream for note extraction, then add scheduling,</text>
+  <text x="82" y="296" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="20">health checks, logs, and recovery around</text>
+  <text x="82" y="324" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="20">the recurring local snapshot loop.</text>
+
+  <rect x="84" y="410" width="210" height="148" rx="24" fill="#FFFFFF" stroke="#D4E4E2"/>
+  <text x="112" y="476" fill="#122027" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700">Apple Notes</text>
+  <text x="112" y="516" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="18">The source account and</text>
+  <text x="112" y="546" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="18">AppleScript boundary.</text>
+
+  <rect x="330" y="410" width="250" height="148" rx="24" fill="#FFFFFF" stroke="#D4E4E2"/>
+  <text x="358" y="476" fill="#122027" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700">Upstream exporter</text>
+  <text x="358" y="516" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="18">`notes-exporter` does the</text>
+  <text x="358" y="546" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="18">actual note extraction.</text>
+
+  <rect x="620" y="390" width="220" height="212" rx="28" fill="#0E7C74"/>
+  <text x="650" y="448" fill="#FFFFFF" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700">Wrapper</text>
+  <text x="650" y="484" fill="#FFFFFF" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700">control room</text>
+  <text x="650" y="532" fill="#E7F7F5" font-family="Helvetica, Arial, sans-serif" font-size="20">Locks</text>
+  <text x="650" y="564" fill="#E7F7F5" font-family="Helvetica, Arial, sans-serif" font-size="20">State + metrics</text>
+  <text x="650" y="596" fill="#E7F7F5" font-family="Helvetica, Arial, sans-serif" font-size="20">Log rotation</text>
+
+  <rect x="900" y="390" width="170" height="110" rx="24" fill="#FFFFFF" stroke="#D4E4E2"/>
+  <text x="930" y="438" fill="#122027" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700">launchd</text>
+  <text x="930" y="470" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="17">Recurring runs</text>
+
+  <rect x="900" y="530" width="170" height="110" rx="24" fill="#FFFFFF" stroke="#D4E4E2"/>
+  <text x="930" y="578" fill="#122027" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700">Web console</text>
+  <text x="930" y="610" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="17">Optional local UI</text>
+
+  <path d="M294 484H312" stroke="#0E7C74" stroke-width="8" stroke-linecap="round"/>
+  <path d="M580 484H602" stroke="#0E7C74" stroke-width="8" stroke-linecap="round"/>
+  <path d="M840 446H876" stroke="#0E7C74" stroke-width="8" stroke-linecap="round"/>
+  <path d="M840 586H876" stroke="#0E7C74" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="312" cy="484" r="10" fill="#E4A11B"/>
+  <circle cx="602" cy="484" r="10" fill="#E4A11B"/>
+  <circle cx="876" cy="446" r="10" fill="#E4A11B"/>
+  <circle cx="876" cy="586" r="10" fill="#E4A11B"/>
+
+  <rect x="82" y="694" width="1118" height="164" rx="24" fill="#FFF8EB" stroke="#F2D899"/>
+  <text x="116" y="744" fill="#B17000" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="1">WHY IT MATTERS</text>
+  <text x="116" y="780" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="21">The exporter stays the engine. Apple Notes Snapshot adds</text>
+  <text x="116" y="808" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="21">the dashboard, scheduler, and safety rails around</text>
+  <text x="116" y="836" fill="#5C6870" font-family="Helvetica, Arial, sans-serif" font-size="21">recurring local backups.</text>
+
+  <defs>
+    <linearGradient id="bg" x1="1140" y1="58" x2="198" y2="670" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E0F0EE"/>
+      <stop offset="1" stop-color="#FFF9EF"/>
+    </linearGradient>
+  </defs>
+</svg>

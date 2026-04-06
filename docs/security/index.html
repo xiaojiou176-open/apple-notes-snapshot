@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Review Apple Notes Snapshot security and privacy | Security</title>
+    <meta
+      name="description"
+      content="Review Apple Notes Snapshot security and privacy boundaries, including local-first behavior, optional Web token handling, and private vulnerability reporting."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/security/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Security and privacy | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Review Apple Notes Snapshot security and privacy boundaries, including local-first behavior, optional Web token handling, and private vulnerability reporting."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/security/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot security and privacy card for the local-first Apple Notes backup control room" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Review Apple Notes Snapshot security and privacy" />
+    <meta
+      name="twitter:description"
+      content="Review Apple Notes Snapshot security and privacy boundaries, including local-first behavior, optional Web token handling, and private vulnerability reporting."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "Security and privacy", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/security/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">Security and privacy</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="../quickstart/">Quickstart</a>
+          <a href="../local-api/">Local Web API</a>
+          <a href="../compare/">Compare</a>
+          <a href="../faq/">FAQ</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">Security and privacy</span>
+      </nav>
+
+      <main id="main-content">
+
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Human-readable boundaries</span>
+        <h1>The safest default is still local, visible, and boring.</h1>
+        <p>
+          Security here is mostly about reducing accidental exposure. The project is at its safest
+          when you keep it local, review your config, and treat the optional Web console like a
+          maintenance panel rather than a public app.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>What the repo is designed to protect</h2>
+        <ul>
+          <li>Accidental overlapping runs through wrapper-level lock handling</li>
+          <li>Silent failure through `status`, `verify`, `doctor`, and log-health surfaces</li>
+          <li>Unsafe Web actions through tokens, scopes, allowlists, and cooldowns</li>
+          <li>Path drift through rebuild and reinstall flows</li>
+          <li>Public disclosure mistakes through the repository security reporting guidance</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Privacy model in one paragraph</h2>
+        <p>
+          Apple Notes Snapshot is local-first. Your notes stay in your Apple Notes account and in the
+          export destination you choose. The repository does not describe a hosted backend, an
+          analytics pipeline, or a cloud account model. The optional Web console and Local Web API
+          are local by default and should remain local unless you have a deliberate reason to expose
+          them more broadly.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Web console and Local Web API safety checklist</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>Set a long random token first</h3>
+            <pre><code>export NOTES_SNAPSHOT_WEB_TOKEN="&lt;long-random-token&gt;"</code></pre>
+          </div>
+          <div class="step">
+            <h3>Prefer loopback</h3>
+            <p>Keep the console bound to `127.0.0.1` unless you have a strong reason not to.</p>
+          </div>
+          <div class="step">
+            <h3>Reduce what the token can do</h3>
+            <p>Use token scopes and action allowlists to shrink the exposed surface area.</p>
+          </div>
+        </div>
+        <p>
+          If you want the browser/API contract spelled out in operational terms, open the
+          <a href="../local-api/">Local Web API guide</a> or run <code>./notesctl audit --json</code>.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Where to report security issues</h2>
+        <p>
+          Use GitHub private vulnerability reporting when the repository UI exposes it. If you need
+          a private disclosure path first, use the public security contact request template without
+          posting exploit details, note samples, tokens, or full logs.
+        </p>
+        <p>
+          For the full policy, supported scope, and fallback guidance, read
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/SECURITY.md">SECURITY.md</a>.
+        </p>
+        <p>
+          Automated scanners and security tooling can also discover the public
+          <a href="../.well-known/security.txt">security.txt</a> entry published by the Pages site.
+        </p>
+      </section>
+
+      </main>
+      <footer class="footer">
+        Security is a local workflow discipline here: smaller surface area, fewer surprises, clearer
+        state. The full repo policy stays in
+        <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/SECURITY.md">SECURITY.md</a>.
+      </footer>
+    </div>
+  </body>
+</html>

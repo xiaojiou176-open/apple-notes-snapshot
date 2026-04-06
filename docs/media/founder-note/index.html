@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Founder note | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Read the founder-style note behind Apple Notes Snapshot and why the project focuses on operational calm instead of one-time exports."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/media/founder-note/" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Founder note | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Read the founder-style note behind Apple Notes Snapshot and why the project focuses on operational calm instead of one-time exports."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/media/founder-note/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot founder note card for the local-first Apple Notes backup control room" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Why Apple Notes Snapshot exists" />
+    <meta
+      name="twitter:description"
+      content="Read the founder-style note behind Apple Notes Snapshot and why the project focuses on operational calm instead of one-time exports."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "Founder note", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/media/founder-note/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">Founder note</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../../">Home</a>
+          <a href="../../quickstart/">Quickstart</a>
+          <a href="../../compare/">Compare</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">Founder note</span>
+      </nav>
+
+      <main id="main-content">
+
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Why this project exists</span>
+        <h1>The hard part is not exporting notes once. The hard part is trusting the workflow later.</h1>
+        <p>
+          Apple Notes Snapshot exists for the six-weeks-later moment, when you want to know whether
+          the scheduler still points to the right checkout, the last run is still fresh, and the logs
+          are still boring.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>The real problem</h2>
+        <p>
+          A one-time export is easy to demo. A repeatable local workflow is harder because it needs
+          locks, state, logs, verification, and calm failure handling.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>The design choice</h2>
+        <p>
+          The project keeps the upstream exporter as the engine. The wrapper layer is intentionally
+          boring: it adds the dashboard instruments and safety rails instead of pretending to be a new
+          cloud platform.
+        </p>
+        <ul>
+          <li>AI Diagnose for calmer operator explanations</li>
+          <li>Local Web API for token-gated same-machine browser/API reads</li>
+          <li>MCP Provider for read-only agent access</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>The intended feeling</h2>
+        <p>
+          When you come back later, you should be able to answer four questions quickly: Did it run?
+          When did it last succeed? Why would it fail? How do I recover without guessing?
+        </p>
+      </section>
+
+      </main>
+      <footer class="footer">
+        That is the whole idea: keep the export engine, make the operations surface calmer.
+        Need the public-facing short version? Open the <a href="../share-kit/">share kit</a>.
+      </footer>
+    </div>
+  </body>
+</html>
