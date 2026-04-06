@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex Starter Pack | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Use the Apple Notes Snapshot Codex starter pack when you want a project-scoped Codex MCP setup, a trusted-project reminder, and a repo-owned post-attach proof checklist without pretending this repository ships an official plugin."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/codex-starter-pack/" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Codex Starter Pack | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Project-scoped Codex MCP starter pack for Apple Notes Snapshot with repo-owned examples, proof boundaries, and post-attach checks."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/codex-starter-pack/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot Codex starter pack page with install, verify, and proof-level guidance" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Codex Starter Pack | Apple Notes Snapshot" />
+    <meta
+      name="twitter:description"
+      content="Use the Apple Notes Snapshot Codex starter pack for a project-scoped MCP setup, post-attach checks, and truthful host-proof boundaries."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">Codex Starter Pack</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../../">Home</a>
+          <a href="../">For Agents</a>
+          <a href="../integration-pack/">Integration Pack</a>
+          <a href="../public-skills/">Public skills pack</a>
+          <a href="../../mcp/">MCP Provider</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <a href="../">For Agents</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">Codex Starter Pack</span>
+      </nav>
+
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Project-scoped, not marketplace-scoped</span>
+        <h1>Use this starter pack when you want the shortest honest path from Apple Notes Snapshot to a Codex MCP setup.</h1>
+        <p>
+          This is a repo-owned Codex starter pack, not an official Codex plugin. It packages the
+          current generic stdio MCP path, the trusted-project reminder, and the repo-owned
+          post-attach checks in one place.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Best fit</h2>
+        <ul>
+          <li>You already use Codex and want Apple Notes Snapshot to expose local backup facts through MCP.</li>
+          <li>You want a project-scoped setup story instead of a global hosted service story.</li>
+          <li>You want a repo-owned checklist that tells you what is proven here versus what still belongs to your Codex host.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Proof level today</h2>
+        <ul>
+          <li><strong>Repo-side proof</strong>: the generic stdio MCP server, tools, resources, and help contract are shipped and tested in this repository.</li>
+          <li><strong>Codex proof</strong>: the registration path is documented and copyable.</li>
+          <li><strong>Still host-side verify</strong>: your Codex install, login state, trusted-project status, and live attach result.</li>
+        </ul>
+        <p>
+          Treat this pack like a good wiring kit: the connector shape is real, but the final
+          “plugged in and live on this machine” proof still happens on your Codex side.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Install path</h2>
+        <ol>
+          <li>Install or update Codex with the current official host docs.</li>
+          <li>Confirm this repository has a healthy local snapshot loop before you attach anything.</li>
+          <li>Use the repo-owned add command below to register the MCP server.</li>
+        </ol>
+        <pre tabindex="0"><code>codex mcp add apple-notes-snapshot -- /absolute/path/to/notesctl mcp</code></pre>
+        <p>
+          Need the tracked text file? Use
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/codex-mcp-add.txt">codex-mcp-add.txt</a>.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Config path and trust boundary</h2>
+        <ul>
+          <li><strong>Codex host config</strong>: Codex keeps its own user-level and project-level config surfaces.</li>
+          <li><strong>Project-scoped reminder</strong>: if your Codex build uses trusted-project gates, the project-level config only matters after the repo is trusted on that machine.</li>
+          <li><strong>Repo-owned boundary</strong>: this repository does not try to hide or bypass that trust step.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Attach path</h2>
+        <ol>
+          <li>Register the MCP server with the add command above.</li>
+          <li>Open or work inside this repository on the same machine where <code>/absolute/path/to/notesctl</code> exists.</li>
+          <li>Let Codex launch the stdio server through <code>notesctl mcp</code>.</li>
+        </ol>
+        <p>
+          The narrow repo-owned claim is the launch shape, not a promise that every Codex release
+          or UI flow looks identical.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Verify path</h2>
+        <ol>
+          <li>Confirm the host sees the current v1 tools: <code>get_status</code>, <code>run_doctor</code>, <code>verify_freshness</code>, <code>get_log_health</code>, <code>list_recent_runs</code>, and <code>get_access_policy</code>.</li>
+          <li>Confirm the host can read the current v1 resources: <code>notes-snapshot://state.json</code>, <code>notes-snapshot://summary.txt</code>, <code>notes-snapshot://recent-runs</code>, and <code>notes-snapshot://config-safe-summary</code>.</li>
+          <li>Run <code>./notesctl status --json</code> locally and compare it with the host-visible status response.</li>
+        </ol>
+        <p>
+          Use the tracked
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/post-attach-checklist.md">post-attach checklist</a>
+          if you want the same steps in Markdown form.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>What this starter pack includes</h2>
+        <ul>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/codex-mcp-add.txt">One-line Codex registration command</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/.codex-plugin/marketplace.json">Repo-owned Codex local marketplace</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/tree/main/plugins/apple-notes-snapshot-control-room">Control-room plugin bundle</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/generic-stdio-mcp.json">Generic stdio MCP launch shape</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/post-attach-checklist.md">Repo-owned post-attach checklist</a></li>
+          <li><a href="../public-skills/">Public skills pack</a> for the public-safe prompt and contract guardrails</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Official public surface truth</h2>
+        <ul>
+          <li><strong>What exists</strong>: OpenAI now documents Codex plugins and an official plugin directory.</li>
+          <li><strong>What is still blocked</strong>: the same official docs still say public third-party plugins in the official directory are coming soon.</li>
+          <li><strong>What this repo ships now</strong>: a local marketplace file and a plugin-grade bundle you can keep alongside the project without pretending it is already in OpenAI's official directory.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Recommended companion guidance</h2>
+        <ul>
+          <li><strong>Use the public skills pack</strong> if you want repo-scoped wording and builder-contract guardrails in the same place as your Codex setup.</li>
+          <li><strong>Start with runtime-resource-hygiene</strong> when your Codex workflow also needs explicit browser/profile cleanup and branch/worktree/PR convergence rules after the task ends.</li>
+          <li><strong>Keep the boundary honest</strong>: these guidance files help the team operate cleanly, but they do not turn this repo into an official Codex plugin or marketplace package.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>What it does not claim</h2>
+        <ul>
+          <li>No official Codex marketplace listing</li>
+          <li>No hosted MCP or remote control plane</li>
+          <li>No promise that this repository has already verified attach on every Codex release</li>
+          <li>No public SDK or OpenAPI surface</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Release and update story</h2>
+        <ul>
+          <li>Repo-owned example files and docs will move with Apple Notes Snapshot releases and current-main updates.</li>
+          <li>Refresh the local bundle by pulling the repo, then rereading the bundle README and marketplace file before you call a plugin install current.</li>
+          <li>Codex host menus, trust prompts, and extra MCP options can change faster than this repo does.</li>
+          <li>Use <a href="../../releases/">release history</a> for the repo-owned side and the official Codex docs for the current host-side steps.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Official docs to pair with this starter pack</h2>
+        <ul>
+          <li><a href="https://developers.openai.com/codex/quickstart/">Codex quickstart</a></li>
+          <li><a href="https://developers.openai.com/codex/config-basic/">Codex config basics</a></li>
+          <li><a href="https://developers.openai.com/codex/config-reference/">Codex config reference</a></li>
+          <li><a href="https://developers.openai.com/codex/plugins/build">Codex plugin build docs</a></li>
+        </ul>
+      </section>
+      </main>
+
+      <footer class="footer">
+        Start here if you want a project-scoped Codex setup story. Go back to the
+        <a href="../integration-pack/">Integration Pack</a> if you want the broader host matrix first.
+      </footer>
+    </div>
+  </body>
+</html>

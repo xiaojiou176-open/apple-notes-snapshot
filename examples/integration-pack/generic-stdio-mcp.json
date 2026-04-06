@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "apple-notes-snapshot": {
+      "command": "/absolute/path/to/notesctl",
+      "args": ["mcp"]
+    }
+  }
+}

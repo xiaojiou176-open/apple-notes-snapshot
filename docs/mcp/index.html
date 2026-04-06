@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MCP Provider for Codex and Claude Code-style local workflows | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Use the Apple Notes Snapshot MCP provider as a stdio-first, read-only-first agent-facing surface backed by notesctl and the local state ledger for Codex, Claude Code, and other MCP-aware hosts."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="MCP Provider for Codex and Claude Code-style local workflows | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Stdio-first, read-only-first MCP surface for Codex, Claude Code, and other agents that need local Apple Notes backup diagnostics and run summaries."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot MCP provider page for the read-only-first agent-facing surface" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MCP Provider for Codex and Claude Code-style local workflows" />
+    <meta
+      name="twitter:description"
+      content="Expose local backup diagnostics, recent runs, and safe runtime summaries to Codex, Claude Code, and other MCP clients without replacing notesctl."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "MCP Provider", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">MCP Provider</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="../ai-diagnose/">AI Diagnose</a>
+          <a href="../for-agents/integration-pack/">Integration Pack</a>
+          <a href="../for-agents/">For Codex / Claude</a>
+          <a href="../troubleshooting/">Troubleshooting</a>
+          <a href="../roadmap/">Roadmap</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">MCP Provider</span>
+      </nav>
+
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">stdio-first and read-only-first</span>
+        <h1>Expose the local backup state to agents without building a second control plane.</h1>
+        <p>
+          The MCP provider is a thin agent-facing surface. It reuses <code>notesctl</code>, the
+          local state ledger, and recent run summaries instead of recreating the workflow in a
+          second server.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>How to start it</h2>
+        <pre><code>./notesctl mcp</code></pre>
+        <p>
+          v1 uses stdio transport only. It is designed for local MCP hosts and local tooling, not
+          for exposing the workflow over a remote HTTP control plane.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Minimal host launch shape</h2>
+        <p>
+          If your local MCP-aware host can spawn stdio servers, the truthful launch contract is just
+          the repo entrypoint plus the <code>mcp</code> command.
+        </p>
+        <pre><code>{
+  "command": "/absolute/path/to/notesctl",
+  "args": ["mcp"]
+}</code></pre>
+        <p>
+          Hosts differ in where they store this configuration, so this page documents the runtime
+          shape instead of pretending one config file works everywhere.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Exact repo-owned help and quick verification</h2>
+        <ul>
+          <li><code>./notesctl help mcp</code> is the narrow contract summary for the MCP surface</li>
+          <li>After attach, verify that the host can see <code>get_status</code>, <code>run_doctor</code>, <code>verify_freshness</code>, <code>get_log_health</code>, <code>list_recent_runs</code>, and <code>get_access_policy</code></li>
+          <li>Read <code>notes-snapshot://recent-runs</code> or call <code>get_status</code> before you assume the local snapshot loop has already been initialized</li>
+        </ul>
+        <p>
+          Need host-by-host status and copyable examples? Open the
+          <a href="../for-agents/integration-pack/">Builder Integration Pack</a>.
+        </p>
+        <p>
+          Need the repo-owned attach checklist? Use
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/post-attach-checklist.md">post-attach-checklist.md</a>
+          so you can separate repo-side proof from host-side proof in one pass.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Official host docs to pair with this page</h2>
+        <ul>
+          <li><a href="https://developers.openai.com/learn/docs-mcp">OpenAI Docs MCP reference</a> for current Codex-side MCP setup patterns</li>
+          <li><a href="https://code.claude.com/docs/en/mcp">Claude Code MCP guide</a> for current local stdio and remote MCP registration flows</li>
+          <li><a href="https://modelcontextprotocol.io/docs/getting-started/intro">Model Context Protocol introduction</a> for the shared protocol vocabulary</li>
+        </ul>
+        <p>
+          This page documents the Apple Notes Snapshot side of the contract. Use the official host
+          docs above when you need the current host-specific registration details.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Where it fits in the AI and agent stack</h2>
+        <ul>
+          <li><strong>Best fit</strong>: MCP-aware coding agents and local automation hosts that want the same backup facts as a human operator</li>
+          <li><strong>Natural neighbors</strong>: Codex- and Claude Code-style local workflows when the host can launch stdio MCP servers</li>
+          <li><strong>Not claimed here</strong>: a hosted agent platform, an OpenHands replacement, or a generic AI assistant runtime</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Current v1 tools</h2>
+        <ul>
+          <li><code>get_status</code></li>
+          <li><code>run_doctor</code></li>
+          <li><code>verify_freshness</code></li>
+          <li><code>get_log_health</code></li>
+          <li><code>list_recent_runs</code></li>
+          <li><code>get_access_policy</code></li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>How each tool maps to the deterministic substrate</h2>
+        <ul>
+          <li><code>get_status</code> -> <code>./notesctl status --json</code></li>
+          <li><code>run_doctor</code> -> <code>./notesctl doctor --json</code></li>
+          <li><code>verify_freshness</code> -> <code>./notesctl verify</code></li>
+          <li><code>get_log_health</code> -> <code>./notesctl log-health --json</code></li>
+          <li><code>list_recent_runs</code> -> <code>./notesctl aggregate --tail N</code></li>
+          <li><code>get_access_policy</code> -> <code>./notesctl audit --json</code></li>
+        </ul>
+        <p>
+          This is why the MCP surface stays truthful: it is a thin agent-facing layer over the same
+          repo-owned control-room facts, not a second business system.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Current v1 resources</h2>
+        <ul>
+          <li><code>notes-snapshot://state.json</code></li>
+          <li><code>notes-snapshot://summary.txt</code></li>
+          <li><code>notes-snapshot://recent-runs</code></li>
+          <li><code>notes-snapshot://config-safe-summary</code></li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Why the first batch is read-only</h2>
+        <ul>
+          <li>The workflow stays anchored to the existing <code>notesctl</code> contract.</li>
+          <li>It avoids turning the MCP surface into a second business system.</li>
+          <li>It keeps high-side-effect actions out of scope until the agent-facing contract proves useful.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Current substrate, and what is still missing</h2>
+        <ul>
+          <li><strong>Current substrate</strong>: <code>notesctl</code>, <code>state.json</code>, aggregate summaries, and the read-only MCP tool/resource surface</li>
+          <li><strong>Still missing on purpose</strong>: public OpenAPI, generated clients, shared SDK packages, and write-capable MCP tools</li>
+          <li><strong>Truthful builder entry today</strong>: start from the CLI contract or the stdio MCP contract, not from a pretend hosted API</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>What it does not do in v1</h2>
+        <ul>
+          <li>No remote HTTP MCP exposure</li>
+          <li>No vendor updates</li>
+          <li>No destructive cleanup tools</li>
+          <li>No note-content reads</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>How MCP differs from the local Web API</h2>
+        <ul>
+          <li><strong>MCP</strong>: stdio-first, host-to-tooling contract for MCP-aware agents</li>
+          <li><strong>Local Web API</strong>: token-gated browser and same-machine HTTP surface behind <code>./notesctl web</code></li>
+          <li><strong>Shared truth</strong>: both sit on top of the same repo-owned status, doctor, log-health, aggregate, and access-policy surfaces</li>
+          <li><strong>Still not claimed</strong>: neither surface becomes a public OpenAPI or hosted control plane</li>
+        </ul>
+        <p>
+          If your workflow already runs through the local Web console or same-machine HTTP clients,
+          open the <a href="../local-api/">Local Web API guide</a> next.
+        </p>
+      </section>
+      </main>
+
+      <footer class="footer">
+        Need the deterministic human-facing view first? Use the
+        <a href="../quickstart/">quickstart</a>, <a href="../troubleshooting/">troubleshooting</a>,
+        <a href="../ai-diagnose/">AI Diagnose</a>, or the
+        <a href="../for-agents/">For Agents</a> page for the Codex / Claude
+        Code / MCP-host setup view.
+      </footer>
+    </div>
+  </body>
+</html>

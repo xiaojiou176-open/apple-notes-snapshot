@@ -1,0 +1,4 @@
+# Replace /absolute/path/to/notesctl with this checkout's real notesctl path.
+# Pair this command with the latest Codex config docs if your Codex release
+# exposes extra MCP options.
+codex mcp add apple-notes-snapshot -- /absolute/path/to/notesctl mcp

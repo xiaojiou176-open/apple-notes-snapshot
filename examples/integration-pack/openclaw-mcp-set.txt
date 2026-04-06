@@ -1,0 +1,1 @@
+openclaw mcp set apple-notes-snapshot '{"command":"/absolute/path/to/notesctl","args":["mcp"]}'

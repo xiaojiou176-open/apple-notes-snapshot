@@ -1,0 +1,4 @@
+{
+  "command": "/absolute/path/to/notesctl",
+  "args": ["mcp"]
+}

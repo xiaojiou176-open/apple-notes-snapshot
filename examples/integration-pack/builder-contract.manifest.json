@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "artifact": "builder-contract-manifest",
+  "product": {
+    "name": "Apple Notes Snapshot",
+    "identity": "Apple Notes local-first backup control room for macOS",
+    "canonical_entrypoint": "./notesctl",
+    "builder_positioning": "Control-room product first; Local Web API, AI Diagnose, and read-only-first MCP second."
+  },
+  "proof_legend": {
+    "repo-side proven": "The repository itself proves the underlying contract.",
+    "attach-proven": "A named host attach was freshly proven on a real host session in this round; other machines may still need local verification.",
+    "host-side verify required": "The repo ships the wiring kit, but the last attach proof still belongs to the host on your machine.",
+    "template-only": "The repo gives you a starting file or pattern, not attach proof.",
+    "comparison-only": "The repo mentions the host only to mark scope and avoid overclaiming."
+  },
+  "builder_surfaces": [
+    {
+      "id": "cli",
+      "label": "Deterministic CLI reads",
+      "transport": "local-cli",
+      "proof_level": "repo-side proven",
+      "entrypoints": [
+        "./notesctl status --json",
+        "./notesctl doctor --json",
+        "./notesctl log-health --json",
+        "./notesctl aggregate --tail N"
+      ],
+      "docs": [
+        "README.md",
+        "docs/for-agents/index.html"
+      ]
+    },
+    {
+      "id": "local-web-api",
+      "label": "Local Web API",
+      "transport": "same-machine-http",
+      "proof_level": "repo-side proven",
+      "entrypoints": [
+        "./notesctl web",
+        "./notesctl help web",
+        "./notesctl help audit"
+      ],
+      "read_endpoints": [
+        "/api/health",
+        "/api/status",
+        "/api/log-health?tail=<n>",
+        "/api/doctor",
+        "/api/metrics?tail=<n>",
+        "/api/recent-runs?tail=<n>",
+        "/api/access"
+      ],
+      "docs": [
+        "docs/local-api/index.html",
+        "docs/for-agents/index.html",
+        "docs/for-agents/integration-pack/index.html"
+      ]
+    },
+    {
+      "id": "ai-diagnose",
+      "label": "AI Diagnose",
+      "transport": "local-cli",
+      "proof_level": "repo-side proven",
+      "entrypoints": [
+        "./notesctl ai-diagnose --json",
+        "./notesctl help ai-diagnose"
+      ],
+      "reads": [
+        "./notesctl status --json",
+        "./notesctl doctor --json",
+        "./notesctl log-health --json",
+        "./notesctl aggregate --tail N"
+      ],
+      "docs": [
+        "docs/ai-diagnose/index.html",
+        "docs/for-agents/index.html"
+      ]
+    },
+    {
+      "id": "mcp",
+      "label": "MCP Provider",
+      "transport": "stdio",
+      "proof_level": "repo-side proven",
+      "entrypoints": [
+        "./notesctl mcp",
+        "./notesctl help mcp"
+      ],
+      "v1_tools": [
+        "get_status",
+        "run_doctor",
+        "verify_freshness",
+        "get_log_health",
+        "list_recent_runs",
+        "get_access_policy"
+      ],
+      "v1_resources": [
+        "notes-snapshot://state.json",
+        "notes-snapshot://summary.txt",
+        "notes-snapshot://recent-runs",
+        "notes-snapshot://config-safe-summary"
+      ],
+      "docs": [
+        "docs/mcp/index.html",
+        "docs/for-agents/index.html",
+        "docs/for-agents/integration-pack/index.html"
+      ]
+    }
+  ],
+  "hosts": [
+    {
+      "id": "generic-mcp-aware-host",
+      "label": "Generic MCP-aware host",
+      "proof_level": "repo-side proven",
+      "pack_today": "Generic MCP pack",
+      "starting_point": "/absolute/path/to/notesctl + mcp",
+      "copyable_assets": [
+        "examples/integration-pack/generic-stdio-mcp.json",
+        "examples/integration-pack/post-attach-checklist.md"
+      ]
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "proof_level": "host-side verify required",
+      "pack_today": "Starter pack plus generic MCP path",
+      "starting_point": "codex mcp add apple-notes-snapshot -- /absolute/path/to/notesctl mcp",
+      "copyable_assets": [
+        ".codex-plugin/marketplace.json",
+        "plugins/apple-notes-snapshot-control-room/README.md",
+        "plugins/apple-notes-snapshot-control-room/.codex-plugin/plugin.json",
+        "plugins/apple-notes-snapshot-control-room/.mcp.json",
+        "examples/integration-pack/codex-mcp-add.txt",
+        "examples/integration-pack/generic-stdio-mcp.json",
+        "examples/integration-pack/post-attach-checklist.md"
+      ]
+    },
+    {
+      "id": "claude-code",
+      "label": "Claude Code",
+      "proof_level": "attach-proven",
+      "pack_today": "Starter pack plus local marketplace/plugin bundle and generic MCP path",
+      "starting_point": "Project or user MCP registration that points to /absolute/path/to/notesctl and mcp",
+      "copyable_assets": [
+        ".claude-plugin/marketplace.json",
+        "plugins/apple-notes-snapshot-control-room/README.md",
+        "plugins/apple-notes-snapshot-control-room/.claude-plugin/plugin.json",
+        "plugins/apple-notes-snapshot-control-room/.mcp.json",
+        "examples/integration-pack/claude-project-mcp.json",
+        "examples/integration-pack/claude-user-mcp.json",
+        "examples/integration-pack/generic-stdio-mcp.json",
+        "examples/integration-pack/post-attach-checklist.md"
+      ]
+    },
+    {
+      "id": "opencode",
+      "label": "OpenCode",
+      "proof_level": "template-only",
+      "pack_today": "Template only",
+      "starting_point": "Local MCP server entry that points to /absolute/path/to/notesctl and mcp",
+      "copyable_assets": [
+        "examples/integration-pack/opencode.jsonc"
+      ]
+    },
+    {
+      "id": "openhands",
+      "label": "OpenHands",
+      "proof_level": "comparison-only",
+      "pack_today": "Comparison and generic MCP guidance only",
+      "starting_point": "Start from the generic stdio MCP launch shape, then map it into current host docs",
+      "copyable_assets": [
+        "examples/integration-pack/generic-stdio-mcp.json"
+      ]
+    },
+    {
+      "id": "openclaw",
+      "label": "OpenClaw",
+      "proof_level": "host-side verify required",
+      "pack_today": "OpenClaw MCP registry path plus bundle-compatible local plugin pack; official CLI config write/read path freshly proven on the current machine",
+      "starting_point": "openclaw mcp set apple-notes-snapshot '{\"command\":\"/absolute/path/to/notesctl\",\"args\":[\"mcp\"]}'",
+      "copyable_assets": [
+        "plugins/apple-notes-snapshot-control-room/README.md",
+        "plugins/apple-notes-snapshot-control-room/.claude-plugin/plugin.json",
+        "plugins/apple-notes-snapshot-control-room/.codex-plugin/plugin.json",
+        "examples/integration-pack/openclaw-mcp.json",
+        "examples/integration-pack/openclaw-mcp-set.txt",
+        "examples/integration-pack/post-attach-checklist.md"
+      ]
+    },
+    {
+      "id": "browser-backed-local-tool",
+      "label": "Browser-backed or HTTP-shaped local tool",
+      "proof_level": "repo-side proven",
+      "pack_today": "Local Web API examples",
+      "starting_point": "./notesctl web plus a local token",
+      "copyable_assets": [
+        "examples/integration-pack/local-web-api.env.example",
+        "examples/integration-pack/local-web-api.curl.sh"
+      ]
+    }
+  ],
+  "help_entrypoints": [
+    "./notesctl help mcp",
+    "./notesctl help web",
+    "./notesctl help audit",
+    "./notesctl help ai-diagnose"
+  ],
+  "docs_entrypoints": [
+    "docs/for-agents/index.html",
+    "docs/for-agents/integration-pack/index.html",
+    "docs/for-agents/codex-starter-pack/index.html",
+    "docs/for-agents/claude-code-starter-pack/index.html",
+    "docs/for-agents/openclaw-starter-pack/index.html",
+    "docs/for-agents/public-skills/index.html"
+  ],
+  "no_claims": [
+    "No public OpenAPI or generated SDK",
+    "No hosted MCP or write-capable remote agent platform",
+    "No official plugin or marketplace claim for named hosts",
+    "No repo-side claim that every named host is already attach-verified"
+  ]
+}

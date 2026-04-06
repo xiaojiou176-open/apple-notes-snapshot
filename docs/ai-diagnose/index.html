@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Diagnose | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Use AI Diagnose as an opt-in, advisory sidecar for Apple Notes Snapshot. It reads local status and diagnostics, not exported note content."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="AI Diagnose | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Use AI Diagnose as an opt-in, advisory sidecar for Apple Notes Snapshot. It reads local status and diagnostics, not exported note content."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot AI Diagnose page for the local-first advisory diagnosis sidecar" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Diagnose for Apple Notes Snapshot" />
+    <meta
+      name="twitter:description"
+      content="Opt-in, advisory diagnosis for local Apple Notes backup state. Reads status and diagnostics, not exported note content."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "AI Diagnose", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">AI Diagnose</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="../quickstart/">Quickstart</a>
+          <a href="../for-agents/">For Codex / Claude</a>
+          <a href="../troubleshooting/">Troubleshooting</a>
+          <a href="../roadmap/">Roadmap</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">AI Diagnose</span>
+      </nav>
+
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Opt-in and advisory</span>
+        <h1>Use AI Diagnose as a local sidecar, not as the system truth.</h1>
+        <p>
+          AI Diagnose reads the existing local diagnostics surface and turns it into a more human
+          explanation. It does not replace <code>status</code>, <code>doctor</code>,
+          <code>verify</code>, or <code>log-health</code>. It also does not read exported note
+          content in v1.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>What it reads</h2>
+        <ul>
+          <li><code>./notesctl status --json</code></li>
+          <li><code>./notesctl doctor --json</code></li>
+          <li><code>./notesctl log-health --json</code></li>
+          <li><code>./notesctl aggregate --tail N</code></li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>What it does not read in v1</h2>
+        <ul>
+          <li>No Apple Notes body content</li>
+          <li>No exported markdown or attachments</li>
+          <li>No remote GitHub control-plane state</li>
+          <li>No write actions into the snapshot workflow</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>How to enable it</h2>
+        <pre tabindex="0"><code># config/notes_snapshot.env
+# opt-in required; AI Diagnose now routes through a local Switchyard runtime
+# NOTES_SNAPSHOT_AI_ENABLE="1"
+# NOTES_SNAPSHOT_AI_PROVIDER="gemini"
+# NOTES_SNAPSHOT_AI_MODEL="gemini-2.5-flash"
+# Optional Switchyard service root or invoke URL override
+# NOTES_SNAPSHOT_AI_BASE_URL="http://127.0.0.1:4010"
+
+./notesctl ai-diagnose
+./notesctl ai-diagnose --json</code></pre>
+        <p>
+          When AI is disabled or misconfigured, the command still returns a deterministic fallback
+          summary instead of breaking the rest of the system.
+        </p>
+        <p>
+          Apple Notes Snapshot does not forward provider credentials into Switchyard for you. The
+          local Switchyard service itself must already be running with a provider credential name
+          it recognizes. For the current Gemini BYOK path, that means one of
+          <code>SWITCHYARD_GEMINI_API_KEY</code>, <code>GEMINI_API_KEY</code>, or
+          <code>GOOGLE_API_KEY</code> on the Switchyard side.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>How to read the output</h2>
+        <ul>
+          <li><strong>Observed Facts</strong>: deterministic evidence copied from the existing diagnostics surface</li>
+          <li><strong>Run / Change Summary</strong>: recent-run trend, streak, failure clustering, and operator-safe change framing built from structured operational state</li>
+          <li><strong>Recoverability</strong>: a compact state that tells you whether you are looking at bootstrap, recoverable failure handling, a watch window, stable monitoring, or a manual-review case</li>
+          <li><strong>Workflow Hint</strong>: the suggested order for the next operator checks, so the output reads more like a control-room handoff than a loose bag of commands</li>
+          <li><strong>Operator Advisory</strong>: a priority-oriented control-room summary that explains whether you are looking at a first-run gap, an active failure cluster, a stale loop, or a healthy/watch-only state</li>
+          <li><strong>Likely Diagnosis</strong>: advisory interpretation of those facts</li>
+          <li><strong>Recommended Next Steps</strong>: concrete commands to run next</li>
+          <li><strong>Confidence / Limitations</strong>: what was inferred, and what stayed outside scope</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Best-fit AI role</h2>
+        <ul>
+          <li><strong>Operator next-step assistant</strong>: explain what the current local control room is already telling you</li>
+          <li><strong>Run-change summarizer</strong>: turn recent-run metadata, streaks, grouped failures, and recoverability into a calmer handoff for operators without opening exported note content</li>
+          <li><strong>Failure and recovery explainer</strong>: translate status, doctor, log-health, and recent-run evidence into calmer operator language</li>
+          <li><strong>Workflow sequencing hint</strong>: suggest the next deterministic checks in order instead of leaving operators with a flat command pile</li>
+          <li><strong>Not a generic notes assistant</strong>: v1 does not answer note-content questions or replace the deterministic runbook path</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Provider notes</h2>
+        <ul>
+          <li><strong>Switchyard local runtime</strong>: AI Diagnose now hands model invocation to a local Switchyard service instead of talking to providers directly from this repo</li>
+          <li><strong>Current best-supported live path here</strong>: Gemini BYOK through the local Switchyard runtime</li>
+          <li><strong>Credential boundary</strong>: provider keys live on the Switchyard side, not in Apple Notes Snapshot</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Hard boundaries that still hold</h2>
+        <ul>
+          <li>AI Diagnose is advisory only</li>
+          <li>The canonical system truth is still the deterministic repo-owned command surface</li>
+          <li>Phase 2 still works from structured operational state and recent-run metadata, not default note-content analysis</li>
+          <li>AI Diagnose does not enter the <code>run/install/verify</code> hot path</li>
+          <li>Note content stays out of scope in v1</li>
+        </ul>
+      </section>
+      </main>
+
+      <footer class="footer">
+        Need the deterministic view first? Go back to the
+        <a href="../troubleshooting/">troubleshooting guide</a> or the
+        <a href="../quickstart/">quickstart</a>. If you are wiring this into a
+        coding agent or an MCP-aware workflow, open the
+        <a href="../for-agents/">For Agents</a> guide next for the Codex /
+        Claude Code / MCP-host setup view.
+      </footer>
+    </div>
+  </body>
+</html>

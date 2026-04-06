@@ -1,0 +1,6 @@
+{
+  "apple-notes-snapshot": {
+    "command": "./scripts/notes_snapshot_mcp.sh",
+    "args": []
+  }
+}

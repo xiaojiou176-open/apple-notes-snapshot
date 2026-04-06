@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>For Codex, Claude Code, and other MCP-aware hosts | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="See how Apple Notes Snapshot fits Codex, Claude Code, and other MCP-aware hosts through a local Web API, AI Diagnose, and a read-only MCP surface."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="For Codex, Claude Code, and other MCP-aware hosts | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Apple Notes Snapshot is a local-first Apple Notes backup control room with a local Web API, AI Diagnose, and a read-only MCP surface for Codex, Claude Code, and other MCP-aware hosts."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot for agents page describing the AI Diagnose sidecar and MCP provider" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="For Codex, Claude Code, and other MCP-aware hosts | Apple Notes Snapshot" />
+    <meta
+      name="twitter:description"
+      content="How Apple Notes Snapshot fits Codex, Claude Code, and other MCP-aware hosts without pretending to be a hosted agent platform."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "For Agents", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">For Agents</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="./integration-pack/">Integration Pack</a>
+          <a href="./codex-starter-pack/">Codex starter pack</a>
+          <a href="./claude-code-starter-pack/">Claude starter pack</a>
+          <a href="./openclaw-starter-pack/">OpenClaw starter pack</a>
+          <a href="./public-skills/">Public skills pack</a>
+          <a href="../ai-diagnose/">AI Diagnose</a>
+          <a href="../mcp/">MCP Provider</a>
+          <a href="../roadmap/">Roadmap</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">For Agents</span>
+      </nav>
+
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">AI-aware, agent-aware, still local-first</span>
+        <h1>Give local coding hosts the same backup facts as a human operator.</h1>
+        <p>
+          The project is not a hosted agent platform. It is a local Apple Notes backup control room
+          with three truthful builder surfaces: a token-gated same-machine Local Web API, an
+          advisory AI diagnosis sidecar, and a stdio-first, read-only-first MCP provider.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Three layers to remember</h2>
+        <ul>
+          <li><strong>Category</strong>: local-first Apple Notes backup control room</li>
+          <li><strong>AI/agent hook</strong>: AI Diagnose plus a read-only MCP surface</li>
+          <li><strong>Result</strong>: humans and coding agents can inspect backup health, recent runs, and recovery clues from the same local state</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Current best-fit ecosystem bindings</h2>
+        <ul>
+          <li><strong>Primary</strong>: MCP-aware coding agents and local automation hosts</li>
+          <li><strong>Natural secondary fit</strong>: Codex-, Claude Code-, and OpenClaw-style local workflows when the host can register or launch stdio MCP servers</li>
+          <li><strong>Template-level guidance only</strong>: OpenCode and OpenHands, because this repository does not ship dedicated adapters, hosted runtimes, or repo-verified attach proof for them today</li>
+          <li><strong>Not a truthful front-door binding</strong>: OpenClaw-style generic AI assistant positioning</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Proof legend before you call a host supported</h2>
+        <ul>
+          <li><strong>Repo-side proven</strong>: this repository ships and verifies the underlying contract itself.</li>
+          <li><strong>Attach-proven</strong>: a named host attach was freshly proven on a real host session in this round, though another machine may still need its own local verification.</li>
+          <li><strong>Host-side verify required</strong>: the repo contract is ready, but the last attach proof still belongs to the host on your machine.</li>
+          <li><strong>Template-only</strong>: this repo gives you a starting file or pattern, not attach proof.</li>
+          <li><strong>Comparison-only</strong>: this repo mentions the host only to mark scope and avoid overclaiming.</li>
+        </ul>
+        <p>
+          Read this legend first, then use the <a href="./integration-pack/">Builder Integration Pack</a>
+          or the host-specific starter packs so you do not accidentally upgrade guidance into a
+          support claim.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Host proof levels at a glance</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Host or workflow</th>
+              <th>Proof level</th>
+              <th>What that means today</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Generic MCP-aware host</strong></td>
+              <td>Repo-side proven</td>
+              <td>The stdio launch shape, tools, resources, and help contract are repo-owned truth here.</td>
+            </tr>
+            <tr>
+              <td><strong>Codex</strong></td>
+              <td>Host-side verify required</td>
+              <td>The starter pack is productized and copyable, but the final attach proof still belongs to your Codex machine.</td>
+            </tr>
+            <tr>
+              <td><strong>Claude Code</strong></td>
+              <td>Attach-proven</td>
+              <td>The starter pack is productized and copyable, and a fresh Claude Code attach proof now exists on the current host build without turning that into a universal claim for every machine.</td>
+            </tr>
+            <tr>
+              <td><strong>OpenCode</strong></td>
+              <td>Template-only</td>
+              <td>There is a truthful local template, but not repo-owned attach proof.</td>
+            </tr>
+            <tr>
+              <td><strong>OpenHands</strong></td>
+              <td>Comparison-only</td>
+              <td>Use the current MCP launch shape as a reference, not as a repo-owned integration claim.</td>
+            </tr>
+            <tr>
+              <td><strong>OpenClaw</strong></td>
+              <td>Host-side verify required</td>
+              <td>The repo now ships an MCP registry starting point, but the final attach proof still belongs to your OpenClaw machine.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="page-card">
+        <h2>What exists right now</h2>
+        <ul>
+          <li><strong>`notesctl`</strong>: the canonical human entrypoint</li>
+          <li><strong>Local Web API</strong>: a token-gated same-machine browser and HTTP lane backed by the same repo-owned command surface</li>
+          <li><strong>AI Diagnose</strong>: an operator next-step assistant that explains local status, doctor, log-health, and recent-run evidence</li>
+          <li><strong>MCP Provider</strong>: a read-only agent substrate that exposes local backup diagnostics and safe runtime summaries</li>
+          <li><strong>State substrate</strong>: <code>state.json</code>, aggregate summaries, and local logs remain the underlying truth-bearing surfaces</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Current builder entry points you can trust</h2>
+        <ul>
+          <li><strong>Deterministic CLI reads</strong>: <code>./notesctl status --json</code>, <code>./notesctl doctor --json</code>, <code>./notesctl log-health --json</code>, and <code>./notesctl aggregate --tail N</code></li>
+          <li><strong>Token-gated local browser/API lane</strong>: <code>./notesctl web</code> when your local workflow wants the Web console plus the same-machine JSON endpoints behind a local token gate</li>
+          <li><strong>Advisory CLI layer</strong>: <code>./notesctl ai-diagnose --json</code> when you want a calmer explanation around the same local facts</li>
+          <li><strong>Agent substrate</strong>: <code>./notesctl mcp</code> when your host can launch stdio MCP servers</li>
+        </ul>
+        <p>
+          Treat these as the truthful builder entry points today. This repository does not claim a
+          hosted runtime, a public OpenAPI, or a generated SDK surface yet, even if your host is
+          Codex or Claude Code.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Need the copy-paste pack?</h2>
+        <p>
+          Open the <a href="./integration-pack/">Builder Integration Pack</a> when you want one
+          page with the capability matrix, same-machine contract, host status table, repo-owned
+          copyable examples, and a short post-attach checklist that separates repo-side proof from
+          host-side proof.
+        </p>
+        <p>
+          Need the host-specific install surface instead of the shared matrix? Open the
+          <a href="./codex-starter-pack/">Codex starter pack</a> or the
+          <a href="./claude-code-starter-pack/">Claude Code starter pack</a>.
+          Need the shortest OpenClaw MCP registry path? Open the
+          <a href="./openclaw-starter-pack/">OpenClaw starter pack</a>.
+          Need the curated public-safe instruction subset? Open the
+          <a href="./public-skills/">public skills pack</a>.
+        </p>
+        <p>
+          Read these like a small plugin shelf for local builder workflows:
+          Codex, Claude Code, and OpenClaw have productized starter packs, the Integration Pack is
+          the shared host matrix, and the Public Skills Pack is the public-safe instruction layer
+          that travels with those hosts without pretending to be a marketplace artifact.
+        </p>
+        <p>
+          Need the same contract in a machine-readable shape instead of reading every page by hand?
+          Use the
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/builder-contract.manifest.json">builder contract manifest</a>.
+          It snapshots the current builder surfaces, proof levels, help entrypoints, and copyable
+          assets without pretending the repo already ships an SDK or hosted platform layer.
+        </p>
+        <p>
+          Need the plugin-grade bundle files themselves? Open the
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/tree/main/plugins/apple-notes-snapshot-control-room">control-room plugin bundle</a>
+          and the root marketplace files for
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/.codex-plugin/marketplace.json">Codex</a>
+          and
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/.claude-plugin/marketplace.json">Claude Code</a>.
+        </p>
+        <p>
+          The public skills pack now also carries a runtime-resource-hygiene layer, so the same
+          repo-scoped guidance can cover not just truthful wording but also browser/profile cleanup,
+          branch/worktree convergence, and non-GitHub external read-only boundaries.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Exact repo-owned help entrypoints</h2>
+        <ul>
+          <li><code>./notesctl help mcp</code> for the narrow MCP contract</li>
+          <li><code>./notesctl help web</code> for the browser plus Local Web API contract</li>
+          <li><code>./notesctl help audit</code> for token, scope, allowlist, readonly, and rate-limit rules</li>
+          <li><code>./notesctl help ai-diagnose</code> for the advisory AI sidecar contract</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Official public-surface truth</h2>
+        <ul>
+          <li><strong>Codex</strong>: OpenAI now documents plugins and an official plugin directory, but the public third-party directory route is still described as coming soon. Treat this repo's Codex bundle as a local plugin-grade surface, not an official public listing.</li>
+          <li><strong>Claude Code</strong>: Anthropic exposes a real marketplace/plugin surface. This repo now ships a local marketplace bundle and also has a fresh local attach proof on the current host build, but this page still does not claim Anthropic has officially listed Apple Notes Snapshot.</li>
+          <li><strong>OpenClaw / ClawHub</strong>: OpenClaw documents a public registry/discovery route through ClawHub. This repo still stays at <code>host-side verify required</code> until a real OpenClaw-side attach or listing proof exists.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Official host docs to pair with this page</h2>
+        <ul>
+          <li><a href="https://developers.openai.com/learn/docs-mcp">OpenAI Docs MCP reference</a> for current Codex-side MCP setup patterns</li>
+          <li><a href="https://developers.openai.com/codex/plugins/build">OpenAI Codex plugin build docs</a> for local plugins and official-directory boundary</li>
+          <li><a href="https://code.claude.com/docs/en/mcp">Claude Code MCP guide</a> for current local stdio and remote MCP registration flows</li>
+          <li><a href="https://github.com/anthropics/claude-plugins-official">Anthropic official plugin marketplace repo</a> for current public plugin distribution</li>
+          <li><a href="https://docs.openclaw.ai/tools/clawhub">OpenClaw ClawHub docs</a> for the official public registry route</li>
+          <li><a href="https://modelcontextprotocol.io/docs/getting-started/intro">Model Context Protocol introduction</a> for the shared protocol vocabulary</li>
+        </ul>
+        <p>
+          This page explains the truthful shape of the Apple Notes Snapshot side. Use the official
+          host docs above for host-specific registration details that may change faster than this
+          repository does.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Minimal stdio launch shape</h2>
+        <p>
+          If your local host can launch stdio MCP servers, the minimal launch contract is just the
+          repo-owned entrypoint plus <code>mcp</code>.
+        </p>
+        <pre><code>{
+  "command": "/absolute/path/to/notesctl",
+  "args": ["mcp"]
+}</code></pre>
+        <p>
+          That is the narrow, truthful claim. Hosts differ in how they store this config, so this
+          page documents the launch shape rather than pretending there is one universal agent setup file.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>How the current layers map together</h2>
+        <ul>
+          <li><strong>Human operator path</strong>: <code>run</code>, <code>verify</code>, <code>doctor</code>, <code>status</code>, <code>dashboard</code>, and the optional local Web console</li>
+          <li><strong>Local browser/API path</strong>: <code>web</code> serves the token-gated control room plus same-machine JSON endpoints for <code>status</code>, <code>doctor</code>, <code>log-health</code>, <code>recent-runs</code>, and <code>access</code></li>
+          <li><strong>AI explanation path</strong>: <code>ai-diagnose</code> reads the deterministic state surfaces and summarizes them without becoming the system truth</li>
+          <li><strong>Agent path</strong>: <code>mcp</code> exposes read-only tools and resources backed by the same local state</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>What this repository does not claim</h2>
+        <ul>
+          <li>No hosted agent runtime</li>
+          <li>No write-capable MCP surface in v1</li>
+          <li>No public OpenAPI or generated SDK surface today</li>
+          <li>No content-level AI, note QA, or semantic-search product positioning</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Where to start</h2>
+        <ul>
+          <li>Read <a href="./integration-pack/">Builder Integration Pack</a> if you want the copyable host matrix and setup examples first</li>
+          <li>Read <a href="./codex-starter-pack/">Codex Starter Pack</a> if you want the narrow project-scoped Codex setup surface</li>
+          <li>Read <a href="./claude-code-starter-pack/">Claude Code Starter Pack</a> if you want the project-scoped versus user-scoped Claude setup surface</li>
+          <li>Read <a href="./openclaw-starter-pack/">OpenClaw Starter Pack</a> if you want the narrow MCP registry path for OpenClaw</li>
+          <li>Read <a href="./public-skills/">Public Skills Pack</a> if you want the public-safe guidance subset instead of the repo-local <code>.agents/skills/</code> tree</li>
+          <li>Read <a href="../local-api/">Local Web API</a> if you want the browser-backed local HTTP surface</li>
+          <li>Read <a href="../ai-diagnose/">AI Diagnose</a> if you want the operator explanation layer</li>
+          <li>Read <a href="../mcp/">MCP Provider</a> if you want the agent-facing contract</li>
+          <li>Read <a href="../quickstart/">Quickstart</a> if you still need the first successful snapshot path before adding any AI or agent surface</li>
+        </ul>
+      </section>
+      </main>
+
+      <footer class="footer">
+        Keep the product identity honest: local backup control room first, AI and MCP as additive surfaces second.
+      </footer>
+    </div>
+  </body>
+</html>

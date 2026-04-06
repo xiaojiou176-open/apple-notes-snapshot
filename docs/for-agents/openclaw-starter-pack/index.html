@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OpenClaw Starter Pack | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="Use the Apple Notes Snapshot OpenClaw starter pack when you want the shortest honest path from an OpenClaw MCP registry entry to the repo's read-only MCP surface."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/openclaw-starter-pack/" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="OpenClaw Starter Pack | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="Repo-owned OpenClaw MCP registration examples, proof boundaries, and post-attach checks for Apple Notes Snapshot."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/openclaw-starter-pack/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot OpenClaw starter pack page with MCP registration and verify guidance" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="OpenClaw Starter Pack | Apple Notes Snapshot" />
+    <meta
+      name="twitter:description"
+      content="Use the Apple Notes Snapshot OpenClaw starter pack for MCP registration, post-attach checks, and truthful host-proof boundaries."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">OpenClaw Starter Pack</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../../">Home</a>
+          <a href="../">For Agents</a>
+          <a href="../integration-pack/">Integration Pack</a>
+          <a href="../public-skills/">Public skills pack</a>
+          <a href="../../mcp/">MCP Provider</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <a href="../">For Agents</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">OpenClaw Starter Pack</span>
+      </nav>
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Host integration path, not front-door positioning</span>
+        <h1>Use this starter pack when you want the shortest honest path from OpenClaw to Apple Notes Snapshot through MCP.</h1>
+        <p>
+          This is a repo-owned OpenClaw starter pack, not an OpenClaw marketplace artifact and not
+          a claim that Apple Notes Snapshot should be positioned as a front-door assistant. It
+          packages the current MCP registry starting point, the proof boundary, and the repo-owned
+          post-attach checks in one place.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Best fit</h2>
+        <ul>
+          <li>You already use OpenClaw and want it to inspect Apple Notes Snapshot through the read-only MCP surface.</li>
+          <li>You want a copyable MCP registry starting point instead of translating the Integration Pack by hand.</li>
+          <li>You want a repo-owned explanation of what is proven here versus what still belongs to your OpenClaw host.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Proof level today</h2>
+        <ul>
+          <li><strong>Repo-side proof</strong>: the generic stdio MCP server, tools, resources, help contract, and OpenClaw registry examples are shipped in this repository.</li>
+          <li><strong>OpenClaw proof</strong>: the MCP registry path is documented and copyable.</li>
+          <li><strong>Fresh config proof</strong>: the official OpenClaw CLI now has a fresh profile-isolated config proof on the current machine, including <code>mcp set</code>, <code>mcp list --json</code>, and <code>mcp show --json</code> for the Apple Notes Snapshot entry.</li>
+          <li><strong>Still host-side verify</strong>: your OpenClaw install, the current MCP registry behavior, and the final attach result on your machine.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Install path</h2>
+        <ol>
+          <li>Install or update OpenClaw with the current official docs.</li>
+          <li>Confirm this repository already has a healthy local snapshot loop.</li>
+          <li>Use the repo-owned MCP registration command or payload below as your starting point.</li>
+        </ol>
+        <pre tabindex="0"><code>openclaw mcp set apple-notes-snapshot '{"command":"/absolute/path/to/notesctl","args":["mcp"]}'</code></pre>
+        <p>
+          Need the tracked files? Use
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/openclaw-mcp-set.txt">openclaw-mcp-set.txt</a>
+          or
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/openclaw-mcp.json">openclaw-mcp.json</a>.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Registry and attach path</h2>
+        <ol>
+          <li>Register the MCP server with the command above or by loading the JSON payload into the current OpenClaw MCP registry surface.</li>
+          <li>Point the command at the real <code>/absolute/path/to/notesctl</code> for this checkout.</li>
+          <li>Let OpenClaw launch the stdio server through <code>notesctl mcp</code>.</li>
+        </ol>
+      </section>
+
+      <section class="page-card">
+        <h2>Verify path</h2>
+        <ol>
+          <li>Confirm the host sees the current v1 tools and resources.</li>
+          <li>Compare host-visible <code>get_status</code> output against local <code>./notesctl status --json</code>.</li>
+          <li>If OpenClaw attaches but shows a missing-state view, initialize the snapshot loop before treating that as an MCP failure.</li>
+        </ol>
+        <p>
+          Use the tracked
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/post-attach-checklist.md">post-attach checklist</a>
+          for the repo-owned verification steps.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>What this starter pack includes</h2>
+        <ul>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/openclaw-mcp-set.txt">One-line OpenClaw MCP registration command</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/openclaw-mcp.json">OpenClaw MCP registry payload</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/tree/main/plugins/apple-notes-snapshot-control-room">Bundle-compatible control-room plugin pack</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/generic-stdio-mcp.json">Generic stdio MCP launch shape</a></li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/post-attach-checklist.md">Repo-owned post-attach checklist</a></li>
+          <li><a href="../public-skills/">Public skills pack</a> for public-safe prompt and contract guardrails</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Official public surface truth</h2>
+        <ul>
+          <li><strong>What exists</strong>: OpenClaw documents ClawHub as a real public registry and discovery route.</li>
+          <li><strong>What this repo ships now</strong>: MCP registry payloads plus a bundle-compatible local plugin pack that follows the documented Claude/Codex-style bundle layouts OpenClaw can read, and the official OpenClaw CLI has now written and read back the MCP config on the current machine.</li>
+          <li><strong>What still stays outside this round</strong>: a live ClawHub listing or a repo-owned guarantee that every OpenClaw build already attaches.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>What it does not claim</h2>
+        <ul>
+          <li>No OpenClaw marketplace listing</li>
+          <li>No hosted MCP or remote control plane</li>
+          <li>No repo-owned proof that every OpenClaw release will attach the same way</li>
+          <li>No front-door assistant positioning for Apple Notes Snapshot</li>
+          <li>No public SDK or OpenAPI surface</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Release and update story</h2>
+        <ul>
+          <li>Repo-owned examples and docs move with Apple Notes Snapshot releases and current-main updates.</li>
+          <li>OpenClaw config locations, MCP registry behavior, and host menus can change faster than this repo does.</li>
+          <li>Use <a href="../../releases/">release history</a> for the repo-owned side and the official OpenClaw docs for the current host-side steps.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Official docs to pair with this starter pack</h2>
+        <ul>
+          <li><a href="https://docs.openclaw.ai/cli/mcp">OpenClaw MCP guide</a></li>
+          <li><a href="https://docs.openclaw.ai/tools/clawhub">OpenClaw ClawHub docs</a></li>
+          <li><a href="https://docs.openclaw.ai/plugins">OpenClaw plugin docs</a></li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        Use this pack when you want the shortest OpenClaw MCP registration path. Go back to the
+        <a href="../integration-pack/">Integration Pack</a> if you want the broader host matrix first.
+      </footer>
+      </main>
+    </div>
+  </body>
+</html>

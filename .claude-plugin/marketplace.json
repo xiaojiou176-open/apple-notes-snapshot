@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "apple-notes-snapshot-local",
+  "description": "Local marketplace for the Apple Notes Snapshot control-room plugin bundle.",
+  "metadata": {
+    "description": "Repo-owned local marketplace for the Apple Notes Snapshot control-room plugin bundle."
+  },
+  "owner": {
+    "name": "Apple Notes Snapshot Maintainers",
+    "email": "maintainers@example.com"
+  },
+  "plugins": [
+    {
+      "name": "apple-notes-snapshot-control-room",
+      "description": "Project-scoped Apple Notes Snapshot control-room bundle with MCP wiring, a preflight command, and truthful host boundaries.",
+      "version": "0.1.7",
+      "author": {
+        "name": "Apple Notes Snapshot Maintainers",
+        "email": "maintainers@example.com"
+      },
+      "source": "./plugins/apple-notes-snapshot-control-room",
+      "category": "development",
+      "strict": false
+    }
+  ]
+}
