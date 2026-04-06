@@ -8,7 +8,49 @@ The format is based on Keep a Changelog.
 
 ### Added
 
-- ongoing public-surface hardening and discoverability follow-up
+- ongoing follow-up after the proof/front-door sync release
+
+## [v0.1.9] - 2026-04-06
+
+### Added
+
+- a public proof page that concentrates repo-side gates, GitHub-controlled delivery evidence, and the same-machine live boundary
+- HTML and markdown release notes for both the `v0.1.8` hard-cut baseline and this `v0.1.9` proof/front-door sync release
+- extracted helper modules for AI Diagnose reporting, Web policy/static routing, and status rendering
+
+### Changed
+
+- reordered the README and docs front door so the control-room operator path comes first and builder surfaces sit clearly in the second lane
+- synced release history, sitemap, and public proof/release narrative around the current tagged truth
+- hardened launchd runtime cleanup so stale runtime-copy directories do not make `install --load` brittle
+
+### Fixed
+
+- release-history and changelog drift after the `v0.1.8` public hard cut
+- the launchd runtime copy cleanup path that could fail with transient `Directory not empty` errors during `install --load`
+
+## [v0.1.8] - 2026-04-06
+
+### Added
+
+- a hard-cut canonical public release for `xiaojiou176-open/apple-notes-snapshot`
+- a public governance and closeout layer across `AGENTS.md`,
+  `CONTRIBUTING.md`, `SECURITY.md`, `SUPPORT.md`, and
+  `docs/runbooks/final-closeout.md`
+
+### Changed
+
+- retargeted the public repo, Pages, and release narrative to the rebuilt
+  `xiaojiou176-open` baseline
+- kept the control-room-first product identity while preserving AI Diagnose,
+  Local Web API, MCP, and builder-facing surfaces as additive layers
+- kept the verification and workflow guardrails intact on the rebuilt public
+  repo baseline
+
+### Fixed
+
+- stopped older public release/docs assumptions from masquerading as the new
+  canonical public-repo truth
 
 ## [v0.1.7] - 2026-04-03
 

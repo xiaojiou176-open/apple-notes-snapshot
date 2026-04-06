@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proof and trust boundary | Apple Notes Snapshot</title>
+    <meta
+      name="description"
+      content="See the Apple Notes Snapshot proof stack: repo-owned gates, GitHub-controlled release evidence, live Web and MCP surface checks, and the current same-machine boundary."
+    />
+    <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <meta name="theme-color" content="#0e7c74" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Proof and trust boundary | Apple Notes Snapshot" />
+    <meta
+      property="og:description"
+      content="See the repo-owned gates, GitHub-controlled release evidence, live Web and MCP checks, and the current same-machine boundary for Apple Notes Snapshot."
+    />
+    <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/" />
+    <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot proof page showing repo gates and trust boundaries" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Proof and trust boundary | Apple Notes Snapshot" />
+    <meta
+      name="twitter:description"
+      content="See the Apple Notes Snapshot proof stack: repo gates, release evidence, live Web and MCP checks, and the current same-machine boundary."
+    />
+    <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/" },
+          { "@type": "ListItem", "position": 2, "name": "Proof", "item": "https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="site-nav__brand">
+          <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
+          <span class="site-nav__title">Proof and trust boundary</span>
+        </div>
+        <div class="site-nav__links">
+          <a href="../">Home</a>
+          <a href="../quickstart/">Quickstart</a>
+          <a href="../releases/">Release history</a>
+          <a href="../security/">Security</a>
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
+        </div>
+      </nav>
+      <nav class="page-context" aria-label="Breadcrumb">
+        <a href="../">Home</a>
+        <span class="page-context__divider" aria-hidden="true">/</span>
+        <span aria-current="page">Proof</span>
+      </nav>
+
+      <main id="main-content">
+      <section class="page-hero">
+        <span class="page-hero__eyebrow">Evidence first</span>
+        <h1>See why this control room is worth trusting without reading every workflow by hand.</h1>
+        <p>
+          This page collects the shortest truthful evidence trail for Apple Notes Snapshot. It
+          separates repo-owned gates, GitHub-controlled delivery facts, live same-machine surface
+          checks, and the places where a real host or macOS permission prompt still becomes the
+          final boundary.
+        </p>
+      </section>
+
+      <section class="proof-grid">
+        <article class="callout">
+          <span class="eyebrow-inline">Current audited release</span>
+          <h3>v0.1.9 is the current tagged public baseline.</h3>
+          <p>
+            The latest public release is
+            <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases/tag/v0.1.9">v0.1.9</a>.
+            Treat later main-branch changes as preview truth until a newer tag exists.
+          </p>
+        </article>
+        <article class="callout">
+          <span class="eyebrow-inline">Same-machine boundary</span>
+          <h3>Web and MCP are real, but they do not become a hosted platform.</h3>
+          <p>
+            The Local Web API stays token-gated and same-machine. MCP stays stdio-first and
+            read-only-first. The repo still does not claim a public OpenAPI, hosted API, or
+            write-capable agent platform.
+          </p>
+        </article>
+      </section>
+
+      <section class="page-card">
+        <h2>Repo-side proof</h2>
+        <ul>
+          <li><code>./notesctl rebuild-dev-env</code> rebuilds the repo-owned maintainer environment.</li>
+          <li><code>pre_commit --all-files</code> enforces gitleaks, docs-link-root hygiene, legacy-path scan, and public-surface-sensitive scan.</li>
+          <li><code>scripts/checks/ci_gate.sh</code> chains GitHub alert gate, vendor hygiene, unit tests, and wrapper smoke into one canonical quick gate.</li>
+          <li>The maintained test floor is <strong>90% coverage</strong> on the repo-owned ops surface.</li>
+        </ul>
+        <p>
+          These are maintainer-grade gates. They are stronger than the first successful snapshot
+          path and exist so contributors can prove the repo still matches its own public contract.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>GitHub-controlled proof</h2>
+        <ul>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases">GitHub Releases</a> show the current tagged public trail.</li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/pages.yml">Pages</a> publishes the docs site from the tracked <code>docs/</code> surface.</li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml">Trusted CI</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/codeql.yml">CodeQL</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trivy.yml">Trivy</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/actionlint.yml">Actionlint</a>, and <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/zizmor.yml">Zizmor</a> stay as live GitHub-controlled guardrails.</li>
+          <li>At the current <strong>v0.1.9</strong> baseline, code scanning was rechecked at <strong>0 open alerts</strong>.</li>
+        </ul>
+        <p>
+          Treat GitHub-controlled truth separately from the tracked tree: release tags, Pages
+          deployment, and alert counts can drift after a local checkout goes stale.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>Live same-machine proof</h2>
+        <ul>
+          <li><strong>Local Web API</strong>: token-gated requests to <code>/api/health</code>, <code>/api/access</code>, and <code>/api/status</code> were re-run against a local <code>./notesctl web</code> process.</li>
+          <li><strong>MCP</strong>: stdio <code>initialize</code> and <code>tools/list</code> were re-run against <code>./notesctl mcp</code>, confirming the read-only-first tool surface still advertises the current contract.</li>
+          <li><strong>AI Diagnose</strong>: <code>./notesctl ai-diagnose --json</code> still returns a deterministic advisory report when the AI provider is disabled or not configured.</li>
+        </ul>
+        <p>
+          These live checks prove the thin surfaces are real. They do not promote the project into
+          a hosted service or replace the deterministic CLI as the system of record.
+        </p>
+      </section>
+
+      <section class="page-card">
+        <h2>What still belongs to your machine</h2>
+        <ul>
+          <li>The first successful snapshot still requires a real <code>./notesctl run --no-status</code> on your Mac.</li>
+          <li>Apple Notes / AppleScript permission prompts still belong to macOS and your current terminal host.</li>
+          <li><code>./notesctl install --minutes 30 --load</code> still becomes a real <code>launchd</code> mutation on your machine.</li>
+          <li>The repo can prove the contract and the tooling shape, but it cannot pre-approve your local permissions or promise that every machine is already initialized.</li>
+        </ul>
+      </section>
+
+      <section class="page-card">
+        <h2>Open the right proof trail next</h2>
+        <ul>
+          <li><a href="../quickstart/">Quickstart</a> if you want the honest first-success path</li>
+          <li><a href="../security/">Security and privacy</a> if you want the token and disclosure boundary</li>
+          <li><a href="../for-agents/">For Agents</a> if you want the builder second lane after the control-room contract already makes sense</li>
+          <li><a href="../releases/">Release history</a> if you want the tag-by-tag public story</li>
+        </ul>
+      </section>
+      </main>
+
+      <footer class="footer">
+        Proof here means evidence plus boundary, not hype. The control room stays local-first, the
+        Web/API lane stays same-machine and token-gated, and MCP stays read-only-first unless the
+        repo proves a different contract in a future tag.
+      </footer>
+    </div>
+  </body>
+</html>

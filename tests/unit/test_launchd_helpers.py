@@ -68,6 +68,16 @@ class LaunchdHelperTests(unittest.TestCase):
         self.assertIn("/.cache/apple-notes-snapshot/repos/", lines[0])
         self.assertNotIn("ApplicationSupport", lines[0])
 
+    def test_install_enables_label_before_bootstrap(self):
+        content = (self.repo_root / "scripts" / "cmd" / "launchd.zsh").read_text(encoding="utf-8")
+        main_enable = 'launchctl enable "$domain/$LABEL"'
+        main_bootstrap = 'launchctl bootstrap "$domain" "$plist_target_path"'
+        web_enable = 'launchctl enable "$domain/$WEB_LABEL"'
+        web_bootstrap = 'launchctl bootstrap "$domain" "$web_plist_target_path"'
+
+        self.assertLess(content.index(main_enable), content.index(main_bootstrap))
+        self.assertLess(content.index(web_enable), content.index(web_bootstrap))
+
 
 if __name__ == "__main__":
     unittest.main()

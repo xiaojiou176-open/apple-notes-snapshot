@@ -6,7 +6,7 @@
     <title>Release history | Apple Notes Snapshot</title>
     <meta
       name="description"
-      content="Browse the Apple Notes Snapshot release history, see what the latest public tag covered, and compare it with the current main-branch AI Diagnose, Local Web API, and MCP surface."
+      content="Browse the Apple Notes Snapshot release history, see what the latest public tag covered, and compare it with current main-branch previews without flattening the two together."
     />
     <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/" />
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
@@ -16,7 +16,7 @@
     <meta property="og:title" content="Release history | Apple Notes Snapshot" />
     <meta
       property="og:description"
-      content="Browse the Apple Notes Snapshot release history, see what the latest public tag covered, and compare it with the current main-branch AI Diagnose, Local Web API, and MCP surface."
+      content="Browse the Apple Notes Snapshot release history, see what the latest public tag covered, and compare it with current main-branch previews without flattening the two together."
     />
     <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/" />
     <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
@@ -25,7 +25,7 @@
     <meta name="twitter:title" content="Release history | Apple Notes Snapshot" />
     <meta
       name="twitter:description"
-      content="Browse tagged release history, keep current-main truth separate, and reuse the share kit or external prep packet when you package a public update."
+      content="Browse tagged release history, keep current-main truth separate, and reuse the proof page, share kit, or external prep packet when you package a public update."
     />
     <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
     <link rel="stylesheet" href="../styles.css" />
@@ -77,21 +77,17 @@
       <section class="page-card">
         <h2>Current main branch</h2>
         <p>
-          The latest public tag is currently <strong>v0.1.7</strong>. Current main can move
-          ahead of that tag, so treat this section as a <strong>main-branch preview</strong>, not
-          as a guarantee that every item below is already part of the latest public release. Today
-          current main includes the Switchyard-backed AI Diagnose path, the read-only-first MCP
-          provider, the dedicated <a href="../for-agents/">For Agents</a> and
-          <a href="../for-agents/integration-pack/">Builder Integration Pack</a> surfaces, the
-          <a href="../local-api/">Local Web API</a> guide, the host-specific starter packs,
-          the public-skills pack, and the cleaner launch-truth split in the external prep packet.
+          The latest public tag is currently <strong>v0.1.9</strong>. At the current baseline,
+          <strong>main and the latest public tag point at the same hard-cut release commit</strong>.
+          Future commits may move ahead again, so keep treating this section as a
+          <strong>main-branch preview</strong> rather than a permanent promise that main always
+          equals the latest public release.
         </p>
         <p>
-          Current main also carries the post-<code>v0.1.7</code> closeout hardening that keeps the
-          builder and maintainer story honest under pressure: a clearer Switchyard credential
-          boundary for AI Diagnose, governance checks that no longer inherit polluted
-          <code>GIT_*</code> hook state, and a tracked execution-hygiene contract in
-          <code>AGENTS.md</code>.
+          The current tagged truth includes the clean public-repo hard cut, the
+          control-room-first README and docs surface, the Local Web API and MCP pages, the
+          dedicated builder packs, the public-skills pack, and the governance/closeout runbooks
+          that keep release, proof, and maintainer language honest.
         </p>
         <p>
           Treat the table below as the <strong>tagged release history</strong>. Treat future
@@ -111,6 +107,16 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td><strong>v0.1.9</strong></td>
+              <td>Proof page, sharper control-room-first front door, release-truth sync, and helper extraction for AI/Web/status internals without expanding the public contract.</td>
+              <td><a href="./v0.1.9/">Release notes</a> | <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases/tag/v0.1.9">GitHub release</a></td>
+            </tr>
+            <tr>
+              <td><strong>v0.1.8</strong></td>
+              <td>Canonical public-repo hard cut for `xiaojiou176-open/apple-notes-snapshot`, keeping the control-room, AI Diagnose, Local Web API, MCP, and governance surfaces aligned on the rebuilt public baseline.</td>
+              <td><a href="./v0.1.8/">Release notes</a> | <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases/tag/v0.1.8">GitHub release</a></td>
+            </tr>
             <tr>
               <td><strong>v0.1.7</strong></td>
               <td>Codex and Claude Code starter packs, a tracked public-skills pack, and a cleaner split between GitHub-controlled and external-only launch work.</td>
@@ -168,6 +174,7 @@
       <section class="page-card">
         <h2>If you are preparing a public update from current main</h2>
         <ul>
+          <li><a href="../proof/">Proof</a> for the repo-side gates, GitHub-controlled evidence, and live-boundary summary</li>
           <li><a href="../media/share-kit/">Share kit</a> for the punchline, demo clip, and compare card</li>
           <li><a href="../media/30-second-overview/">30-second overview</a> for the shortest accurate summary</li>
           <li><a href="../media/external-launch-prep/">External launch prep</a> for the repo-ready checklist versus manual-only actions</li>

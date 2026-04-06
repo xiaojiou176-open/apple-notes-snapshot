@@ -54,6 +54,7 @@
         <div class="site-nav__links">
           <a href="./quickstart/">Quickstart</a>
           <a href="./compare/">Compare</a>
+          <a href="./proof/">Proof</a>
           <a href="./local-api/">Local Web API</a>
           <a href="./for-agents/">For Codex / Claude</a>
           <a href="./faq/">FAQ</a>
@@ -67,25 +68,24 @@
       <main id="main-content">
       <section class="hero">
         <div class="hero__copy">
-          <span class="hero__eyebrow">Keep upstream. Add a visible control room plus agent-facing surfaces.</span>
+          <span class="hero__eyebrow">Keep upstream. Add a visible control room first.</span>
           <h1>The local-first Apple Notes backup control room for macOS.</h1>
           <p>
             Apple Notes Snapshot keeps the upstream exporter, then adds path-aware exports,
-            `launchd` scheduling, visible health checks, a clearer recovery path when the
-            backup loop drifts, a token-gated Local Web API, an advisory AI diagnosis sidecar, and
-            a read-only MCP surface for MCP-aware coding agents. It is also a truthful fit for
-            Codex- and Claude Code-style local workflows when the host can launch stdio MCP
-            servers. Start with the public 3-step quickstart if you want the operator path, the
-            compare page if you are still deciding whether the wrapper fits, the builder guide if
-            you already have a local host in mind, and the external prep packet only when the repo
-            story is ready and a human is about to do the launch work.
+            `launchd` scheduling, visible health checks, and a clearer recovery path when the
+            backup loop drifts. Start with the public 3-step quickstart if you want the operator
+            path, and open the compare page if you are still deciding whether the wrapper fits.
+          </p>
+          <p>
+            AI Diagnose, the Local Web API, and the read-only MCP surface are real builder-facing
+            extensions around the same local control room. They stay downstream of the operator
+            story, not above it.
           </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="./quickstart/">Start the 3-step quickstart</a>
           <a class="btn btn--secondary" href="./compare/">Compare with upstream</a>
           <a class="btn btn--secondary" href="./support/">Get support or routing help</a>
-          <a class="btn btn--secondary" href="./for-agents/">Open Codex / Claude guide</a>
-          <a class="btn btn--secondary" href="./media/external-launch-prep/">Open the external prep packet</a>
+          <a class="btn btn--secondary" href="./proof/">Open the proof page</a>
         </div>
           <div class="hero__stats">
             <div class="hero__stat">
@@ -224,7 +224,7 @@
           <article class="card">
             <h3>Build or automate on top</h3>
             <p>Use the builder-facing lane only after the control-room story already makes sense to you.</p>
-            <p><a href="./for-agents/">For Agents</a> | <a href="./for-agents/codex-starter-pack/">Codex starter pack</a> | <a href="./for-agents/public-skills/">Public skills pack</a></p>
+            <p><a href="./for-agents/">For Agents</a> | <a href="./proof/">Proof</a> | <a href="./for-agents/public-skills/">Public skills pack</a></p>
           </article>
           <article class="card">
             <h3>Get help or join the conversation</h3>
@@ -269,6 +269,11 @@
             <h3>Release history</h3>
             <p>Follow how the public launch surface has evolved version by version, including HTML release notes for each public tag.</p>
             <p><a href="./releases/">Browse release history</a></p>
+          </article>
+          <article class="card">
+            <h3>Proof and trust boundary</h3>
+            <p>Open the shortest evidence trail for repo gates, GitHub-controlled delivery, and live same-machine surfaces.</p>
+            <p><a href="./proof/">Open proof</a></p>
           </article>
           <article class="card">
             <h3>Share kit</h3>

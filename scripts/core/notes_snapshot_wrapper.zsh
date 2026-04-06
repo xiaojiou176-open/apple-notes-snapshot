@@ -250,6 +250,7 @@ if command -v flock >/dev/null 2>&1; then
   exec 200>"$NOTES_SNAPSHOT_LOCK_FILE"
   if ! flock -n 200; then
     log_line "flock busy, skip" >> "$NOTES_SNAPSHOT_LOG_DIR/stderr.log"
+    FINALIZED=1
     exit 0
   fi
   LOCK_ACQUIRED=1
@@ -260,6 +261,7 @@ else
       if [[ "${STATE_STATUS:-}" == "running" ]] && [[ -n "${pid:-}" ]]; then
         if ps -p "$pid" >/dev/null 2>&1; then
           log_line "notes snapshot already running (pid=$pid), skip" >> "$NOTES_SNAPSHOT_LOG_DIR/stdout.log"
+          FINALIZED=1
           exit 0
         fi
       fi
@@ -271,6 +273,7 @@ else
         LOCK_AGE_SEC=$(( LOCK_NOW_EPOCH - LOCK_MTIME_EPOCH ))
         if [[ "$LOCK_AGE_SEC" -lt "$NOTES_SNAPSHOT_LOCK_TTL_SEC" ]]; then
           log_line "lock dir present (age=${LOCK_AGE_SEC}s < ttl=${NOTES_SNAPSHOT_LOCK_TTL_SEC}s), skip" >> "$NOTES_SNAPSHOT_LOG_DIR/stderr.log"
+          FINALIZED=1
           exit 0
         fi
         log_line "lock dir stale (age=${LOCK_AGE_SEC}s >= ttl=${NOTES_SNAPSHOT_LOCK_TTL_SEC}s), clearing" >> "$NOTES_SNAPSHOT_LOG_DIR/stderr.log"
@@ -280,6 +283,7 @@ else
     "$RMDIR_BIN" -- "$NOTES_SNAPSHOT_LOCK_DIR" 2>/dev/null || true
     if ! "$MKDIR_BIN" -- "$NOTES_SNAPSHOT_LOCK_DIR" 2>/dev/null; then
       log_line "failed to acquire lock after cleanup, skip" >> "$NOTES_SNAPSHOT_LOG_DIR/stderr.log"
+      FINALIZED=1
       exit 1
     fi
   fi
