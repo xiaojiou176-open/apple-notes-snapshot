@@ -1,0 +1,36 @@
+name: Dependency Review
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: dependency-review-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # Allow checkout of the current repository contents.
+  pull-requests: read # Allow the action to read the pull request dependency diff metadata.
+
+jobs:
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Run dependency review
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4.9.0
+        with:
+          fail-on-severity: high
+
+      - name: Record non-PR status
+        if: github.event_name != 'pull_request'
+        run: echo "Dependency Review requires a pull request diff; push/workflow_dispatch stay green by design."

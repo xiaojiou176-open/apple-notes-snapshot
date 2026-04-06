@@ -1,0 +1,106 @@
+name: Trusted CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: trusted-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # Allow checkout across all jobs in this workflow.
+
+jobs:
+  quick-gate:
+    name: Canonical Quick Gate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # Allow checkout of the current repository contents.
+      security-events: read # Allow ci_gate.sh to read code-scanning alerts on pull requests.
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+      GITHUB_REF: ${{ github.ref }}
+      GITHUB_EVENT_NAME: ${{ github.event_name }}
+      GITHUB_EVENT_PATH: ${{ github.event_path }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install zsh
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run canonical quick gate
+        run: PYTHON_BIN=python scripts/checks/ci_gate.sh
+
+  secret-scan:
+    name: Secret Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # Allow checkout of the current repository contents.
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install hygiene dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run gitleaks via pre-commit
+        run: python -m pre_commit run gitleaks --all-files --show-diff-on-failure
+
+  github-alert-gate:
+    name: GitHub Alert Gate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # Allow checkout of the current repository contents.
+      security-events: read # Allow the gate to read GitHub code-scanning alert state.
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+      GITHUB_REF: ${{ github.ref }}
+      GITHUB_EVENT_NAME: ${{ github.event_name }}
+      GITHUB_EVENT_PATH: ${{ github.event_path }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.11"
+
+      - name: Run GitHub alert gate
+        run: python scripts/checks/github_alert_gate.py

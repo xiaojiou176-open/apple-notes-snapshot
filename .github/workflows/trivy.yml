@@ -1,0 +1,47 @@
+name: Trivy
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: trivy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  trivy:
+    name: Trivy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/v0.69.3/contrib/install.sh \
+            | sh -s -- -b "${RUNNER_TEMP}/trivy-bin" v0.69.3
+          echo "${RUNNER_TEMP}/trivy-bin" >> "${GITHUB_PATH}"
+
+      - name: Run Trivy fs gate
+        run: |
+          trivy fs \
+            --scanners vuln,secret \
+            --severity HIGH,CRITICAL \
+            --ignore-unfixed \
+            --no-progress \
+            --exit-code 1 \
+            --skip-dirs .runtime-cache \
+            --skip-dirs .agents \
+            --skip-dirs .serena \
+            --skip-dirs .claude-plugin \
+            --skip-dirs .codex-plugin \
+            --skip-dirs vendor/notes-exporter/.git \
+            .

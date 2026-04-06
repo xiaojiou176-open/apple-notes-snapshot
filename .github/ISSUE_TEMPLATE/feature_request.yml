@@ -1,0 +1,40 @@
+name: Feature request
+description: Suggest a scoped improvement to the public repo or local workflow.
+title: "[feature] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or need
+      description: What user problem or maintainer pain point are you trying to solve?
+      placeholder: I want to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the smallest useful change.
+      placeholder: The repo should...
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints or tradeoffs
+      description: Mention macOS, launchd, security, vendor, or reviewability constraints if they matter.
+      placeholder: This should avoid...
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      placeholder: Current workaround or alternative ideas
+    validations:
+      required: false

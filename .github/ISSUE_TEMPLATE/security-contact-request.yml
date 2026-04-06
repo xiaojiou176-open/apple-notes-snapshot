@@ -1,0 +1,47 @@
+name: Security contact request
+description: Use this public template only to request a private disclosure path.
+title: "[security-contact-request] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include exploit steps, exported note content, tokens, full logs, or private paths here.
+        This form exists only to request a private disclosure channel.
+
+  - type: input
+    id: affected_version
+    attributes:
+      label: Affected version or commit
+      description: Share the smallest version, tag, or commit identifier you can confirm.
+      placeholder: v0.x.y or commit SHA
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact_summary
+    attributes:
+      label: High-level impact summary
+      description: Describe the category of risk without posting exploit details.
+      placeholder: Example: possible credential exposure in logs, or unsafe file write behavior
+    validations:
+      required: true
+
+  - type: dropdown
+    id: sensitive_data_risk
+    attributes:
+      label: Could secrets or personal note content be exposed?
+      options:
+        - "yes"
+        - "no"
+        - "unknown"
+    validations:
+      required: true
+
+  - type: textarea
+    id: request
+    attributes:
+      label: What you need from the maintainer
+      description: Ask for a private disclosure path and list any timing urgency.
+      placeholder: Please provide a private disclosure channel before I share the reproducer.
+    validations:
+      required: true
