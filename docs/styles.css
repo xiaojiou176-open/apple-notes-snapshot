@@ -448,6 +448,28 @@ img {
   line-height: 1.15;
 }
 
+.signal-card p,
+.curation-card p,
+.timeline-card p {
+  color: var(--muted);
+}
+
+.signal-card:nth-child(1) {
+  background: linear-gradient(180deg, rgba(14, 124, 116, 0.08), rgba(255, 255, 255, 0.94));
+}
+
+.signal-card:nth-child(2) {
+  background: linear-gradient(180deg, rgba(228, 161, 27, 0.08), rgba(255, 255, 255, 0.94));
+}
+
+.signal-card:nth-child(3) {
+  background: linear-gradient(180deg, rgba(123, 82, 104, 0.08), rgba(255, 255, 255, 0.94));
+}
+
+.signal-card:nth-child(4) {
+  background: linear-gradient(180deg, rgba(142, 165, 143, 0.08), rgba(255, 255, 255, 0.94));
+}
+
 .timeline-grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-top: 18px;
@@ -463,6 +485,12 @@ img {
   font-size: 22px;
   line-height: 1.12;
   font-family: var(--heading-font);
+}
+
+.timeline-card--featured {
+  background: linear-gradient(160deg, rgba(14, 124, 116, 0.14), rgba(255, 255, 255, 0.96));
+  border-color: rgba(14, 124, 116, 0.18);
+  box-shadow: 0 24px 48px rgba(14, 124, 116, 0.14);
 }
 
 .signal-card {
@@ -648,6 +676,16 @@ img {
 
 .page-card + .page-card {
   margin-top: 18px;
+}
+
+.section-note {
+  margin-top: 18px;
+  padding: 18px 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px dashed rgba(18, 32, 39, 0.14);
+  color: var(--muted);
+  box-shadow: var(--shadow-soft);
 }
 
 .steps {
