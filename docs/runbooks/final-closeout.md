@@ -49,10 +49,23 @@ scripts/checks/zizmor_gate.sh
 TRIVY_BIN=/path/to/trivy scripts/checks/trivy_fs_gate.sh
 ```
 
+Five-layer verification contract:
+
+| Layer | Canonical home | Closeout expectation |
+| --- | --- | --- |
+| `pre-commit` | local hook | quick hygiene only |
+| `pre-push` | local hook | deterministic repo-local gate only |
+| `hosted` | GitHub Actions | GitHub-state-aware security and policy gates |
+| `nightly` | intentionally unused for now | keep empty until a deterministic deep audit truly needs it |
+| `manual` | real machine / owner session | live browser, desktop, provider, and external control-plane proof |
+
 GitHub-only governance gate:
 
 - `Dependency Review` must pass on the pull request because it needs the PR
   base/head diff.
+- `GitHub Alert Gate`, CodeQL, Secret Scan, Actionlint, Zizmor, and Trivy stay
+  hosted-first. Local reruns remain optional maintainer repro steps, not part
+  of the default pre-push contract.
 
 ## 4. GitHub Control Plane Checklist
 
@@ -60,6 +73,8 @@ Before final closeout, confirm:
 
 - `Dependabot` / vulnerability alerts are enabled
 - private vulnerability reporting is enabled
+- `secret_scanning_non_provider_patterns` and `secret_scanning_validity_checks`
+  are either enabled or explicitly recorded as platform capability residuals
 - required checks match the current governance set
 - latest release points at the current canonical closeout commit
 - Pages homepage and README links still point at the current canonical entry

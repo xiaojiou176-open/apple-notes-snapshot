@@ -327,12 +327,23 @@ commands stay aligned with the current checkout path and interpreter.
 GitHub Actions for this repo run on **GitHub-hosted runners**; the local ladder
 below is maintainer verification, not a self-hosted runner requirement.
 
+Five-layer CI contract:
+
+| Layer | Canonical home | What belongs here |
+| --- | --- | --- |
+| `pre-commit` | local hook | `gitleaks`, docs-link-root hygiene, legacy-path scan, and public-surface-sensitive scan |
+| `pre-push` | local hook | `scripts/checks/ci_gate.sh` for repo-local deterministic checks: docs/root hygiene, vendor tree hygiene, unit tests, and wrapper smoke |
+| `hosted` | GitHub Actions | `Canonical Quick Gate`, `Secret Scan`, `GitHub Alert Gate`, `Dependency Review`, `Actionlint`, `Zizmor`, `Trivy`, `CodeQL`, and `Pages` |
+| `nightly` | intentionally unused for now | keep this lane empty until a deterministic deep audit exists that is too heavy for `hosted` push / PR runs |
+| `manual` | real machine / owner session | `notesctl run|verify|doctor|status`, real browser/session checks, Search Console, named-host attach proof, and other external control-plane evidence |
+
 GitHub-only governance gates:
 
 - `Dependency Review` runs on pull requests because it needs GitHub's base/head
   dependency diff.
 - `CodeQL`, `Secret Scan`, `GitHub Alert Gate`, `Actionlint`, `Zizmor`, and
-  `Trivy` are expected to stay green on the current canonical branch.
+  `Trivy` stay hosted-first; local reruns are optional maintainer repro steps,
+  not part of the default hook path.
 - Latest release tags should point at the current canonical closeout commit; do
   not treat an older tag as proof of current repo-side closure.
 
@@ -455,14 +466,15 @@ Chrome instance.
 
 ## CI contract
 
-The repository keeps two verification lanes, and they are not the same thing:
+The repository keeps five verification layers, and they are not interchangeable:
 
-- local maintainer verification:
-  - `./notesctl rebuild-dev-env`
-  - `./.runtime-cache/dev/venv/bin/python -m pre_commit run --all-files`
-  - `PYTHON_BIN=./.runtime-cache/dev/venv/bin/python scripts/checks/ci_gate.sh`
-- GitHub CI:
-  - GitHub-hosted runners only
+| Layer | Default trigger | Canonical home | Contract |
+| --- | --- | --- | --- |
+| `pre-commit` | every local commit attempt | local hook | quick hygiene only |
+| `pre-push` | every local push attempt | local hook | deterministic repo-local quick gate only |
+| `hosted` | pull request / push / workflow dispatch | GitHub-hosted runners | GitHub-state-aware security and policy gates |
+| `nightly` | none yet | reserved | intentionally empty until a deterministic deep audit justifies it |
+| `manual` | deliberate human/operator action | real machine / owner session | live browser, desktop, provider, and external control-plane proof |
 
 This open-source repository does **not** rely on a local self-hosted runner
 lane. Local verification exists so maintainers can reproduce the repo-owned
@@ -477,10 +489,12 @@ High-value local checks:
 ./notesctl doctor
 ```
 
-The repo-owned quick gate now covers docs/root hygiene, unit tests, and
-wrapper-level JSON/help smoke checks. The 90%+ coverage bar still applies to
-repo-owned Python surfaces under `scripts/ops`; the shell wrapper surface is
-guarded by smoke checks rather than pretending it shares that coverage metric.
+The repo-owned quick gate now covers docs/root hygiene, vendor tree hygiene,
+unit tests, and wrapper-level JSON/help smoke checks. GitHub alert state moved
+fully into the hosted lane so the default local pre-push path stays lighter and
+more deterministic. The 90%+ coverage bar still applies to repo-owned Python
+surfaces under `scripts/ops`; the shell wrapper surface is guarded by smoke
+checks rather than pretending it shares that coverage metric.
 
 ## Verification ladder and test pyramid
 

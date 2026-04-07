@@ -90,6 +90,14 @@ Maintainer verification expects Python 3.11+ and a fresh repo-owned virtual
 environment. `./notesctl rebuild-dev-env` is responsible for recreating
 `.runtime-cache/dev/venv` before the other verification commands run.
 
+Keep the verification layers separate:
+
+- `pre-commit` = quick hygiene only
+- `pre-push` = deterministic repo-local quick gate only
+- `hosted` = GitHub Actions / GitHub-state-aware security and policy gates
+- `nightly` = intentionally unused until a deterministic deep audit truly needs it
+- `manual` = real-machine / owner-session proof such as browser, desktop, provider, or external control-plane checks
+
 ## Boundaries
 
 - `notesctl` is the canonical human entry point.
