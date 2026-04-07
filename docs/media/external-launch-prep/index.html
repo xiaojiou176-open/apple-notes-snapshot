@@ -128,7 +128,7 @@
         <h2>Search Console prep</h2>
         <ul>
           <li><strong>Only if it still belongs in this launch plan</strong>: if you do not currently plan to use Search Console, or you do not yet have owner access to the target property, keep it in the external/manual bucket and skip it for this round</li>
-          <li><strong>Repo-side ready</strong>: <a href="../../sitemap.xml">sitemap.xml</a>, <a href="../../robots.txt">robots.txt</a>, canonical tags across the docs site, and the current Pages homepage link on the GitHub repo</li>
+          <li><strong>Repo-side ready</strong>: <a href="../../sitemap.xml">sitemap.xml</a>, <a href="../../robots.txt">robots.txt</a>, canonical tags across the docs site, and repo-owned homepage metadata that already points at the current GitHub Pages site URL</li>
           <li><strong>Exact property to use</strong>: <code>https://xiaojiou176-open.github.io/apple-notes-snapshot/</code> as a URL-prefix property unless you later move to a custom domain</li>
           <li><strong>API boundary to remember</strong>: Search Console API reads need <code>https://www.googleapis.com/auth/webmasters.readonly</code>, and sitemap submission needs <code>https://www.googleapis.com/auth/webmasters</code></li>
           <li><strong>Smallest API-assisted path</strong>: once the owner account grants the Search Console scope, the repo can finish <code>SitesService.Add</code>, <code>SitemapsService.Submit</code>, and a read-back check without inventing a second repo-side workflow</li>
@@ -278,7 +278,7 @@
               <td>Search Console ownership and sitemap submission</td>
               <td><a href="https://search.google.com/search-console">search.google.com/search-console</a></td>
               <td>Google account that actually owns or can verify the target property</td>
-              <td><a href="../../sitemap.xml">sitemap.xml</a>, <a href="../../robots.txt">robots.txt</a>, canonical tags, the Pages homepage link, and the URL-prefix target <code>https://xiaojiou176-open.github.io/apple-notes-snapshot/</code> are already in place</td>
+              <td><a href="../../sitemap.xml">sitemap.xml</a>, <a href="../../robots.txt">robots.txt</a>, canonical tags, repo-owned homepage metadata that already points at the current GitHub Pages site URL, and the URL-prefix target <code>https://xiaojiou176-open.github.io/apple-notes-snapshot/</code> are already in place</td>
               <td>Use <strong>Start now</strong>, then <strong>Add property</strong> or the visible property picker, verify or open <code>https://xiaojiou176-open.github.io/apple-notes-snapshot/</code>, then open <strong>Sitemaps</strong>, enter <code>https://xiaojiou176-open.github.io/apple-notes-snapshot/sitemap.xml</code>, and click <strong>Submit</strong>. If you want CLI automation afterward, rerun <code>gcloud auth application-default login --scopes=https://www.googleapis.com/auth/webmasters,https://www.googleapis.com/auth/webmasters.readonly</code> first.</td>
               <td>Capture the property view or sitemap row that shows the property exists and the sitemap submission result is visible under the signed-in owner account, or capture a scoped-ADC retry where <code>SitesService.List</code> stops returning <code>403 insufficient_scope</code></td>
               <td>Do not claim Search Console is configured or indexed before the owner sees the property and the submission result</td>
