@@ -52,13 +52,7 @@
           <a href="../">Home</a>
           <a href="../proof/">Proof</a>
           <a href="./integration-pack/">Integration Pack</a>
-          <a href="./codex-starter-pack/">Codex starter pack</a>
-          <a href="./claude-code-starter-pack/">Claude starter pack</a>
-          <a href="./openclaw-starter-pack/">OpenClaw starter pack</a>
           <a href="./public-skills/">Public skills pack</a>
-          <a href="../ai-diagnose/">AI Diagnose</a>
-          <a href="../mcp/">MCP Provider</a>
-          <a href="../roadmap/">Roadmap</a>
           <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
         </div>
       </nav>
@@ -106,48 +100,6 @@
           <a href="../proof/">proof page</a> if you still need the control-room contract first.
           This page is the builder second lane, not the first thing every visitor needs to open.
         </p>
-      </section>
-
-      <section class="page-card">
-        <h2>Three layers to remember</h2>
-        <ul>
-          <li><strong>Category</strong>: local-first Apple Notes backup control room</li>
-          <li><strong>AI/agent hook</strong>: AI Diagnose plus a read-only MCP surface</li>
-          <li><strong>Result</strong>: humans and coding agents can inspect backup health, recent runs, and recovery clues from the same local state</li>
-        </ul>
-      </section>
-
-      <section class="signal-strip">
-        <article class="signal-card">
-          <span class="eyebrow-inline">Layer 1</span>
-          <strong>CLI first</strong>
-          <p>The deterministic control-room entrypoint is still the anchor of every builder story.</p>
-        </article>
-        <article class="signal-card">
-          <span class="eyebrow-inline">Layer 2</span>
-          <strong>Web second</strong>
-          <p>Use the Local Web API when your same-machine workflow already speaks browser or HTTP.</p>
-        </article>
-        <article class="signal-card">
-          <span class="eyebrow-inline">Layer 3</span>
-          <strong>AI third</strong>
-          <p>AI Diagnose is an explanation layer over operational state, not a second source of truth.</p>
-        </article>
-        <article class="signal-card">
-          <span class="eyebrow-inline">Layer 4</span>
-          <strong>MCP fourth</strong>
-          <p>MCP is the read-only-first agent substrate, not a remote platform or write-capable control plane.</p>
-        </article>
-      </section>
-
-      <section class="page-card">
-        <h2>Current best-fit ecosystem bindings</h2>
-        <ul>
-          <li><strong>Primary</strong>: MCP-aware coding agents and local automation hosts</li>
-          <li><strong>Natural secondary fit</strong>: Codex-, Claude Code-, and OpenClaw-style local workflows when the host can register or launch stdio MCP servers</li>
-          <li><strong>Template-level guidance only</strong>: OpenCode and OpenHands, because this repository does not ship dedicated adapters, hosted runtimes, or repo-verified attach proof for them today</li>
-          <li><strong>Not a truthful front-door binding</strong>: OpenClaw-style generic AI assistant positioning</li>
-        </ul>
       </section>
 
       <section class="page-card">
@@ -211,17 +163,6 @@
         </table>
       </section>
 
-      <section class="page-card">
-        <h2>What exists right now</h2>
-        <ul>
-          <li><strong>`notesctl`</strong>: the canonical human entrypoint</li>
-          <li><strong>Local Web API</strong>: a token-gated same-machine browser and HTTP lane backed by the same repo-owned command surface</li>
-          <li><strong>AI Diagnose</strong>: an operator next-step assistant that explains local status, doctor, log-health, and recent-run evidence</li>
-          <li><strong>MCP Provider</strong>: a read-only agent substrate that exposes local backup diagnostics and safe runtime summaries</li>
-          <li><strong>State substrate</strong>: <code>state.json</code>, aggregate summaries, and local logs remain the underlying truth-bearing surfaces</li>
-        </ul>
-      </section>
-
       <section class="page-card page-card--accent">
         <h2>Current builder entry points you can trust</h2>
         <ul>
@@ -260,12 +201,6 @@
           <a href="./public-skills/">public skills pack</a>.
         </p>
         <p>
-          Read these like a small plugin shelf for local builder workflows:
-          Codex, Claude Code, and OpenClaw have productized starter packs, the Integration Pack is
-          the shared host matrix, and the Public Skills Pack is the public-safe instruction layer
-          that travels with those hosts without pretending to be a marketplace artifact.
-        </p>
-        <p>
           Need the same contract in a machine-readable shape instead of reading every page by hand?
           Use the
           <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/builder-contract.manifest.json">builder contract manifest</a>.
@@ -280,24 +215,6 @@
           and
           <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/.claude-plugin/marketplace.json">Claude Code</a>.
         </p>
-        <p>
-          The public skills pack now also carries a runtime-resource-hygiene layer, so the same
-          repo-scoped guidance can cover not just truthful wording but also browser/profile cleanup,
-          branch/worktree convergence, and non-GitHub external read-only boundaries.
-        </p>
-      </section>
-
-      <section class="timeline-grid">
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Reader sequence</span>
-          <h3>Control room, then proof, then host pack.</h3>
-          <p>This is the fastest way to keep the product story clean while still letting advanced users move quickly into Codex, Claude, or OpenClaw setup.</p>
-        </article>
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Curation rule</span>
-          <h3>Every host page should feel like a shelf, not a rebrand.</h3>
-          <p>The packs are useful because they are narrower than the repo, not because they pretend the repo is a universal agent platform.</p>
-        </article>
       </section>
 
       <section class="page-card">
@@ -308,32 +225,6 @@
           <li><code>./notesctl help audit</code> for token, scope, allowlist, readonly, and rate-limit rules</li>
           <li><code>./notesctl help ai-diagnose</code> for the advisory AI sidecar contract</li>
         </ul>
-      </section>
-
-      <section class="page-card">
-        <h2>Official public-surface truth</h2>
-        <ul>
-          <li><strong>Codex</strong>: OpenAI now documents plugins and an official plugin directory, but the public third-party directory route is still described as coming soon. Treat this repo's Codex bundle as a local plugin-grade surface, not an official public listing.</li>
-          <li><strong>Claude Code</strong>: Anthropic exposes a real marketplace/plugin surface. This repo now ships a local marketplace bundle and also has a fresh local attach proof on the current host build, but this page still does not claim Anthropic has officially listed Apple Notes Snapshot.</li>
-          <li><strong>OpenClaw / ClawHub</strong>: OpenClaw documents a public registry/discovery route through ClawHub. This repo still stays at <code>host-side verify required</code> until a real OpenClaw-side attach or listing proof exists.</li>
-        </ul>
-      </section>
-
-      <section class="page-card">
-        <h2>Official host docs to pair with this page</h2>
-        <ul>
-          <li><a href="https://developers.openai.com/learn/docs-mcp">OpenAI Docs MCP reference</a> for current Codex-side MCP setup patterns</li>
-          <li><a href="https://developers.openai.com/codex/plugins/build">OpenAI Codex plugin build docs</a> for local plugins and official-directory boundary</li>
-          <li><a href="https://code.claude.com/docs/en/mcp">Claude Code MCP guide</a> for current local stdio and remote MCP registration flows</li>
-          <li><a href="https://github.com/anthropics/claude-plugins-official">Anthropic official plugin marketplace repo</a> for current public plugin distribution</li>
-          <li><a href="https://docs.openclaw.ai/tools/clawhub">OpenClaw ClawHub docs</a> for the official public registry route</li>
-          <li><a href="https://modelcontextprotocol.io/docs/getting-started/intro">Model Context Protocol introduction</a> for the shared protocol vocabulary</li>
-        </ul>
-        <p>
-          This page explains the truthful shape of the Apple Notes Snapshot side. Use the official
-          host docs above for host-specific registration details that may change faster than this
-          repository does.
-        </p>
       </section>
 
       <section class="page-card">
@@ -350,16 +241,6 @@
           That is the narrow, truthful claim. Hosts differ in how they store this config, so this
           page documents the launch shape rather than pretending there is one universal agent setup file.
         </p>
-      </section>
-
-      <section class="page-card">
-        <h2>How the current layers map together</h2>
-        <ul>
-          <li><strong>Human operator path</strong>: <code>run</code>, <code>verify</code>, <code>doctor</code>, <code>status</code>, <code>dashboard</code>, and the optional local Web console</li>
-          <li><strong>Local browser/API path</strong>: <code>web</code> serves the token-gated control room plus same-machine JSON endpoints for <code>status</code>, <code>doctor</code>, <code>log-health</code>, <code>recent-runs</code>, and <code>access</code></li>
-          <li><strong>AI explanation path</strong>: <code>ai-diagnose</code> reads the deterministic state surfaces and summarizes them without becoming the system truth</li>
-          <li><strong>Agent path</strong>: <code>mcp</code> exposes read-only tools and resources backed by the same local state</li>
-        </ul>
       </section>
 
       <section class="page-card">
@@ -385,19 +266,6 @@
           <li>Read <a href="../mcp/">MCP Provider</a> if you want the agent-facing contract</li>
           <li>Read <a href="../quickstart/">Quickstart</a> if you still need the first successful snapshot path before adding any AI or agent surface</li>
         </ul>
-      </section>
-
-      <section class="timeline-grid">
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Operator lens</span>
-          <h3>Best first read</h3>
-          <p>If you are still deciding whether this repo is truthful, open Proof before you open any host-specific pack.</p>
-        </article>
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Host lens</span>
-          <h3>Best second read</h3>
-          <p>Once the boundary is clear, use the Integration Pack or a host starter pack as a copyable, narrower next step.</p>
-        </article>
       </section>
       </main>
 
