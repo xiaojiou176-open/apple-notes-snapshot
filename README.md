@@ -215,38 +215,26 @@ Natural fit:
   - The truthful builder entry points are the CLI contract, the token-gated
     local Web API, and the read-only MCP surface.
 
-Official host docs move faster than this README. Use them when you wire the
-current MCP surface into a real host:
+The builder lane has its own shelves now, so this README does not need to carry
+every host-specific setup detail:
 
-- Codex + Docs MCP reference:
-  <https://developers.openai.com/learn/docs-mcp>
-- Codex plugin build docs:
-  <https://developers.openai.com/codex/plugins/build>
-- Claude Code MCP guide:
-  <https://code.claude.com/docs/en/mcp>
-- Anthropic official plugin marketplace repo:
-  <https://github.com/anthropics/claude-plugins-official>
-- OpenClaw ClawHub docs:
-  <https://docs.openclaw.ai/tools/clawhub>
-- MCP specification intro:
-  <https://modelcontextprotocol.io/docs/getting-started/intro>
-
-If you want the shortest Codex / Claude Code / MCP-host explanation, open the
-public [For Agents guide](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/).
-If you want the host-specific install surface for current named hosts, open the
-[Codex starter pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/codex-starter-pack/)
-or the
-[Claude Code starter pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/claude-code-starter-pack/).
-If you want the repo-owned local marketplace and plugin bundle files, open
-[`plugins/apple-notes-snapshot-control-room/README.md`](./plugins/apple-notes-snapshot-control-room/README.md).
-If you want the capability matrix, same-machine contract, and copyable setup
-examples, open the
-[Builder integration pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/integration-pack/).
-If you want the curated public-safe instruction subset instead of the repo-local
-`.agents/skills/` tree, open the
-[Public skills pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/public-skills/).
-If you want the browser-backed local HTTP surface, open the
-[Local Web API guide](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/).
+- Open the public
+  [For Agents guide](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/)
+  for the truthful builder overview and proof legend.
+- Open the
+  [Codex starter pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/codex-starter-pack/),
+  [Claude Code starter pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/claude-code-starter-pack/),
+  or
+  [OpenClaw starter pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/openclaw-starter-pack/)
+  when you need host-shaped install guidance.
+- Open the
+  [Builder integration pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/integration-pack/)
+  for the capability matrix and copyable examples, or the
+  [Public skills pack](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/public-skills/)
+  for the curated public-safe instruction subset.
+- Open the
+  [Local Web API guide](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/)
+  if your workflow is browser- or local-HTTP-shaped instead of stdio MCP.
 
 ## Typical workflows
 
@@ -310,15 +298,12 @@ It keeps the repo-side gates, GitHub-controlled delivery facts, and live
 same-machine boundary in one place. The ladder below remains the
 maintainer-grade verification contract.
 
-Core gates:
+Default local maintainer lane:
 
 ```bash
 ./notesctl rebuild-dev-env
 ./.runtime-cache/dev/venv/bin/python -m pre_commit run --all-files
 PYTHON_BIN=./.runtime-cache/dev/venv/bin/python scripts/checks/ci_gate.sh
-scripts/checks/actionlint_gate.sh
-scripts/checks/zizmor_gate.sh
-TRIVY_BIN=/path/to/trivy scripts/checks/trivy_fs_gate.sh
 ```
 
 Maintainer verification expects a local Python 3.11+ toolchain. `./notesctl rebuild-dev-env`
@@ -332,10 +317,10 @@ Five-layer CI contract:
 | Layer | Canonical home | What belongs here |
 | --- | --- | --- |
 | `pre-commit` | local hook | `gitleaks`, docs-link-root hygiene, legacy-path scan, and public-surface-sensitive scan |
-| `pre-push` | local hook | `scripts/checks/ci_gate.sh` for repo-local deterministic checks: docs/root hygiene, vendor tree hygiene, unit tests, and wrapper smoke |
+| `pre-push` | local hook | `scripts/checks/ci_gate.sh` for repo-local deterministic checks: docs/root hygiene, GitHub alert readback, vendor tree hygiene, unit tests, and wrapper smoke |
 | `hosted` | GitHub Actions | `Canonical Quick Gate`, `Secret Scan`, `GitHub Alert Gate`, `Dependency Review`, `Actionlint`, `Zizmor`, `Trivy`, `CodeQL`, and `Pages` |
-| `nightly` | intentionally unused for now | keep this lane empty until a deterministic deep audit exists that is too heavy for `hosted` push / PR runs |
-| `manual` | real machine / owner session | `notesctl run|verify|doctor|status`, real browser/session checks, Search Console, named-host attach proof, and other external control-plane evidence |
+| `nightly` | none by default | this repo currently keeps no dedicated nightly lane because the deterministic checks already run in hosted PR / push lanes |
+| `manual` | real machine / owner session | `scripts/checks/actionlint_gate.sh`, `scripts/checks/zizmor_gate.sh`, `scripts/checks/trivy_fs_gate.sh`, `notesctl run|verify|doctor|status`, real browser/session checks, Search Console, named-host attach proof, and other external control-plane evidence |
 
 GitHub-only governance gates:
 
@@ -473,7 +458,7 @@ The repository keeps five verification layers, and they are not interchangeable:
 | `pre-commit` | every local commit attempt | local hook | quick hygiene only |
 | `pre-push` | every local push attempt | local hook | deterministic repo-local quick gate only |
 | `hosted` | pull request / push / workflow dispatch | GitHub-hosted runners | GitHub-state-aware security and policy gates |
-| `nightly` | none yet | reserved | intentionally empty until a deterministic deep audit justifies it |
+| `nightly` | scheduled GitHub run | `CodeQL` deep analysis without slowing the default local or PR path |
 | `manual` | deliberate human/operator action | real machine / owner session | live browser, desktop, provider, and external control-plane proof |
 
 This open-source repository does **not** rely on a local self-hosted runner

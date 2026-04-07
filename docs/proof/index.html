@@ -124,7 +124,7 @@
           <li><code>./notesctl rebuild-dev-env</code> rebuilds the repo-owned maintainer environment.</li>
           <li><code>pre_commit --all-files</code> enforces gitleaks, docs-link-root hygiene, legacy-path scan, and public-surface-sensitive scan.</li>
           <li><code>scripts/checks/ci_gate.sh</code> keeps the default local pre-push path deterministic by running repo-local hygiene, vendor-tree checks, unit tests, and wrapper smoke only.</li>
-          <li>The repo keeps five distinct layers: <strong>pre-commit</strong>, <strong>pre-push</strong>, <strong>hosted</strong>, <strong>nightly</strong> (currently unused), and <strong>manual</strong>.</li>
+          <li>The repo keeps five distinct layers: <strong>pre-commit</strong>, <strong>pre-push</strong>, <strong>hosted</strong>, <strong>nightly</strong> (scheduled CodeQL), and <strong>manual</strong>.</li>
           <li>The maintained test floor is <strong>90% coverage</strong> on the repo-owned ops surface.</li>
         </ul>
         <p>
