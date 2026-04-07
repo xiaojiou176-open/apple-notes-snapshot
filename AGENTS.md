@@ -100,7 +100,7 @@ Keep the verification layers separate:
 - `pre-commit` = quick hygiene only
 - `pre-push` = deterministic repo-local quick gate only
 - `hosted` = GitHub Actions / GitHub-state-aware security and policy gates
-- `nightly` = none by default for this repo
+- `nightly` = scheduled GitHub-hosted deterministic replay of the repo-owned ladder
 - `manual` = real-machine / owner-session proof such as browser, desktop, provider, or external control-plane checks
 
 ## Boundaries

@@ -317,10 +317,10 @@ Five-layer CI contract:
 | Layer | Canonical home | What belongs here |
 | --- | --- | --- |
 | `pre-commit` | local hook | `gitleaks`, docs-link-root hygiene, legacy-path scan, and public-surface-sensitive scan |
-| `pre-push` | local hook | `scripts/checks/ci_gate.sh` for repo-local deterministic checks: docs/root hygiene, GitHub alert readback, vendor tree hygiene, unit tests, and wrapper smoke |
+| `pre-push` | local hook | `scripts/checks/ci_gate.sh` for repo-local deterministic checks: docs/root hygiene, vendor tree hygiene, unit tests, and wrapper smoke |
 | `hosted` | GitHub Actions | `Canonical Quick Gate`, `Secret Scan`, `GitHub Alert Gate`, `Dependency Review`, `Actionlint`, `Zizmor`, `Trivy`, `CodeQL`, and `Pages` |
-| `nightly` | none by default | this repo currently keeps no dedicated nightly lane because the deterministic checks already run in hosted PR / push lanes |
-| `manual` | real machine / owner session | `scripts/checks/actionlint_gate.sh`, `scripts/checks/zizmor_gate.sh`, `scripts/checks/trivy_fs_gate.sh`, `notesctl run|verify|doctor|status`, real browser/session checks, Search Console, named-host attach proof, and other external control-plane evidence |
+| `nightly` | GitHub Actions schedule | `Nightly Deterministic Audit` reruns the repo-owned ladder on GitHub-hosted runners without making `pre-push` heavier |
+| `manual` | real machine / owner session | `notesctl run|verify|doctor|status`, real browser/session checks, Search Console, named-host attach proof, and other external control-plane evidence |
 
 GitHub-only governance gates:
 
@@ -458,7 +458,7 @@ The repository keeps five verification layers, and they are not interchangeable:
 | `pre-commit` | every local commit attempt | local hook | quick hygiene only |
 | `pre-push` | every local push attempt | local hook | deterministic repo-local quick gate only |
 | `hosted` | pull request / push / workflow dispatch | GitHub-hosted runners | GitHub-state-aware security and policy gates |
-| `nightly` | scheduled GitHub run | `CodeQL` deep analysis without slowing the default local or PR path |
+| `nightly` | scheduled GitHub run | `Nightly Deterministic Audit` reruns the repo-owned ladder on GitHub-hosted runners |
 | `manual` | deliberate human/operator action | real machine / owner session | live browser, desktop, provider, and external control-plane proof |
 
 This open-source repository does **not** rely on a local self-hosted runner
