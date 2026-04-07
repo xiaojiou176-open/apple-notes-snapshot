@@ -100,10 +100,10 @@
       <section class="proof-grid">
         <article class="callout">
           <span class="eyebrow-inline">Current audited release</span>
-          <h3>v0.1.11 is the current tagged public baseline.</h3>
+          <h3>v0.1.12 is the current tagged public baseline.</h3>
           <p>
             The latest public release is
-            <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases/tag/v0.1.11">v0.1.11</a>.
+            <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases/tag/v0.1.12">v0.1.12</a>.
             Treat later main-branch changes as preview truth until a newer tag exists.
           </p>
         </article>
@@ -123,7 +123,8 @@
         <ul>
           <li><code>./notesctl rebuild-dev-env</code> rebuilds the repo-owned maintainer environment.</li>
           <li><code>pre_commit --all-files</code> enforces gitleaks, docs-link-root hygiene, legacy-path scan, and public-surface-sensitive scan.</li>
-          <li><code>scripts/checks/ci_gate.sh</code> chains GitHub alert gate, vendor hygiene, unit tests, and wrapper smoke into one canonical quick gate.</li>
+          <li><code>scripts/checks/ci_gate.sh</code> keeps the default local pre-push path deterministic by running repo-local hygiene, vendor-tree checks, unit tests, and wrapper smoke only.</li>
+          <li>The repo keeps five distinct layers: <strong>pre-commit</strong>, <strong>pre-push</strong>, <strong>hosted</strong>, <strong>nightly</strong> (currently unused), and <strong>manual</strong>.</li>
           <li>The maintained test floor is <strong>90% coverage</strong> on the repo-owned ops surface.</li>
         </ul>
         <p>
@@ -137,8 +138,9 @@
         <ul>
           <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/releases">GitHub Releases</a> show the current tagged public trail.</li>
           <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/pages.yml">Pages</a> publishes the docs site from the tracked <code>docs/</code> surface.</li>
-          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml">Trusted CI</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/codeql.yml">CodeQL</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trivy.yml">Trivy</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/actionlint.yml">Actionlint</a>, and <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/zizmor.yml">Zizmor</a> stay as live GitHub-controlled guardrails.</li>
-          <li>At the current <strong>v0.1.11</strong> baseline, code scanning was rechecked at <strong>0 open alerts</strong>.</li>
+          <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml">Trusted CI</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/codeql.yml">CodeQL</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trivy.yml">Trivy</a>, <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/actionlint.yml">Actionlint</a>, and <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/zizmor.yml">Zizmor</a> stay as live GitHub-hosted guardrails.</li>
+          <li>GitHub-side alert truth is hosted-only here: <code>GitHub Alert Gate</code>, code scanning, secret scanning, and private vulnerability reporting belong to the GitHub control plane, not to the default local hook path.</li>
+          <li>At the current <strong>v0.1.12</strong> baseline, code scanning and secret scanning were rechecked at <strong>0 open alerts</strong>.</li>
         </ul>
         <p>
           Treat GitHub-controlled truth separately from the tracked tree: release tags, Pages

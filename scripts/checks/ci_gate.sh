@@ -20,7 +20,8 @@ unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_OBJECT_DIRECTORY \
 "${PYTHON_BIN}" scripts/checks/docs_link_root_hygiene.py
 "${PYTHON_BIN}" scripts/checks/legacy_path_scan.py
 "${PYTHON_BIN}" scripts/checks/public_surface_sensitive_scan.py
-"${PYTHON_BIN}" scripts/checks/github_alert_gate.py
+# Keep the default local pre-push path deterministic and GitHub-read-free.
+# The hosted lane still owns GitHub alert state via trusted-ci.yml.
 bash "${SCRIPT_DIR}/vendor_tree_hygiene.sh"
 bash "${SCRIPT_DIR}/run_unit_tests.sh"
 bash "${SCRIPT_DIR}/run_wrapper_smoke.sh"
