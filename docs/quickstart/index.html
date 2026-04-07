@@ -51,9 +51,8 @@
         <div class="site-nav__links">
           <a href="../">Home</a>
           <a href="../compare/">Compare</a>
-          <a href="../local-api/">Local Web API</a>
-          <a href="../faq/">FAQ</a>
-          <a href="../security/">Security</a>
+          <a href="../proof/">Proof</a>
+          <a href="../troubleshooting/">Troubleshooting</a>
           <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
         </div>
       </nav>
@@ -108,16 +107,6 @@
           <li>`launchctl` for recurring snapshots</li>
           <li>Python 3 only if you want repo-owned verification or the optional local Web console</li>
         </ul>
-      </section>
-
-      <section class="page-card">
-        <h2>What this page covers, and what it does not</h2>
-        <p>
-          This is the authority for the first successful snapshot. It covers the public
-          3-step path, the most useful fail-fast checks, and the next docs to open if something
-          blocks you. It does not ask you to rebuild the maintainer environment before the first
-          export works.
-        </p>
       </section>
 
       <section class="page-card">
@@ -233,6 +222,12 @@ PYTHON_BIN=./.runtime-cache/dev/venv/bin/python scripts/checks/ci_gate.sh</code>
 # $HOME/iCloudDrive/NotesSnapshots</code></pre>
           </div>
         </div>
+        <p>
+          After the first success, open <a href="../proof/">Proof</a> if you want the trust
+          ledger, or <a href="../troubleshooting/">Troubleshooting</a> if the loop drifts later.
+          Keep the Local Web API as an optional second-layer surface, not part of the first-run
+          requirement.
+        </p>
       </section>
 
       <section class="page-card">
