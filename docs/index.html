@@ -48,19 +48,15 @@
     <div class="site-shell">
       <nav class="site-nav" aria-label="Primary">
         <div class="site-nav__brand">
-          <span class="site-nav__eyebrow">Local-first Apple Notes backup control room with Local Web API, AI Diagnose, MCP, and truthful agent-host fit</span>
+          <span class="site-nav__eyebrow">Local-first Apple Notes backup control room for macOS</span>
           <span class="site-nav__title">Apple Notes Snapshot</span>
         </div>
         <div class="site-nav__links">
           <a href="./quickstart/">Quickstart</a>
           <a href="./compare/">Compare</a>
           <a href="./proof/">Proof</a>
-          <a href="./local-api/">Local Web API</a>
-          <a href="./for-agents/">For Codex / Claude</a>
-          <a href="./faq/">FAQ</a>
-          <a href="./examples/">Examples</a>
-          <a href="./roadmap/">Roadmap</a>
-          <a href="./security/">Security</a>
+          <a href="./releases/">Releases</a>
+          <a href="./support/">Support</a>
           <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
         </div>
       </nav>
@@ -78,13 +74,12 @@
           </p>
           <p>
             AI Diagnose, the Local Web API, and the read-only MCP surface are real builder-facing
-            extensions around the same local control room. They stay downstream of the operator
-            story, not above it.
+            extensions around the same local control room. They stay in the second lane, not above
+            the operator story.
           </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="./quickstart/">Start the 3-step quickstart</a>
           <a class="btn btn--secondary" href="./compare/">Compare with upstream</a>
-          <a class="btn btn--secondary" href="./support/">Get support or routing help</a>
           <a class="btn btn--secondary" href="./proof/">Open the proof page</a>
         </div>
           <div class="hero-curation">
@@ -118,12 +113,8 @@
               Check freshness, failures, logs, metrics, and scheduler state when something breaks.
             </div>
             <div class="hero__stat">
-              <strong>Agent-ready</strong>
-              Use AI Diagnose and the read-only MCP surface when a coding agent needs the same local facts.
-            </div>
-            <div class="hero__stat">
-              <strong>Browser/API-ready</strong>
-              Use the token-gated Local Web API when a same-machine workflow already speaks browser or HTTP.
+              <strong>Extendable</strong>
+              Add AI Diagnose, the Local Web API, and the read-only MCP surface only after the control room already makes sense.
             </div>
           </div>
         </div>
@@ -132,28 +123,6 @@
             src="./assets/hero-console.png"
             alt="Apple Notes Snapshot Web console showing status, health, launchd state, and quick actions"
           />
-        </div>
-      </section>
-
-      <section class="page-card page-card--accent">
-        <h2>This repo is strongest when you read it like a control room, not like an AI demo.</h2>
-        <div class="signal-strip">
-          <article class="signal-card">
-            <strong>Understand the operator loop</strong>
-            <p>Path, scheduler, status, verify, and doctor are still the center of gravity.</p>
-          </article>
-          <article class="signal-card">
-            <strong>Use proof as your trust ledger</strong>
-            <p>Release truth, GitHub-controlled evidence, and same-machine live checks belong together, not in scattered lore.</p>
-          </article>
-          <article class="signal-card">
-            <strong>Treat builder work as a second pass</strong>
-            <p>Web, AI Diagnose, and MCP are real and useful, but only after the control-room shape already clicks.</p>
-          </article>
-          <article class="signal-card">
-            <strong>Launch comes last</strong>
-            <p>Share kit, release history, and the external prep packet are final-stage tools, not first impressions.</p>
-          </article>
         </div>
       </section>
 
@@ -194,44 +163,6 @@
         </div>
       </section>
 
-      <section class="timeline-grid">
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Control room</span>
-          <h3>The repo earns trust through calmer operations, not through trend language.</h3>
-          <p>Everything starts from path visibility, scheduler clarity, and recovery when the loop drifts.</p>
-        </article>
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Additive surfaces</span>
-          <h3>AI, Web, and MCP stay useful because the operator substrate is already solid.</h3>
-          <p>The point is not to sound bigger than the repo is. The point is to let humans and local hosts inspect the same facts cleanly.</p>
-        </article>
-      </section>
-
-      <section class="section">
-        <div class="section__header">
-          <span class="section__eyebrow">Curated Start</span>
-          <h2>Three doors, in the order a new reader actually needs them.</h2>
-        </div>
-        <div class="signal-strip">
-          <article class="signal-card">
-            <strong>Door 1: Quickstart</strong>
-            <p>Prove the local backup loop once, then wire in launchd and health checks.</p>
-          </article>
-          <article class="signal-card">
-            <strong>Door 2: Compare</strong>
-            <p>Decide whether you need the control room at all, or just the upstream engine.</p>
-          </article>
-          <article class="signal-card">
-            <strong>Door 3: Proof</strong>
-            <p>Read one page that separates repo gates, GitHub truth, and same-machine live proof.</p>
-          </article>
-          <article class="signal-card">
-            <strong>Then: Builder lane</strong>
-            <p>Only after the first three doors should Codex, Claude, Local Web API, and MCP become the focus.</p>
-          </article>
-        </div>
-      </section>
-
       <section class="section two-col">
         <article class="callout">
           <span class="eyebrow-inline">Best fit</span>
@@ -261,19 +192,6 @@
         </article>
       </section>
 
-      <section class="timeline-grid">
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Stage 1</span>
-          <h3>Make the control room feel inevitable.</h3>
-          <p>Quickstart, Compare, and the hero section should make the operator story feel obvious before any builder terminology shows up.</p>
-        </article>
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Stage 2</span>
-          <h3>Then let the proof and builder shelves deepen the trust.</h3>
-          <p>Proof, For Agents, and release history work best as “go deeper” surfaces, not as competing first impressions.</p>
-        </article>
-      </section>
-
       <section class="section">
         <div class="section__header">
           <span class="section__eyebrow">See the shape</span>
@@ -297,117 +215,29 @@
 
       <section class="section">
         <div class="section__header">
-          <span class="section__eyebrow">Choose your route</span>
-          <h2>Pick the lane that matches what you need right now.</h2>
+          <span class="section__eyebrow">Go deeper</span>
+          <h2>Open the next shelf only after Quickstart, Compare, and Proof make sense.</h2>
         </div>
-        <div class="cards">
+        <div class="cards cards--routes">
           <article class="card card--accent">
-            <h3>Start a local backup loop</h3>
-            <p>Use the operator path first if your goal is a healthy recurring snapshot routine on your own Mac.</p>
-            <p><a href="./quickstart/">Open quickstart</a> | <a href="./troubleshooting/">Open troubleshooting</a></p>
-          </article>
-          <article class="card">
-            <h3>Decide whether the wrapper fits</h3>
-            <p>Use the fit-filter pages if you still need the honest answer to “why this instead of upstream?”</p>
-            <p><a href="./compare/">Compare</a> | <a href="./faq/">FAQ</a> | <a href="./examples/">Examples</a></p>
-          </article>
-          <article class="card card--warm">
-            <h3>Build or automate on top</h3>
-            <p>Use the builder-facing lane only after the control-room story already makes sense to you.</p>
-            <p><a href="./for-agents/">For Agents</a> | <a href="./proof/">Proof</a> | <a href="./for-agents/public-skills/">Public skills pack</a></p>
-          </article>
-          <article class="card">
-            <h3>Get help or join the conversation</h3>
-            <p>Use the routing pages if you need the right lane for Q&amp;A, ideas, workflow sharing, or announcements.</p>
-            <p><a href="./support/">Support</a> | <a href="./community/">Community</a></p>
-          </article>
-          <article class="card">
-            <h3>Prepare a public update</h3>
-            <p>Use the release and media lane when the repo is already ready and a human is about to do launch work.</p>
-            <p><a href="./releases/">Release history</a> | <a href="./media/share-kit/">Share kit</a> | <a href="./media/external-launch-prep/">External prep</a></p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section__header">
-          <span class="section__eyebrow">Stay oriented</span>
-          <h2>Choose the right entry point for docs, releases, or community.</h2>
-        </div>
-        <div class="cards">
-          <article class="card">
-            <h3>Community hub</h3>
-            <p>See every public discussion lane in one place before you post.</p>
-            <p><a href="./community/">Open the community hub</a></p>
-          </article>
-          <article class="card">
-            <h3>Support routing</h3>
-            <p>Know when to use Q&amp;A, Ideas, Show and tell, or a real bug issue.</p>
-            <p><a href="./support/">Open support routing</a></p>
-          </article>
-          <article class="card">
             <h3>Troubleshooting</h3>
-            <p>Use the shortest diagnostic path for permissions, launchd, stale runs, and Web UI issues.</p>
+            <p>Use the shortest diagnostic path when permissions, launchd, stale runs, or Web details block the first healthy loop.</p>
             <p><a href="./troubleshooting/">Open troubleshooting</a></p>
           </article>
           <article class="card">
-            <h3>Roadmap</h3>
-            <p>See the current focus, the next likely upgrades, and the boundaries we still refuse to fake.</p>
-            <p><a href="./roadmap/">Open the roadmap</a></p>
-          </article>
-          <article class="card">
             <h3>Release history</h3>
-            <p>Follow how the public launch surface has evolved version by version, including HTML release notes for each public tag.</p>
+            <p>Read the tagged public story version by version when you want release truth instead of workshop notes.</p>
             <p><a href="./releases/">Browse release history</a></p>
           </article>
-          <article class="card">
-            <h3>Proof and trust boundary</h3>
-            <p>Open the shortest evidence trail for repo gates, GitHub-controlled delivery, and live same-machine surfaces.</p>
-            <p><a href="./proof/">Open proof</a></p>
+          <article class="card card--warm">
+            <h3>For Agents</h3>
+            <p>Open the builder shelf only after the control-room contract is clear and you want the truthful Web, AI, or MCP split.</p>
+            <p><a href="./for-agents/">Open the builder lane</a></p>
           </article>
           <article class="card">
-            <h3>Share kit</h3>
-            <p>Reuse the short demo, compare card, and punchline when you need a truthful public explanation.</p>
-            <p><a href="./media/share-kit/">Open the share kit</a></p>
-          </article>
-          <article class="card">
-            <h3>External launch prep</h3>
-            <p>Open the repo-owned activation packet when you want the last checklist before manual launch actions.</p>
-            <p><a href="./media/external-launch-prep/">Open the external prep packet</a></p>
-          </article>
-          <article class="card">
-            <h3>Public skills pack</h3>
-            <p>Reuse the public-safe prompt and contract subset without copying the repo-local <code>.agents/skills</code> tree.</p>
-            <p><a href="./for-agents/public-skills/">Open the public skills pack</a></p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section__header">
-          <span class="section__eyebrow">Join the conversation</span>
-          <h2>The project now has real entry points for questions, ideas, and field reports.</h2>
-        </div>
-        <div class="cards">
-          <article class="card">
-            <h3>Questions welcome</h3>
-            <p>Use the Q&amp;A thread if setup, permissions, or scheduler behavior blocks your first snapshot.</p>
-            <p><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/q-a">Open the Q&amp;A thread</a></p>
-          </article>
-          <article class="card">
-            <h3>Ideas for v0.2.0</h3>
-            <p>Drop roadmap suggestions and workflow gaps in the Ideas discussion.</p>
-            <p><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/ideas">Share an idea</a></p>
-          </article>
-          <article class="card">
-            <h3>Show and tell</h3>
-            <p>Share how you schedule and monitor Apple Notes snapshots in your own setup.</p>
-            <p><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/show-and-tell">Share your workflow</a></p>
-          </article>
-          <article class="card">
-            <h3>Announcements</h3>
-            <p>Follow release notes, public updates, and launch-facing changes in the announcements lane.</p>
-            <p><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/announcements">Read announcements</a></p>
+            <h3>Support and community</h3>
+            <p>Use the routing pages when you need the right lane for Q&amp;A, ideas, workflow sharing, or announcements.</p>
+            <p><a href="./support/">Support</a> | <a href="./community/">Community</a></p>
           </article>
         </div>
       </section>
@@ -429,19 +259,6 @@
             <a href="./media/external-launch-prep/">external launch prep packet</a>.
           </p>
         </div>
-      </section>
-
-      <section class="timeline-grid">
-        <article class="timeline-card">
-          <span class="eyebrow-inline">Why the front door matters</span>
-          <h3>The repo already has the substance.</h3>
-          <p>The real job of this public surface is not to sound bigger. It is to make the existing control-room story easier to trust in under a minute.</p>
-        </article>
-        <article class="timeline-card">
-          <span class="eyebrow-inline">What comes after</span>
-          <h3>Once the story lands, every deeper page gets lighter.</h3>
-          <p>Quickstart stops feeling scary, Proof stops feeling like homework, and For Agents reads like a precise extension shelf instead of a competing pitch.</p>
-        </article>
       </section>
       </main>
 

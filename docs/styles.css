@@ -342,7 +342,7 @@ img {
 
 .hero__stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-top: 24px;
 }
@@ -566,6 +566,10 @@ img {
 
 .cards {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cards--routes {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .card,
@@ -823,5 +827,28 @@ th {
   .step::before {
     position: static;
     margin-bottom: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .card:hover,
+  .proof-card:hover,
+  .callout:hover,
+  .curation-card:hover,
+  .signal-card:hover,
+  .timeline-card:hover {
+    transform: none;
+    box-shadow: 0 16px 36px rgba(18, 32, 39, 0.08);
   }
 }
