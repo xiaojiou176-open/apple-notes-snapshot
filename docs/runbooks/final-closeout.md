@@ -38,12 +38,17 @@ Promote to hard cut immediately when any promotion condition from
 
 ## 3. Repo-Owned Verification Ladder
 
-Core repo-owned gates:
+Default local maintainer lane:
 
 ```bash
 ./notesctl rebuild-dev-env
 ./.runtime-cache/dev/venv/bin/python -m pre_commit run --all-files
 PYTHON_BIN=./.runtime-cache/dev/venv/bin/python scripts/checks/ci_gate.sh
+```
+
+Optional local parity lane:
+
+```bash
 scripts/checks/actionlint_gate.sh
 scripts/checks/zizmor_gate.sh
 TRIVY_BIN=/path/to/trivy scripts/checks/trivy_fs_gate.sh
@@ -56,8 +61,8 @@ Five-layer verification contract:
 | `pre-commit` | local hook | quick hygiene only |
 | `pre-push` | local hook | deterministic repo-local gate only |
 | `hosted` | GitHub Actions | GitHub-state-aware security and policy gates |
-| `nightly` | intentionally unused for now | keep empty until a deterministic deep audit truly needs it |
-| `manual` | real machine / owner session | live browser, desktop, provider, and external control-plane proof |
+| `nightly` | none by default | no dedicated nightly lane is required right now because the deterministic checks already run in hosted PR / push lanes |
+| `manual` | real machine / owner session | local parity reruns plus live browser, desktop, provider, and external control-plane proof |
 
 GitHub-only governance gate:
 
@@ -84,10 +89,11 @@ Before final closeout, confirm:
 Do not retarget old releases. Publish a new release from the final closeout
 commit instead.
 
-For this current closeout wave:
+For the active closeout wave:
 
-- `v0.1.7` stays historical
-- `v0.1.8` is the next canonical closeout release
+- the latest public tag stays historical once a newer closeout commit exists
+- the next release should be cut from the final closeout commit instead of
+  retargeting an older tag
 
 Before release:
 

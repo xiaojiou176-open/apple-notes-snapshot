@@ -81,6 +81,11 @@ Use the repo-owned environment:
 ./notesctl rebuild-dev-env
 ./.runtime-cache/dev/venv/bin/python -m pre_commit run --all-files
 PYTHON_BIN=./.runtime-cache/dev/venv/bin/python scripts/checks/ci_gate.sh
+```
+
+Optional local parity commands:
+
+```bash
 scripts/checks/actionlint_gate.sh
 scripts/checks/zizmor_gate.sh
 TRIVY_BIN=/path/to/trivy scripts/checks/trivy_fs_gate.sh
@@ -95,7 +100,7 @@ Keep the verification layers separate:
 - `pre-commit` = quick hygiene only
 - `pre-push` = deterministic repo-local quick gate only
 - `hosted` = GitHub Actions / GitHub-state-aware security and policy gates
-- `nightly` = intentionally unused until a deterministic deep audit truly needs it
+- `nightly` = none by default for this repo
 - `manual` = real-machine / owner-session proof such as browser, desktop, provider, or external control-plane checks
 
 ## Boundaries
