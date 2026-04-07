@@ -8,7 +8,34 @@ The format is based on Keep a Changelog.
 
 ### Note
 
-- no current main-only changes since `v0.1.11` yet
+- no current main-only changes since `v0.1.12` yet
+
+## [v0.1.12] - 2026-04-06
+
+### Added
+
+- a standalone public skill packet for `notes-snapshot-control-room` under
+  `examples/public-skills/notes-snapshot-control-room/`
+- an MCP Registry publish lane with a tracked `server.json`, MCPB manifest,
+  local build script, and artifact metadata output
+- a registry-lane unit test that locks the public skill packet and MCPB release
+  path into the repo contract
+
+### Changed
+
+- promoted Codex and OpenClaw from wiring-kit-only documentation to fresh
+  current-host attach proof while keeping “other machine” verification separate
+- aligned the last drifted support and security routing surfaces back to the
+  current live `xiaojiou176-open` public identity
+- expanded the public-skills surface so the control-room guidance can travel as
+  a standalone packet instead of only as a plugin-embedded skill
+
+### Fixed
+
+- removed hand-copied MCP Registry hash drift by making the MCPB build script
+  rewrite `server.json` after each fresh pack
+- fixed the builder-manifest test contract so it matches the current named-host
+  proof level
 
 ## [v0.1.11] - 2026-04-06
 

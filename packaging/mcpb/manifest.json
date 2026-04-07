@@ -1,0 +1,40 @@
+{
+  "manifest_version": "0.4",
+  "name": "apple-notes-snapshot",
+  "display_name": "Apple Notes Snapshot",
+  "version": "0.1.12",
+  "description": "Local-first Apple Notes backup control room for macOS with a read-only MCP surface.",
+  "author": {
+    "name": "Apple Notes Snapshot Maintainers"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaojiou176-open/apple-notes-snapshot.git"
+  },
+  "homepage": "https://xiaojiou176-open.github.io/apple-notes-snapshot/",
+  "documentation": "https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/",
+  "support": "https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/q-a",
+  "license": "MIT",
+  "keywords": [
+    "apple-notes",
+    "backup",
+    "control-room",
+    "mcp",
+    "macos"
+  ],
+  "server": {
+    "type": "binary",
+    "entry_point": "notesctl",
+    "mcp_config": {
+      "command": "${__dirname}/notesctl",
+      "args": [
+        "mcp"
+      ]
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin"
+    ]
+  }
+}

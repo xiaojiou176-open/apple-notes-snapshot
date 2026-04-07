@@ -27,6 +27,10 @@ What is newly public-safe in the current main branch:
 - `runtime-resource-hygiene.md`
   - makes browser/profile/tab cleanup, Docker restraint, and branch/worktree/PR convergence part of the shareable repo-scoped guidance layer
   - keeps non-GitHub external control planes read-only by default
+- `notes-snapshot-control-room/`
+  - a standalone skill packet with its own `SKILL.md`
+  - keeps the control-room identity, preflight-before-attach rule, and
+    starter-pack versus official-listing boundary in one portable folder
 
 Internal-only categories that stay out:
 
@@ -49,6 +53,9 @@ Files:
   - keep builder and agent entrypoints aligned
 - `runtime-resource-hygiene.md`
   - keep browser/profile/tab cleanup, repo-owned Docker restraint, and branch/worktree/PR convergence explicit at repo scope
+- `notes-snapshot-control-room/SKILL.md`
+  - standalone public skill packet for repo-scoped host guidance or future
+    skill-registry lanes
 
 Use these files as copyable repo-scoped guidance. Pair them with your host's
 current docs for the exact storage path or registration UI.

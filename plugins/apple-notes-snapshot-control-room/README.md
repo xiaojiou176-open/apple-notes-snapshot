@@ -44,6 +44,8 @@ claude mcp list
 codex mcp add apple-notes-snapshot -- /absolute/path/to/notesctl mcp
 codex mcp list --json
 codex mcp get apple-notes-snapshot --json
+codex exec -C /absolute/path/to/apple-notes-snapshot \
+  "Use the apple-notes-snapshot MCP server, list the visible tools/resources, and report the current health level."
 ```
 
 Codex's official plugin docs currently describe local plugins plus an official
@@ -51,12 +53,20 @@ directory where public third-party entries are still marked "coming soon". This
 bundle gives you the local plugin-grade surface while keeping that boundary
 honest.
 
-### OpenClaw boundary
+### OpenClaw live attach proof
 
-OpenClaw documents a real public registry/discovery route through ClawHub, but
-this repository does not claim a published ClawHub package in this round. Use
-the tracked OpenClaw starter pack and MCP registry payloads, and keep the final
-attach proof on the OpenClaw host side.
+```bash
+openclaw mcp set apple-notes-snapshot '{"command":"/absolute/path/to/notesctl","args":["mcp"]}'
+openclaw mcp list --json
+openclaw mcp show apple-notes-snapshot --json
+openclaw agent --local --agent main --message \
+  "Use the apple-notes-snapshot MCP server and report the current health level."
+```
+
+OpenClaw documents a real public registry/discovery route through ClawHub. This
+repository now has a fresh current-host attach proof for the MCP path, but it
+still does not claim a published ClawHub package or a universal attach result
+on every machine.
 
 ## Update and remove
 
