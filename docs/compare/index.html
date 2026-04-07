@@ -6,7 +6,7 @@
     <title>Compare with upstream | Apple Notes Snapshot</title>
     <meta
       name="description"
-      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, a token-gated Local Web API, AI-assisted diagnostics, a read-only MCP surface, and a local Web console."
+      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, and a visible local control room."
     />
     <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/compare/" />
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
@@ -16,7 +16,7 @@
     <meta property="og:title" content="Compare with upstream | Apple Notes Snapshot" />
     <meta
       property="og:description"
-      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, a token-gated Local Web API, AI-assisted diagnostics, a read-only MCP surface, and a local Web console."
+      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, and a visible local control room."
     />
     <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/compare/" />
     <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
@@ -25,7 +25,7 @@
     <meta name="twitter:title" content="Compare Apple Notes Snapshot with upstream" />
     <meta
       name="twitter:description"
-      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, a token-gated Local Web API, AI-assisted diagnostics, a read-only MCP surface, and a local Web console."
+      content="Understand when upstream notes-exporter is enough and when Apple Notes Snapshot adds value through scheduling, health checks, and a visible local control room."
     />
     <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
     <link rel="stylesheet" href="../styles.css" />
@@ -133,8 +133,8 @@
       </section>
 
       <section class="page-card">
-        <h2>What this repo adds</h2>
-        <div class="cards">
+        <h2>What the control room adds</h2>
+        <div class="cards cards--routes">
           <article class="card">
             <h3>Scheduling</h3>
             <p>`launchd` install, ensure, reload, and path-aware reinstall flows.</p>
@@ -148,22 +148,24 @@
             <p>Locks, state files, log rotation, vendor provenance, and token-aware local Web actions.</p>
           </article>
           <article class="card">
-            <h3>AI Diagnose</h3>
-            <p>An advisory explanation layer for status, doctor, log-health, and recent-run evidence.</p>
-          </article>
-          <article class="card">
-            <h3>Read-only MCP surface</h3>
-            <p>A stdio-first way for MCP-aware hosts to inspect the same local backup facts without a fake hosted API.</p>
-          </article>
-          <article class="card">
-            <h3>Local Web API</h3>
-            <p>A token-gated same-machine browser/API lane for status, doctor, recent-runs, and access-policy reads.</p>
+            <h3>Path-aware wrapper</h3>
+            <p>A calmer local shell around the exporter, so reinstall, path drift, and recovery stay reviewable instead of magical.</p>
           </article>
         </div>
+      </section>
+
+      <section class="page-card page-card--warm">
+        <h2>Optional second lane after the control room</h2>
         <p>
-          Those builder-facing layers are real, but they still belong after the control-room fit is
-          already clear. Open <a href="../proof/">Proof</a> if you want the trust boundary first,
-          or <a href="../for-agents/">For Agents</a> if you already know you need the host-facing
+          Once the operator fit is already obvious, the repo also adds three builder-facing
+          surfaces around the same local facts: <strong>AI Diagnose</strong> for advisory
+          explanation, a <strong>token-gated Local Web API</strong> for same-machine browser or
+          HTTP workflows, and a <strong>read-only-first MCP surface</strong> for agent hosts.
+        </p>
+        <p>
+          Those layers are real, but they are still second-shelf surfaces. Open
+          <a href="../proof/">Proof</a> if you want the trust boundary first, or
+          <a href="../for-agents/">For Agents</a> if you already know you need the host-facing
           contract.
         </p>
       </section>

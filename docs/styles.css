@@ -398,6 +398,10 @@ img {
   margin-top: 18px;
 }
 
+.signal-strip--triad {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .curation-card,
 .signal-card,
 .timeline-card {
