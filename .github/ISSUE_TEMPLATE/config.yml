@@ -1,17 +1,17 @@
 blank_issues_enabled: false
 contact_links:
   - name: Start here
-    url: https://xiaojiou176.github.io/apple-notes-snapshot/support/
+    url: https://xiaojiou176-open.github.io/apple-notes-snapshot/support/
     about: Start here if you are not yet sure whether you need docs, Q&A, ideas, or a bug report.
   - name: Setup help and troubleshooting
-    url: https://github.com/xiaojiou176/apple-notes-snapshot/discussions/categories/q-a
+    url: https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/q-a
     about: Use Q&A for setup blockers, permission prompts, launchd questions, or support requests.
   - name: Feature ideas
-    url: https://github.com/xiaojiou176/apple-notes-snapshot/discussions/categories/ideas
+    url: https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/ideas
     about: Use Ideas for roadmap suggestions and workflow improvements.
   - name: Support guide
-    url: https://github.com/xiaojiou176/apple-notes-snapshot/blob/main/SUPPORT.md
+    url: https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/SUPPORT.md
     about: Read the support-routing guide before opening an issue.
   - name: Private security report
-    url: https://github.com/xiaojiou176/apple-notes-snapshot/security/advisories/new
+    url: https://github.com/xiaojiou176-open/apple-notes-snapshot/security/advisories/new
     about: Use GitHub private vulnerability reporting for exploitable or sensitive security issues.

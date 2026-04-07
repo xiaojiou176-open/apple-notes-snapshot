@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.xiaojiou176-open/apple-notes-snapshot",
+  "title": "Apple Notes Snapshot",
+  "description": "Local-first Apple Notes backup control room for macOS with a read-only MCP surface.",
+  "websiteUrl": "https://xiaojiou176-open.github.io/apple-notes-snapshot/",
+  "repository": {
+    "url": "https://github.com/xiaojiou176-open/apple-notes-snapshot",
+    "source": "github"
+  },
+  "version": "0.1.12",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/xiaojiou176-open/apple-notes-snapshot/releases/download/v0.1.12/apple-notes-snapshot-control-room-v0.1.12.mcpb",
+      "fileSha256": "c57970167a168100e8102cde9f705d527e9b94f3cf0240463292d50e7f9fa4d1",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

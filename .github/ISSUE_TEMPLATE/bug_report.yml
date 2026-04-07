@@ -9,7 +9,7 @@ body:
       value: |
         Use this form for a reproducible repository or runtime bug.
         If your question is really setup help, launchd troubleshooting, or first-run permissions,
-        use the Q&A discussion instead: https://github.com/xiaojiou176/apple-notes-snapshot/discussions/categories/q-a
+        use the Q&A discussion instead: https://github.com/xiaojiou176-open/apple-notes-snapshot/discussions/categories/q-a
 
   - type: textarea
     id: summary

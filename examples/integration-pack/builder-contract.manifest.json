@@ -121,8 +121,8 @@
     {
       "id": "codex",
       "label": "Codex",
-      "proof_level": "host-side verify required",
-      "pack_today": "Starter pack plus generic MCP path",
+      "proof_level": "attach-proven",
+      "pack_today": "Starter pack plus generic MCP path and a fresh current-host attach proof",
       "starting_point": "codex mcp add apple-notes-snapshot -- /absolute/path/to/notesctl mcp",
       "copyable_assets": [
         ".codex-plugin/marketplace.json",
@@ -174,8 +174,8 @@
     {
       "id": "openclaw",
       "label": "OpenClaw",
-      "proof_level": "host-side verify required",
-      "pack_today": "OpenClaw MCP registry path plus bundle-compatible local plugin pack; official CLI config write/read path freshly proven on the current machine",
+      "proof_level": "attach-proven",
+      "pack_today": "OpenClaw MCP registry path plus bundle-compatible local plugin pack; official CLI config write/read and local attach freshly proven on the current machine",
       "starting_point": "openclaw mcp set apple-notes-snapshot '{\"command\":\"/absolute/path/to/notesctl\",\"args\":[\"mcp\"]}'",
       "copyable_assets": [
         "plugins/apple-notes-snapshot-control-room/README.md",

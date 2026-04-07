@@ -80,12 +80,13 @@
         <h2>Proof level today</h2>
         <ul>
           <li><strong>Repo-side proof</strong>: the generic stdio MCP server, tools, resources, and help contract are shipped and tested in this repository.</li>
-          <li><strong>Codex proof</strong>: the registration path is documented and copyable.</li>
-          <li><strong>Still host-side verify</strong>: your Codex install, login state, trusted-project status, and live attach result.</li>
+          <li><strong>Codex proof</strong>: the registration path is documented and copyable, and a fresh named-host attach proof now exists on the current host build.</li>
+          <li><strong>Still host-side verify on another machine</strong>: your Codex install, trusted-project status, and any host-specific attach differences outside the current verified host.</li>
         </ul>
         <p>
-          Treat this pack like a good wiring kit: the connector shape is real, but the final
-          “plugged in and live on this machine” proof still happens on your Codex side.
+          Treat this pack like a verified wiring kit on the current host build: the connector
+          shape is real and the current machine now has a fresh attach proof, but another Codex
+          install can still differ and should be rechecked locally.
         </p>
       </section>
 
@@ -174,7 +175,7 @@
         <ul>
           <li>No official Codex marketplace listing</li>
           <li>No hosted MCP or remote control plane</li>
-          <li>No promise that this repository has already verified attach on every Codex release</li>
+          <li>No promise that this repository has already verified attach on every Codex release or every machine</li>
           <li>No public SDK or OpenAPI surface</li>
         </ul>
       </section>

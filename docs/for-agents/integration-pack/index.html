@@ -174,10 +174,10 @@
             <tr>
               <td><strong>Codex</strong></td>
               <td><a href="../codex-starter-pack/">Starter pack</a> plus the generic MCP path</td>
-              <td>Generic path documented; host attach still verify</td>
+              <td>Attach-proven on the current host build; still recheck on another machine</td>
               <td><code>codex mcp add apple-notes-snapshot -- /absolute/path/to/notesctl mcp</code></td>
               <td><a href="../codex-starter-pack/">Codex starter pack</a> and <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/codex-mcp-add.txt">Codex add command</a></td>
-              <td>The current Codex-side registration flow and any extra host options from the latest Codex config docs</td>
+              <td>The current Codex-side registration flow, trusted-project handling, and any extra host options from the latest Codex config docs on another machine</td>
             </tr>
             <tr>
               <td><strong>Claude Code</strong></td>
@@ -206,10 +206,10 @@
             <tr>
               <td><strong>OpenClaw</strong></td>
               <td>OpenClaw MCP registry path</td>
-              <td>Host-side verify required</td>
+              <td>Attach-proven on the current host build; still recheck on another machine</td>
               <td><code>openclaw mcp set apple-notes-snapshot '{"command":"/absolute/path/to/notesctl","args":["mcp"]}'</code></td>
               <td><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/openclaw-mcp-set.txt">OpenClaw add command</a> and <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/openclaw-mcp.json">OpenClaw MCP payload</a></td>
-              <td>The current OpenClaw config location, MCP registry behavior, and whether your host build attaches and exposes the expected tools/resources; the official CLI has already written and read back the MCP config on the current machine.</td>
+              <td>The current OpenClaw config location, provider wiring, and whether another host build still exposes the expected tools/resources; the official CLI has already written, read back, and locally attached to the MCP config on the current machine.</td>
             </tr>
             <tr>
               <td><strong>Browser-backed or HTTP-shaped local tool</strong></td>
@@ -226,10 +226,10 @@
       <section class="page-card">
         <h2>Repo proof vs host-side proof</h2>
         <ul>
-          <li><strong>Repo-side already proven here</strong>: the CLI contract, the same-machine Local Web API contract, the stdio MCP launch shape, and the current read-only tool/resource surface</li>
-          <li><strong>Named-host status today</strong>: Claude Code now has fresh attach proof on the current host build; Codex still stops at a repo-owned starting point; OpenClaw now has fresh official-CLI config proof, but not a full attach proof yet.</li>
-          <li><strong>Host-side still yours to verify</strong>: where your host stores config, whether attach succeeds in your host build, and any extra host-specific options or UI steps on another machine.</li>
-          <li><strong>Truthful attach rule</strong>: treat OpenCode as template-only, OpenHands as comparison-only, and OpenClaw as host-side verify required until fresh attach proof exists; do not generalize one Claude proof run into a universal guarantee.</li>
+          <li><strong>Repo-side already proven here</strong>: the CLI contract, the same-machine Local Web API contract, the stdio MCP launch shape, and the current read-only tool/resource surface.</li>
+          <li><strong>Named-host status today</strong>: Claude Code, Codex, and OpenClaw now all have fresh attach proof on the current host build; OpenCode stays template-only and OpenHands stays comparison-only.</li>
+          <li><strong>Host-side still yours to verify on another machine</strong>: where your host stores config, whether attach succeeds in that host build, and any extra host-specific options or UI steps outside the current verified machine.</li>
+          <li><strong>Truthful attach rule</strong>: keep OpenCode template-only and OpenHands comparison-only, and do not generalize one fresh named-host proof into a universal guarantee for every machine or release.</li>
         </ul>
       </section>
 
@@ -294,8 +294,8 @@
             <tr>
               <td><strong>OpenClaw starter pack</strong></td>
               <td>OpenClaw MCP registry path and bundle-compatible host prep</td>
-              <td>Registry payload, set command, verify path, and truthful ClawHub boundary</td>
-              <td>No ClawHub listing or repo-owned attach proof in this round</td>
+              <td>Registry payload, set command, verify path, truthful ClawHub boundary, and a fresh named-host attach proof on the current host build</td>
+              <td>No ClawHub listing and no universal attach proof on every machine</td>
             </tr>
             <tr>
               <td><strong>Public skills pack</strong></td>

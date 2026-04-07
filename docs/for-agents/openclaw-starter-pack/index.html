@@ -80,9 +80,9 @@
         <h2>Proof level today</h2>
         <ul>
           <li><strong>Repo-side proof</strong>: the generic stdio MCP server, tools, resources, help contract, and OpenClaw registry examples are shipped in this repository.</li>
-          <li><strong>OpenClaw proof</strong>: the MCP registry path is documented and copyable.</li>
-          <li><strong>Fresh config proof</strong>: the official OpenClaw CLI now has a fresh profile-isolated config proof on the current machine, including <code>mcp set</code>, <code>mcp list --json</code>, and <code>mcp show --json</code> for the Apple Notes Snapshot entry.</li>
-          <li><strong>Still host-side verify</strong>: your OpenClaw install, the current MCP registry behavior, and the final attach result on your machine.</li>
+          <li><strong>OpenClaw proof</strong>: the MCP registry path is documented and copyable, and a fresh profile-isolated attach proof now exists on the current host build.</li>
+          <li><strong>Fresh config + attach proof</strong>: the official OpenClaw CLI now has a fresh profile-isolated config proof on the current machine, including <code>mcp set</code>, <code>mcp list --json</code>, and <code>mcp show --json</code> for the Apple Notes Snapshot entry, followed by a local agent turn that called the repo MCP tools successfully.</li>
+          <li><strong>Still host-side verify on another machine</strong>: your OpenClaw install, provider wiring, MCP registry behavior, and attach result can still differ outside the current verified host.</li>
         </ul>
       </section>
 
@@ -141,8 +141,8 @@
         <h2>Official public surface truth</h2>
         <ul>
           <li><strong>What exists</strong>: OpenClaw documents ClawHub as a real public registry and discovery route.</li>
-          <li><strong>What this repo ships now</strong>: MCP registry payloads plus a bundle-compatible local plugin pack that follows the documented Claude/Codex-style bundle layouts OpenClaw can read, and the official OpenClaw CLI has now written and read back the MCP config on the current machine.</li>
-          <li><strong>What still stays outside this round</strong>: a live ClawHub listing or a repo-owned guarantee that every OpenClaw build already attaches.</li>
+          <li><strong>What this repo ships now</strong>: MCP registry payloads plus a bundle-compatible local plugin pack that follows the documented Claude/Codex-style bundle layouts OpenClaw can read, and the official OpenClaw CLI has now written, read back, and locally attached to the MCP config on the current machine.</li>
+          <li><strong>What still stays outside this round</strong>: a live ClawHub listing or a repo-owned guarantee that every OpenClaw build already attaches the same way.</li>
         </ul>
       </section>
 
@@ -151,7 +151,7 @@
         <ul>
           <li>No OpenClaw marketplace listing</li>
           <li>No hosted MCP or remote control plane</li>
-          <li>No repo-owned proof that every OpenClaw release will attach the same way</li>
+          <li>No repo-owned proof that every OpenClaw release or every machine will attach the same way</li>
           <li>No front-door assistant positioning for Apple Notes Snapshot</li>
           <li>No public SDK or OpenAPI surface</li>
         </ul>

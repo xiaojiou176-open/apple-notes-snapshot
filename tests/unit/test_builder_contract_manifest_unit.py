@@ -23,11 +23,11 @@ class BuilderContractManifestUnitTests(unittest.TestCase):
     def test_manifest_host_proof_levels_and_assets_are_truthful(self):
         hosts = {host["id"]: host for host in self.payload["hosts"]}
         self.assertEqual(hosts["generic-mcp-aware-host"]["proof_level"], "repo-side proven")
-        self.assertEqual(hosts["codex"]["proof_level"], "host-side verify required")
+        self.assertEqual(hosts["codex"]["proof_level"], "attach-proven")
         self.assertEqual(hosts["claude-code"]["proof_level"], "attach-proven")
         self.assertEqual(hosts["opencode"]["proof_level"], "template-only")
         self.assertEqual(hosts["openhands"]["proof_level"], "comparison-only")
-        self.assertEqual(hosts["openclaw"]["proof_level"], "host-side verify required")
+        self.assertEqual(hosts["openclaw"]["proof_level"], "attach-proven")
         self.assertIn(".claude-plugin/marketplace.json", hosts["claude-code"]["copyable_assets"])
         self.assertIn(".codex-plugin/marketplace.json", hosts["codex"]["copyable_assets"])
         self.assertIn("attach-proven", self.payload["proof_legend"])

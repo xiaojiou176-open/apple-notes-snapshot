@@ -1,6 +1,6 @@
-Contact: https://github.com/xiaojiou176/apple-notes-snapshot/security/advisories/new
-Contact: https://github.com/xiaojiou176/apple-notes-snapshot/issues/new?template=security-contact-request.yml
+Contact: https://github.com/xiaojiou176-open/apple-notes-snapshot/security/advisories/new
+Contact: https://github.com/xiaojiou176-open/apple-notes-snapshot/issues/new?template=security-contact-request.yml
 Expires: 2027-03-25T00:00:00Z
 Preferred-Languages: en
-Canonical: https://xiaojiou176.github.io/apple-notes-snapshot/.well-known/security.txt
-Policy: https://github.com/xiaojiou176/apple-notes-snapshot/blob/main/SECURITY.md
+Canonical: https://xiaojiou176-open.github.io/apple-notes-snapshot/.well-known/security.txt
+Policy: https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/SECURITY.md
