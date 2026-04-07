@@ -8,7 +8,23 @@ The format is based on Keep a Changelog.
 
 ### Added
 
-- ongoing follow-up after the proof/front-door sync release
+- ongoing follow-up after the second-pass curation release
+
+## [v0.1.10] - 2026-04-06
+
+### Added
+
+- second-pass curation polish across Home, Proof, For Agents, Releases, and Quickstart
+- stronger visual signaling for proof ledgers, release storytelling, and builder-lane sequencing
+
+### Changed
+
+- deepened the public-surface storytelling so control-room, proof, and builder shelves now read more like a curated exhibit than a flat docs stack
+- sharpened the visual language for curation cards, signal cards, and release-timeline highlights without changing product truth
+
+### Fixed
+
+- the gap where the second-pass curation polish had landed on `main` but was not yet part of the latest tagged public release
 
 ## [v0.1.9] - 2026-04-06
 
