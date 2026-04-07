@@ -54,20 +54,11 @@ scripts/checks/zizmor_gate.sh
 TRIVY_BIN=/path/to/trivy scripts/checks/trivy_fs_gate.sh
 ```
 
-Five-layer verification contract:
+Reuse the five-layer CI contract in [README.md](../../README.md#ci-contract) as
+the public SSOT. The closeout-only deltas are:
 
-| Layer | Canonical home | Closeout expectation |
-| --- | --- | --- |
-| `pre-commit` | local hook | quick hygiene only |
-| `pre-push` | local hook | deterministic repo-local gate only |
-| `hosted` | GitHub Actions | GitHub-state-aware security and policy gates |
-| `nightly` | none by default | no dedicated nightly lane is required right now because the deterministic checks already run in hosted PR / push lanes |
-| `manual` | real machine / owner session | local parity reruns plus live browser, desktop, provider, and external control-plane proof |
-
-GitHub-only governance gate:
-
-- `Dependency Review` must pass on the pull request because it needs the PR
-  base/head diff.
+- `Dependency Review` must still pass on the pull request because it needs the
+  PR base/head diff.
 - `GitHub Alert Gate`, CodeQL, Secret Scan, Actionlint, Zizmor, and Trivy stay
   hosted-first. Local reruns remain optional maintainer repro steps, not part
   of the default pre-push contract.
