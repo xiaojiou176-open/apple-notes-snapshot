@@ -6,9 +6,21 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 
-### Added
+### Note
 
-- ongoing follow-up after the second-pass curation release
+- no current main-only changes since `v0.1.11` yet
+
+## [v0.1.11] - 2026-04-06
+
+### Changed
+
+- deepened the public-surface rhythm across Compare, Support, Community, Troubleshooting, Security, and Proof so the side rooms now read like the same exhibition as the front door
+- tightened side-room navigation so operator-first routes stay clearer before builder or secondary surfaces
+- separated support-desk, discussion-hall, troubleshooting-runbook, and proof-ledger roles more cleanly across the docs site
+
+### Fixed
+
+- release-truth drift after `v0.1.10`, so `CHANGELOG`, release history, proof, HTML release notes, and the latest public tag all point back at the same current truth
 
 ## [v0.1.10] - 2026-04-06
 
