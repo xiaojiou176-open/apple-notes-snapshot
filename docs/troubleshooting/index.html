@@ -63,38 +63,40 @@
         </p>
       </section>
 
-      <section class="cards section">
+      <section class="section">
         <div class="section__header">
           <span class="section__eyebrow">First-pass checks</span>
           <h2>Start with the shortest fixes before you dive into the longer runbook.</h2>
         </div>
-        <article class="card">
-          <h2>Snapshots landed in the wrong place</h2>
-          <p>
-            Check <code>config/notes_snapshot.env</code> first. If you never changed it, the default
-            export destination is <code>$HOME/iCloudDrive/NotesSnapshots</code>.
-          </p>
-          <pre tabindex="0"><code># review the runtime config
+        <div class="cards">
+          <article class="card">
+            <h2>Snapshots landed in the wrong place</h2>
+            <p>
+              Check <code>config/notes_snapshot.env</code> first. If you never changed it, the default
+              export destination is <code>$HOME/iCloudDrive/NotesSnapshots</code>.
+            </p>
+            <pre tabindex="0"><code># review the runtime config
 config/notes_snapshot.env</code></pre>
-        </article>
-        <article class="card">
-          <h2>Permission prompt never appeared</h2>
-          <p>Run one manual snapshot first. The first `run --no-status` is the moment macOS can ask for Apple Notes and AppleScript access.</p>
-          <pre tabindex="0"><code>./notesctl run --no-status</code></pre>
-        </article>
-        <article class="card">
-          <h2>Scheduler looks missing</h2>
-          <p>Reinstall the launchd job and verify the current checkout path is the one you expect.</p>
-          <pre tabindex="0"><code>./notesctl install --minutes 30 --load
+          </article>
+          <article class="card">
+            <h2>Permission prompt never appeared</h2>
+            <p>Run one manual snapshot first. The first `run --no-status` is the moment macOS can ask for Apple Notes and AppleScript access.</p>
+            <pre tabindex="0"><code>./notesctl run --no-status</code></pre>
+          </article>
+          <article class="card">
+            <h2>Scheduler looks missing</h2>
+            <p>Reinstall the launchd job and verify the current checkout path is the one you expect.</p>
+            <pre tabindex="0"><code>./notesctl install --minutes 30 --load
 ./notesctl doctor</code></pre>
-        </article>
-        <article class="card">
-          <h2>Health looks stale</h2>
-          <p>Check whether the last success is old or missing, then inspect logs and doctor output before assuming the exporter broke.</p>
-          <pre tabindex="0"><code>./notesctl status --full
+          </article>
+          <article class="card">
+            <h2>Health looks stale</h2>
+            <p>Check whether the last success is old or missing, then inspect logs and doctor output before assuming the exporter broke.</p>
+            <pre tabindex="0"><code>./notesctl status --full
 ./notesctl verify
 ./notesctl log-health --tail 200</code></pre>
-        </article>
+          </article>
+        </div>
       </section>
 
       <section class="page-card">
