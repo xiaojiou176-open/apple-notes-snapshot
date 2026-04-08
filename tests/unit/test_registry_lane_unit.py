@@ -48,7 +48,7 @@ class RegistryLaneUnitTests(unittest.TestCase):
         self.assertRegex(
             manifest_text,
             re.compile(
-                r"submit_via: clawhub skill publish <repo-root>/examples/public-skills/notes-snapshot-control-room "
+                r"submit_via: clawhub publish <repo-root>/examples/public-skills/notes-snapshot-control-room "
                 r"--slug notes-snapshot-control-room --name \"Apple Notes Snapshot Control-Room\" "
                 r"--version 1.0.0 --tags apple-notes,local-first,backup,mcp"
             ),
