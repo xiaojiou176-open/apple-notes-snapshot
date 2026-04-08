@@ -126,9 +126,9 @@
             status and recent-run reads instead of screen-scraping the dashboard.
           </p>
           <pre><code>export NOTES_SNAPSHOT_WEB_TOKEN="a-long-random-token"
-./notesctl web --host 127.0.0.1 --port 8080
+./notesctl web --host 127.0.0.1 --port 8787
 curl -H "Authorization: Bearer $NOTES_SNAPSHOT_WEB_TOKEN" \
-  http://127.0.0.1:8080/api/status</code></pre>
+  http://127.0.0.1:8787/api/status</code></pre>
         </article>
         <article class="card">
           <h3>Codex / Claude Code MCP-aware audit</h3>

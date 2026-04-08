@@ -80,7 +80,7 @@
       <section class="page-card">
         <h2>How to start it</h2>
         <pre><code>export NOTES_SNAPSHOT_WEB_TOKEN="a-long-random-token"
-./notesctl web --host 127.0.0.1 --port 8080</code></pre>
+./notesctl web --host 127.0.0.1 --port 8787</code></pre>
         <p>
           The default fit is same-machine use on <code>127.0.0.1</code>. Keep the token gate on
           unless you have a deliberate local-only reason to relax it.
@@ -145,10 +145,10 @@
       <section class="page-card">
         <h2>Minimal same-machine request shape</h2>
         <pre><code>curl -H "Authorization: Bearer $NOTES_SNAPSHOT_WEB_TOKEN" \
-  http://127.0.0.1:8080/api/status
+  http://127.0.0.1:8787/api/status
 
 curl -H "Authorization: Bearer $NOTES_SNAPSHOT_WEB_TOKEN" \
-  "http://127.0.0.1:8080/api/recent-runs?tail=5"</code></pre>
+  "http://127.0.0.1:8787/api/recent-runs?tail=5"</code></pre>
       </section>
 
       <section class="page-card">

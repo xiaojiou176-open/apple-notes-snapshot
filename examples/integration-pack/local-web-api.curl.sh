@@ -3,7 +3,7 @@ set -euo pipefail
 
 : "${NOTES_SNAPSHOT_WEB_TOKEN:?set NOTES_SNAPSHOT_WEB_TOKEN first}"
 
-BASE_URL="${BASE_URL:-http://127.0.0.1:8080}"
+BASE_URL="${BASE_URL:-http://127.0.0.1:8787}"
 
 curl -H "Authorization: Bearer ${NOTES_SNAPSHOT_WEB_TOKEN}" \
   "${BASE_URL}/api/status"

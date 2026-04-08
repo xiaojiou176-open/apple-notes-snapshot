@@ -64,57 +64,56 @@
       <main id="main-content">
       <section class="hero">
         <div class="hero__copy">
-          <span class="hero__eyebrow">Keep upstream. Add a visible control room first.</span>
-          <h1>The local-first Apple Notes backup control room for macOS.</h1>
+          <span class="hero__eyebrow">Operator first. Builder-ready only after the loop feels obvious.</span>
+          <h1>Prove your Apple Notes backup loop in one local pass.</h1>
           <p>
-            Apple Notes Snapshot keeps the upstream exporter, then adds path-aware exports,
-            `launchd` scheduling, visible health checks, and a clearer recovery path when the
-            backup loop drifts. Start with the public 3-step quickstart if you want the operator
-            path, and open the compare page if you are still deciding whether the wrapper fits.
+            Apple Notes Snapshot keeps the upstream exporter, then adds the things operators actually
+            need when the loop has to survive day two: an obvious destination, repeatable
+            `launchd` scheduling, visible health checks, and a calmer recovery path when something drifts.
           </p>
           <p>
-            AI Diagnose, the Local Web API, and the read-only MCP surface are real builder-facing
-            extensions around the same local control room. They stay in the second lane, not above
-            the operator story.
+            Start with the 3-step operator quickstart, compare it to upstream if you need context,
+            and only then open AI Diagnose, the Local Web API, or the read-only MCP lane. Those
+            builder surfaces are real, but they should feel like an upgrade path, not the first puzzle.
           </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="./quickstart/">Start the 3-step quickstart</a>
-          <a class="btn btn--secondary" href="./compare/">Compare with upstream</a>
           <a class="btn btn--secondary" href="./proof/">Open the proof page</a>
+          <a class="btn btn--secondary" href="./compare/">Compare with upstream</a>
         </div>
           <div class="hero-curation">
             <article class="curation-card">
-              <span class="eyebrow-inline">Operator first</span>
-              <strong>Start with one clean local loop.</strong>
-              <p>The first question is still simple: where will snapshots land, can one export succeed, and is the scheduler healthy afterward?</p>
+              <span class="eyebrow-inline">3-minute proof</span>
+              <strong>Confirm the local loop before you touch anything fancier.</strong>
+              <p>One run, one install, one verify pass: that is enough to prove the path, the scheduler, and the health surface.</p>
             </article>
             <article class="curation-card">
-              <span class="eyebrow-inline">Proof before hype</span>
-              <strong>Check evidence before you infer platform scope.</strong>
-              <p>The proof page is the shortest route to repo gates, GitHub delivery facts, and the same-machine boundary for Web and MCP.</p>
+              <span class="eyebrow-inline">Visible by design</span>
+              <strong>See the status, proof, and recovery story without guessing.</strong>
+              <p>The same control room shows destination, freshness, launchd state, logs, and recovery clues instead of hiding them in scripts.</p>
             </article>
             <article class="curation-card">
               <span class="eyebrow-inline">Builder second lane</span>
-              <strong>Add AI, Web, and MCP only after the control room clicks.</strong>
-              <p>The builder path is real, but it makes more sense after the operator story already feels obvious.</p>
+              <strong>Bring AI, Web, and MCP in only after the operator story clicks.</strong>
+              <p>The repo still ships AI Diagnose, the Local Web API, and the read-only MCP lane, but none of them are allowed to outrun the operator contract.</p>
             </article>
           </div>
           <div class="hero__stats">
             <div class="hero__stat">
-              <strong>Path-aware</strong>
-              Review or override the export destination before the first run.
+              <strong>1 entrypoint</strong>
+              `notesctl` stays the only human entrypoint you need to remember.
             </div>
             <div class="hero__stat">
-              <strong>Scheduled</strong>
-              Use `launchd` to turn manual exports into repeatable local snapshots.
+              <strong>3 steps</strong>
+              Review the path, run one snapshot, then install and verify the loop.
             </div>
             <div class="hero__stat">
-              <strong>Visible</strong>
-              Check freshness, failures, logs, metrics, and scheduler state when something breaks.
+              <strong>1 proof page</strong>
+              The shortest external audit path lives on one page instead of across scattered notes.
             </div>
             <div class="hero__stat">
-              <strong>Extendable</strong>
-              Add AI Diagnose, the Local Web API, and the read-only MCP surface only after the control room already makes sense.
+              <strong>Builder later</strong>
+              AI Diagnose, Local Web API, and MCP are upgrades, not the first thing a new operator must decode.
             </div>
           </div>
         </div>

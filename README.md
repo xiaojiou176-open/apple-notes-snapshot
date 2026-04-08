@@ -17,12 +17,6 @@ hosted service.
 [Open the proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/) |
 [Get support or routing help](https://xiaojiou176-open.github.io/apple-notes-snapshot/support/)
 
-Builder lane after Quickstart or Proof:
-[AI Diagnose](https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/) |
-[Local Web API](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/) |
-[MCP Provider](https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/) |
-[For Codex / Claude Code builders](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/)
-
 [![Trusted CI](https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml/badge.svg)](https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml)
 [![Latest Release](https://img.shields.io/github/v/release/xiaojiou176-open/apple-notes-snapshot?display_name=tag&color=1d4ed8)](https://github.com/xiaojiou176-open/apple-notes-snapshot/releases)
 [![macOS only](https://img.shields.io/badge/platform-macOS-111827?logo=apple)](https://support.apple.com/macos)
@@ -47,6 +41,13 @@ Builder lane after Quickstart or Proof:
 > Not the goal: cloud sync, team collaboration, or two-way write-back into
 > Apple Notes.
 
+### What you can prove in one local pass
+
+- **The destination is obvious**: you can review or override the snapshot path before anything writes.
+- **The loop is real**: one manual run plus `launchd` turns a one-off export into a repeatable local rhythm.
+- **The control room is inspectable**: `status`, `verify`, `doctor`, logs, and proof pages all stay on the same local facts.
+- **Builder surfaces are optional**: AI Diagnose, the Local Web API, and MCP all stay behind the operator story instead of replacing it.
+
 If you want the shortest public evidence trail after that first pass, open the
 [proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/).
 It collects the repo-owned gates, the GitHub-controlled release and Pages
@@ -54,6 +55,12 @@ evidence, and the current same-machine boundary in one place.
 
 Star or follow releases if you want a visible, reviewable local backup control
 room instead of another opaque automation snippet.
+
+Builder lane after the first healthy loop:
+[AI Diagnose](https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/) |
+[Local Web API](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/) |
+[MCP Provider](https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/) |
+[For Codex / Claude Code builders](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/)
 
 ## Quickstart
 
@@ -350,6 +357,10 @@ Current repo-local contract:
 - `.runtime-cache/pytest` -> pytest cache
 - `.runtime-cache/coverage` -> coverage data
 - `.runtime-cache/pycache` -> Python bytecode cache
+- `.runtime-cache/browser-proof` -> generated proof screenshots that can be rebuilt from the current docs surface
+- `.runtime-cache/phase1` -> historical hard-cut rollback artifacts, not current runtime truth
+- `.runtime-cache/phase1-history-rebuild` -> historical rebuild rollback artifacts, not current runtime truth
+- `.runtime-cache/mcp-registry-lane/out` -> release-ready MCP registry artifacts that can be rebuilt on demand
 
 Current external repo-owned contract:
 
@@ -373,7 +384,7 @@ trying to complete the first successful snapshot.
 - `./notesctl clean-cache --dry-run`
   - previews repo-local rebuildable/disposable cleanup under `.runtime-cache/`
 - `./notesctl clean-cache`
-  - removes repo-local rebuildables and disposable-generated residue
+  - removes repo-local rebuildables, generated proof captures, historical rollback bundles, and disposable-generated residue
 - `./notesctl runtime-audit`
   - reports repo-local support surfaces plus external repo-owned cache/runtime roots
 - `./notesctl clean-runtime --dry-run`
@@ -390,7 +401,8 @@ trying to complete the first successful snapshot.
 The repo may still clean legacy `.pytest_cache`, `.coverage`, or scattered
 `__pycache__` directories if they are already present, but those are migration
 backstops. The current contract routes repo-owned disposable artifacts into
-`.runtime-cache/*`.
+`.runtime-cache/*`, including historical rollback folders and proof captures
+that are safe to regenerate when you no longer need them.
 
 Automatic janitor hooks run on repo-owned entrypoints that create or reuse
 machine-level residue, including `run`, `web`, `install`, `ensure`,
