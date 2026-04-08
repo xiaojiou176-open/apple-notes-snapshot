@@ -16,15 +16,15 @@ The format is based on Keep a Changelog.
 
 - a standalone public skill packet for `notes-snapshot-control-room` under
   `examples/public-skills/notes-snapshot-control-room/`
-- an MCP Registry publish lane with a tracked `server.json`, MCPB manifest,
+- an MCP Registry-ready lane with a tracked `server.json`, MCPB manifest,
   local build script, and artifact metadata output
 - a registry-lane unit test that locks the public skill packet and MCPB release
   path into the repo contract
 
 ### Changed
 
-- promoted Codex and OpenClaw from wiring-kit-only documentation to fresh
-  current-host attach proof while keeping “other machine” verification separate
+- promoted Codex and OpenClaw from wiring-kit-only documentation to a tagged
+  v0.1.12 attach-proof trail while keeping “other machine” verification separate
 - aligned the last drifted support and security routing surfaces back to the
   current live `xiaojiou176-open` public identity
 - expanded the public-skills surface so the control-room guidance can travel as

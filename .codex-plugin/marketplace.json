@@ -9,7 +9,7 @@
     {
       "name": "apple-notes-snapshot-control-room",
       "description": "Project-scoped Apple Notes Snapshot control-room bundle with MCP wiring, a preflight command, and truthful host boundaries.",
-      "version": "0.1.7",
+      "version": "0.1.12",
       "source": "./plugins/apple-notes-snapshot-control-room"
     }
   ]

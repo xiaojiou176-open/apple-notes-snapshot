@@ -64,9 +64,9 @@ openclaw agent --local --agent main --message \
 ```
 
 OpenClaw documents a real public registry/discovery route through ClawHub. This
-repository now has a fresh current-host attach proof for the MCP path, but it
-still does not claim a published ClawHub package or a universal attach result
-on every machine.
+repository now keeps a tagged `v0.1.12` attach-proof trail for the MCP path,
+but it still does not claim a published ClawHub package or a universal attach
+result on every machine.
 
 ## Update and remove
 
