@@ -33,6 +33,10 @@ class RuntimeHygieneUnitTests(unittest.TestCase):
             write_file(repo_root / ".runtime-cache" / "pytest" / "state")
             write_file(repo_root / ".runtime-cache" / "coverage" / ".coverage")
             write_file(repo_root / ".runtime-cache" / "pycache" / "module.pyc")
+            write_file(repo_root / ".runtime-cache" / "browser-proof" / "proof.png")
+            write_file(repo_root / ".runtime-cache" / "phase1" / "rollback" / "pre-cutover.bundle")
+            write_file(repo_root / ".runtime-cache" / "phase1-history-rebuild" / "rollback.bundle")
+            write_file(repo_root / ".runtime-cache" / "mcp-registry-lane" / "out" / "artifact.mcpb")
             write_file(repo_root / ".pytest_cache" / "legacy")
             write_file(repo_root / ".coverage")
 
@@ -42,6 +46,10 @@ class RuntimeHygieneUnitTests(unittest.TestCase):
         self.assertTrue(classes["repo-local-pytest-cache"]["exists"])
         self.assertTrue(classes["repo-local-coverage"]["exists"])
         self.assertTrue(classes["repo-local-pycache"]["exists"])
+        self.assertTrue(classes["repo-local-browser-proof"]["exists"])
+        self.assertTrue(classes["repo-local-history-rebuild"]["exists"])
+        self.assertTrue(classes["repo-local-history-rebuild-rollback"]["exists"])
+        self.assertTrue(classes["repo-local-registry-stage"]["exists"])
         self.assertTrue(classes["legacy-pytest-cache"]["exists"])
         self.assertTrue(classes["legacy-coverage"]["exists"])
 

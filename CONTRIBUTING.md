@@ -96,6 +96,9 @@ Current cleanup classes:
 - `.runtime-cache/cache/apple-notes-snapshot` -> repo-local runtime cache
 - `.runtime-cache/temp` -> scratch
 - `.runtime-cache/logs`, `.runtime-cache/pytest`, `.runtime-cache/coverage`, and `.runtime-cache/pycache` -> repo-local disposable/generated support surfaces
+- `.runtime-cache/browser-proof` -> generated proof screenshots that can be recaptured
+- `.runtime-cache/phase1` and `.runtime-cache/phase1-history-rebuild` -> historical rollback artifacts you can remove once you no longer need old cutover safety copies
+- `.runtime-cache/mcp-registry-lane/out` -> rebuildable MCP registry lane artifacts
 - legacy `.pytest_cache`, `.coverage`, and scattered `__pycache__` -> migration-only cleanup backstops if they still exist
 
 External repo-owned residue belongs under the current repo-managed machine cache

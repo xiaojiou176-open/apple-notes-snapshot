@@ -39,6 +39,10 @@ TARGETS=(
   "${NOTES_SNAPSHOT_PYTEST_CACHE_DIR}"
   "${NOTES_SNAPSHOT_COVERAGE_FILE:h}"
   "${NOTES_SNAPSHOT_PYTHONPYCACHEPREFIX}"
+  "${NOTES_SNAPSHOT_RUNTIME_ROOT}/browser-proof"
+  "${NOTES_SNAPSHOT_RUNTIME_ROOT}/phase1"
+  "${NOTES_SNAPSHOT_RUNTIME_ROOT}/phase1-history-rebuild"
+  "${NOTES_SNAPSHOT_RUNTIME_ROOT}/mcp-registry-lane/out"
   "${REPO_ROOT}/.pytest_cache"
   "${REPO_ROOT}/.coverage"
   "${REPO_ROOT}/.venv"
@@ -95,6 +99,15 @@ class_for_target() {
     */.runtime-cache/pycache|*/__pycache__)
       printf '%s\n' "python-bytecode"
       ;;
+    */.runtime-cache/browser-proof)
+      printf '%s\n' "proof-captures"
+      ;;
+    */.runtime-cache/phase1|*/.runtime-cache/phase1-history-rebuild)
+      printf '%s\n' "historical-rollback"
+      ;;
+    */.runtime-cache/mcp-registry-lane/out)
+      printf '%s\n' "registry-stage"
+      ;;
     *)
       printf '%s\n' "disposable-generated"
       ;;
@@ -112,6 +125,15 @@ rebuild_hint_for_target() {
       ;;
     */.runtime-cache/pytest|*/.runtime-cache/coverage|*/.runtime-cache/pycache|*/.runtime-cache/logs|*/.pytest_cache|*/.coverage|*/__pycache__)
       printf '%s\n' "rerun the documented repo workflow"
+      ;;
+    */.runtime-cache/browser-proof)
+      printf '%s\n' "rerun the browser proof capture workflow if you still need screenshots"
+      ;;
+    */.runtime-cache/phase1|*/.runtime-cache/phase1-history-rebuild)
+      printf '%s\n' "historical hard-cut rollback artifacts; keep only if you still need manual rollback evidence"
+      ;;
+    */.runtime-cache/mcp-registry-lane/out)
+      printf '%s\n' "rerun scripts/release/build_mcp_registry_lane.zsh"
       ;;
     *)
       printf '%s\n' "rerun the documented repo workflow"
