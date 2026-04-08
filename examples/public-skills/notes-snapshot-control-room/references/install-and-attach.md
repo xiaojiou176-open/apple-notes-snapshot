@@ -6,6 +6,20 @@ Use this reference when the agent or reviewer asks:
 - what exact command should the host run?
 - what has to be proven before attach claims?
 
+## Get `notesctl` first
+
+If the host does not already have a checkout with `notesctl`, start from a
+public repo checkout:
+
+```bash
+git clone --depth 1 --branch v0.1.12 \
+  https://github.com/xiaojiou176-open/apple-notes-snapshot.git
+cd apple-notes-snapshot
+```
+
+If you want current-main behavior instead of the last tagged proof baseline,
+clone without `--branch v0.1.12`.
+
 ## Minimum operator proof
 
 Before any host attach claim, prove the operator lane first:
@@ -43,11 +57,26 @@ For a generic MCP host that expects `command` plus `args`, use:
 
 Replace `/absolute/path/to/notesctl` with the path for the local checkout.
 
+For example:
+
+- `/absolute/path/to/apple-notes-snapshot/notesctl`
+- `/path/to/apple-notes-snapshot/notesctl`
+
 ## Builder surfaces that pair with this skill
 
 - AI Diagnose: `./notesctl ai-diagnose`
 - Local Web API: `./notesctl web`
 - MCP Provider: `./notesctl mcp`
+
+## MCP capability surface after attach
+
+- `get_status`
+- `run_doctor`
+- `verify_freshness`
+- `get_log_health`
+- `list_recent_runs`
+- `get_access_policy`
+- `notes-snapshot://recent-runs`
 
 These three surfaces are not interchangeable:
 

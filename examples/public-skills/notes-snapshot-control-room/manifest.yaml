@@ -4,7 +4,7 @@ artifact: public-skill-listing-manifest
 skill:
   name: notes-snapshot-control-room
   display_name: Apple Notes Snapshot Control-Room
-  version: 1.0.1
+  version: 1.0.2
   entrypoint: SKILL.md
   package_shape: skill-folder
 
@@ -12,7 +12,7 @@ registry_targets:
   clawhub:
     status: ready-but-not-listed
     package_shape: skill-folder
-    submit_via: clawhub publish <repo-root>/examples/public-skills/notes-snapshot-control-room --slug notes-snapshot-control-room --name "Apple Notes Snapshot Control-Room" --version 1.0.1 --tags apple-notes,local-first,backup,mcp
+    submit_via: clawhub publish <repo-root>/examples/public-skills/notes-snapshot-control-room --slug notes-snapshot-control-room --name "Apple Notes Snapshot Control-Room" --version 1.0.2 --tags apple-notes,local-first,backup,mcp
   openhands-extensions:
     status: folder-ready
     package_shape: skill-folder

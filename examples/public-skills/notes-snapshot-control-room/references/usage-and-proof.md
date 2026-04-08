@@ -8,7 +8,15 @@ Use this reference when the reviewer asks:
 
 ## First-success path
 
-The shortest truthful path is:
+Acquire the tool first if needed:
+
+```bash
+git clone --depth 1 --branch v0.1.12 \
+  https://github.com/xiaojiou176-open/apple-notes-snapshot.git
+cd apple-notes-snapshot
+```
+
+Then run the shortest truthful path:
 
 ```bash
 ./notesctl run --no-status
@@ -26,6 +34,17 @@ Then, if the local state exists, move into builder surfaces:
 ./notesctl mcp
 ```
 
+## MCP capability surface after attach
+
+- Tools:
+  `get_status`, `run_doctor`, `verify_freshness`, `get_log_health`,
+  `list_recent_runs`, and `get_access_policy`
+- Resource:
+  `notes-snapshot://recent-runs`
+- Boundary:
+  the MCP lane is local stdio, read-only-first, and backed by the same
+  repo-owned state as the operator lane
+
 ## Example prompts
 
 - "Is this Apple Notes Snapshot problem a local preflight failure or an MCP attach failure?"
@@ -41,6 +60,10 @@ Then, if the local state exists, move into builder surfaces:
 - MCP provider guide: https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/
 - For Agents overview: https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/
 - Public skills pack docs: https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/public-skills/
+
+## Visual demo
+
+![Apple Notes Snapshot run flow](https://raw.githubusercontent.com/xiaojiou176-open/apple-notes-snapshot/main/assets/readme/run-flow.gif)
 
 ## Reviewer one-liner
 
