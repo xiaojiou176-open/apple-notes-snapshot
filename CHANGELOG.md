@@ -6,9 +6,19 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 
-### Note
+### Added
 
-- no current main-only changes since `v0.1.12` yet
+- a repo-owned `manifest.yaml` for the standalone `notes-snapshot-control-room`
+  public skill packet so ClawHub-style submit metadata lives next to `SKILL.md`
+- a root `glama.json` claim file for Glama directory ownership without
+  pretending the macOS-only control room now ships a truthful Docker runtime
+
+### Changed
+
+- tightened remaining builder-facing wording from "fresh/current round" attach
+  phrasing into tagged `v0.1.12` proof-trail language
+- narrowed the standalone public-skill wording so OpenHands stays a skill-folder
+  or comparison boundary instead of sounding like a repo-owned listing lane
 
 ## [v0.1.12] - 2026-04-06
 
@@ -16,15 +26,15 @@ The format is based on Keep a Changelog.
 
 - a standalone public skill packet for `notes-snapshot-control-room` under
   `examples/public-skills/notes-snapshot-control-room/`
-- an MCP Registry publish lane with a tracked `server.json`, MCPB manifest,
+- an MCP Registry-ready lane with a tracked `server.json`, MCPB manifest,
   local build script, and artifact metadata output
 - a registry-lane unit test that locks the public skill packet and MCPB release
   path into the repo contract
 
 ### Changed
 
-- promoted Codex and OpenClaw from wiring-kit-only documentation to fresh
-  current-host attach proof while keeping “other machine” verification separate
+- promoted Codex and OpenClaw from wiring-kit-only documentation to a tagged
+  v0.1.12 attach-proof trail while keeping “other machine” verification separate
 - aligned the last drifted support and security routing surfaces back to the
   current live `xiaojiou176-open` public identity
 - expanded the public-skills surface so the control-room guidance can travel as

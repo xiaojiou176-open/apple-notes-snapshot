@@ -36,14 +36,14 @@ If those fail, call it a local snapshot preflight problem, not an MCP bug.
 
 - Repo-owned starter packs and local marketplaces are public-ready wiring kits.
 - They are not the same thing as official public directory listing.
-- A fresh named-host attach proof on one machine does not become a universal
+- A tagged `v0.1.12` named-host attach-proof trail on one machine does not become a universal
   proof for every host build or every machine.
 
 ## Best-fit use cases
 
 - Repo-scoped guidance for Codex, Claude Code, OpenClaw, or another local host
-- Public skill distribution through a ClawHub-style or OpenHands-style
-  registry lane
+- Public skill distribution through a ClawHub-style listing or another
+  skill-folder distribution lane
 - Public-facing docs or README edits that must keep builder wording honest
 
 ## What this skill should not do

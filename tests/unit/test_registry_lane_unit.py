@@ -1,4 +1,5 @@
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -29,6 +30,34 @@ class RegistryLaneUnitTests(unittest.TestCase):
         self.assertIn("name: notes-snapshot-control-room", skill_text)
         self.assertIn("description:", skill_text)
         self.assertIn("version: 1.0.0", skill_text)
+
+    def test_public_skill_listing_manifest_is_present_and_truthful(self):
+        manifest_text = (
+            self.repo_root
+            / "examples"
+            / "public-skills"
+            / "notes-snapshot-control-room"
+            / "manifest.yaml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("artifact: public-skill-listing-manifest", manifest_text)
+        self.assertIn("name: notes-snapshot-control-room", manifest_text)
+        self.assertIn('display_name: Apple Notes Snapshot Control-Room', manifest_text)
+        self.assertIn("version: 1.0.0", manifest_text)
+        self.assertIn("status: ready-but-not-listed", manifest_text)
+        self.assertIn("No live ClawHub listing exists yet", manifest_text)
+        self.assertRegex(
+            manifest_text,
+            re.compile(
+                r"submit_via: clawhub skill publish <repo-root>/examples/public-skills/notes-snapshot-control-room "
+                r"--slug notes-snapshot-control-room --name \"Apple Notes Snapshot Control-Room\" "
+                r"--version 1.0.0 --tags apple-notes,local-first,backup,mcp"
+            ),
+        )
+
+    def test_glama_claim_metadata_exists_without_docker_runtime_claim(self):
+        payload = json.loads((self.repo_root / "glama.json").read_text(encoding="utf-8"))
+        self.assertEqual(payload["$schema"], "https://glama.ai/mcp/schemas/server.json")
+        self.assertEqual(payload["maintainers"], ["xiaojiou176"])
 
 
 if __name__ == "__main__":

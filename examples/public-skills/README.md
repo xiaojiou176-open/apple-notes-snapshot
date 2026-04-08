@@ -29,6 +29,8 @@ What is newly public-safe in the current main branch:
   - keeps non-GitHub external control planes read-only by default
 - `notes-snapshot-control-room/`
   - a standalone skill packet with its own `SKILL.md`
+  - a repo-owned `manifest.yaml` that keeps ClawHub-style submit metadata next
+    to the packet without claiming a live listing already exists
   - keeps the control-room identity, preflight-before-attach rule, and
     starter-pack versus official-listing boundary in one portable folder
 
@@ -56,6 +58,9 @@ Files:
 - `notes-snapshot-control-room/SKILL.md`
   - standalone public skill packet for repo-scoped host guidance or future
     skill-registry lanes
+- `notes-snapshot-control-room/manifest.yaml`
+  - repo-owned submit metadata for ClawHub-style listings and other skill-folder
+    distribution lanes
 
 Use these files as copyable repo-scoped guidance. Pair them with your host's
 current docs for the exact storage path or registration UI.

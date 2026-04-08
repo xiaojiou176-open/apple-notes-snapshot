@@ -109,6 +109,7 @@
         <h2>Current-main standalone public skill packet</h2>
         <ul>
           <li><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/tree/main/examples/public-skills/notes-snapshot-control-room">notes-snapshot-control-room/</a> is a standalone packet with its own <code>SKILL.md</code>.</li>
+          <li>The packet now also carries a repo-owned <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/public-skills/notes-snapshot-control-room/manifest.yaml"><code>manifest.yaml</code></a> so ClawHub-style submit metadata lives next to the skill itself.</li>
           <li>Use it when you want one portable folder that keeps the control-room identity, preflight-before-attach rule, and starter-pack versus official-listing boundary together.</li>
           <li>It stays public-safe because it does not depend on task boards, machine-private paths, or owner-session-only rituals.</li>
         </ul>
@@ -118,6 +119,7 @@
         <h2>Install path</h2>
         <ol>
           <li>Start with the public files under <code>examples/public-skills/</code>.</li>
+          <li>Use <code>notes-snapshot-control-room/manifest.yaml</code> when you need repo-owned submit metadata for a ClawHub-style skill listing.</li>
           <li>Copy them into the repo-scoped guidance surface that your host or workflow already uses.</li>
           <li>Keep the content repo-scoped and reviewable rather than hiding it in a machine-private prompt layer.</li>
           <li>Pair the files with your host's current docs for the exact storage path or registration UI.</li>
@@ -236,7 +238,7 @@
         <ul>
           <li><strong>Keep it public-safe</strong> if the guidance still works without machine-private paths, task-board state, private archives, or owner-session-only steps.</li>
           <li><strong>Pull it back out</strong> if the guidance starts depending on local credential routing, private browser/session state, or maintainer-only closeout rituals.</li>
-          <li><strong>Keep host fit honest</strong>: Codex and Claude guidance can travel as repo-scoped markdown, while OpenCode/OpenHands stay lighter-weight and OpenClaw stays comparison-only.</li>
+          <li><strong>Keep host fit honest</strong>: Codex and Claude guidance can travel as repo-scoped markdown, OpenCode/OpenHands stay lighter-weight, and the standalone skill packet stays a listing-ready folder instead of a hosted runtime claim.</li>
         </ul>
       </section>
 

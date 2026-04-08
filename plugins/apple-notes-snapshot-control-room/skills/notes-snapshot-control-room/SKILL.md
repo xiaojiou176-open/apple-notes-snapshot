@@ -36,7 +36,7 @@ If those fail, call it a local snapshot preflight problem, not an MCP bug.
 
 - Repo-owned starter packs and local marketplaces are public-ready wiring kits.
 - They are not the same thing as official public directory listing.
-- Fresh named-host attach proof now exists for Claude Code, Codex, and OpenClaw on the current host build, but other machines still need local verification.
+- Tagged v0.1.12 named-host proof now exists for Claude Code, Codex, and OpenClaw, but other machines still need local verification.
 
 ## Best-fit use cases
 

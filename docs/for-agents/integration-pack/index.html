@@ -145,7 +145,7 @@
         <p>
           Read the proof column like a safety label:
           <strong>repo-side proven</strong> means the repository itself proves the contract,
-          <strong>attach-proven</strong> means a named host attach was freshly proven on a real host session in this round,
+          <strong>attach-proven</strong> means the repo keeps a tagged named-host attach-proof trail,
           <strong>host-side verify required</strong> means the repo ships the wiring kit but your
           machine still has to attach successfully, <strong>template-only</strong> means the repo
           ships a starting shape without named-host proof, and <strong>comparison-only</strong>
@@ -229,7 +229,7 @@
           <li><strong>Repo-side already proven here</strong>: the CLI contract, the same-machine Local Web API contract, the stdio MCP launch shape, and the current read-only tool/resource surface.</li>
           <li><strong>Named-host status today</strong>: Claude Code, Codex, and OpenClaw each have a tagged host-proof trail in <a href="../../releases/v0.1.12/">v0.1.12</a>; OpenCode stays template-only and OpenHands stays comparison-only.</li>
           <li><strong>Host-side still yours to verify on another machine</strong>: where your host stores config, whether attach succeeds in that host build, and any extra host-specific options or UI steps outside the current verified machine.</li>
-          <li><strong>Truthful attach rule</strong>: keep OpenCode template-only and OpenHands comparison-only, and do not generalize one fresh named-host proof into a universal guarantee for every machine or release.</li>
+          <li><strong>Truthful attach rule</strong>: keep OpenCode template-only and OpenHands comparison-only, and do not generalize one tagged named-host proof trail into a universal guarantee for every machine or release.</li>
         </ul>
       </section>
 
@@ -237,8 +237,8 @@
         <h2>What counts as a stronger proof level</h2>
         <ul>
           <li><strong>To move from template-only to host-side verify required</strong>: the repo needs a concrete setup file or install path that maps cleanly onto the host.</li>
-          <li><strong>To move from host-side verify required to attach-proven</strong>: the repo needs a fresh named-host attach proof in the current round.</li>
-          <li><strong>To move from host-side verify required to repo-side proven</strong>: the repo needs fresh attach proof that survives a repo-owned verification pass without hand-wavy gaps.</li>
+          <li><strong>To move from host-side verify required to attach-proven</strong>: the repo needs a tagged named-host attach-proof trail it can point to without flattening machine-local verification.</li>
+          <li><strong>To move from host-side verify required to repo-side proven</strong>: the repo needs attach evidence that survives a repo-owned verification pass without hand-wavy gaps.</li>
           <li><strong>To stay comparison-only</strong>: mention the host only to stop overclaiming, not to imply a plugin, gateway, or dedicated adapter exists.</li>
         </ul>
       </section>
@@ -256,6 +256,11 @@
           <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/builder-contract.manifest.json">builder contract manifest</a>.
           It packages the current builder surfaces, host proof levels, help entrypoints, and
           copyable assets into one repo-owned artifact.
+        </p>
+        <p>
+          Need the repo-owned submit metadata for the standalone public skill packet? Use
+          <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/public-skills/notes-snapshot-control-room/manifest.yaml">the public skill manifest</a>.
+          It keeps the ClawHub-style submit fields next to <code>SKILL.md</code> without claiming a live listing already exists.
         </p>
         <p>
           Need the plugin-grade bundle files? Use the root marketplace files for
@@ -300,7 +305,7 @@
             <tr>
               <td><strong>Public skills pack</strong></td>
               <td>Repo-scoped instruction reuse</td>
-              <td>Public-safe prompt/contract rules that pair with builder hosts</td>
+              <td>Public-safe prompt/contract rules plus a repo-owned listing manifest for the standalone skill packet</td>
               <td>No raw `.agents/skills/` export and no host-native plugin claim</td>
             </tr>
             <tr>

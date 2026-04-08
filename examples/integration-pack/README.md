@@ -29,7 +29,7 @@ What these examples are not:
 Proof legend:
 
 - `repo-side proven` = the repo itself verifies the underlying contract
-- `attach-proven` = a named host attach was freshly proven on a real host session in this round, though other machines may still need local verification
+- `attach-proven` = the repo keeps a tagged named-host attach-proof trail, though other machines may still need local verification
 - `host-side verify required` = the repo contract is ready, but the host still has to prove attach on your machine
 - `template-only` = this repo gives you a starting file, not attach proof
 - `comparison-only` = this repo mentions the host only to mark scope and avoid overclaiming

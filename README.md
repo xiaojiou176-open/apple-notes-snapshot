@@ -17,6 +17,7 @@ hosted service.
 [Open the proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/) |
 [Get support or routing help](https://xiaojiou176-open.github.io/apple-notes-snapshot/support/)
 
+Builder lane after Quickstart or Proof:
 [AI Diagnose](https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/) |
 [Local Web API](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/) |
 [MCP Provider](https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/) |
