@@ -29,7 +29,7 @@ class RegistryLaneUnitTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         self.assertIn("name: notes-snapshot-control-room", skill_text)
         self.assertIn("description:", skill_text)
-        self.assertIn("version: 1.0.1", skill_text)
+        self.assertIn("version: 1.0.2", skill_text)
 
     def test_public_skill_listing_manifest_is_present_and_truthful(self):
         manifest_text = (
@@ -42,7 +42,7 @@ class RegistryLaneUnitTests(unittest.TestCase):
         self.assertIn("artifact: public-skill-listing-manifest", manifest_text)
         self.assertIn("name: notes-snapshot-control-room", manifest_text)
         self.assertIn('display_name: Apple Notes Snapshot Control-Room', manifest_text)
-        self.assertIn("version: 1.0.1", manifest_text)
+        self.assertIn("version: 1.0.2", manifest_text)
         self.assertIn("status: ready-but-not-listed", manifest_text)
         self.assertIn("No live ClawHub listing exists yet", manifest_text)
         self.assertRegex(
@@ -50,7 +50,7 @@ class RegistryLaneUnitTests(unittest.TestCase):
             re.compile(
                 r"submit_via: clawhub publish <repo-root>/examples/public-skills/notes-snapshot-control-room "
                 r"--slug notes-snapshot-control-room --name \"Apple Notes Snapshot Control-Room\" "
-                r"--version 1.0.1 --tags apple-notes,local-first,backup,mcp"
+                r"--version 1.0.2 --tags apple-notes,local-first,backup,mcp"
             ),
         )
         self.assertIn("references/install-and-attach.md", manifest_text)
