@@ -53,10 +53,34 @@ If you want the shortest public evidence trail after that first pass, open the
 It collects the repo-owned gates, the GitHub-controlled release and Pages
 evidence, and the current same-machine boundary in one place.
 
+## Current lane order
+
+Treat Apple Notes Snapshot like a local control room with a few adapter boxes
+around it:
+
+- **Primary current lane: pure MCP**
+  - the repo's main machine-facing surface is the local stdio MCP flow behind
+    `./notesctl mcp` and the root [`server.json`](./server.json)
+- **Secondary current lane: pure skills**
+  - the public skill packet at
+    [`examples/public-skills/notes-snapshot-control-room/`](./examples/public-skills/notes-snapshot-control-room/)
+    teaches hosts how to attach to that same local control room
+- **Companion later lanes: plugin shell and `.mcpb` packaging**
+  - [`plugins/apple-notes-snapshot-control-room/`](./plugins/apple-notes-snapshot-control-room/)
+    and [`packaging/mcpb/`](./packaging/mcpb/) are host-shaped packaging
+    surfaces around the same local workflow
+  - they matter, but they are not the first story a new reviewer should read
+- **Current non-claims**
+  - no hosted Notes service
+  - no cloud sync product
+  - no official skill or plugin marketplace listing without fresh host-side
+    read-back
+  - no cross-machine attach guarantee
+
 Star or follow releases if you want a visible, reviewable local backup control
 room instead of another opaque automation snippet.
 
-Builder lane after the first healthy loop:
+Secondary builder reads after the first healthy loop:
 [AI Diagnose](https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/) |
 [Local Web API](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/) |
 [MCP Provider](https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/) |

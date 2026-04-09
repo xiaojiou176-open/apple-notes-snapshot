@@ -16,7 +16,7 @@ registry_targets:
   openhands-extensions:
     status: folder-ready
     package_shape: skill-folder
-    submit_via: import the skill folder into the current OpenHands skills or extensions flow
+    submit_via: submit this folder as skills/notes-snapshot-control-room/ in OpenHands/extensions
 
 boundaries:
   product_identity: Apple Notes local-first backup control room for macOS
@@ -30,7 +30,11 @@ boundaries:
 
 pair_with:
   - SKILL.md
-  - ../README.md
-  - references/install-and-attach.md
-  - references/usage-and-proof.md
-  - ../../integration-pack/builder-contract.manifest.json
+  - README.md
+  - references/README.md
+  - references/INSTALL.md
+  - references/OPENHANDS_MCP_CONFIG.json
+  - references/OPENCLAW_MCP_CONFIG.json
+  - references/CAPABILITIES.md
+  - references/DEMO.md
+  - references/TROUBLESHOOTING.md

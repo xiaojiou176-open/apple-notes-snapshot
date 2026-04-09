@@ -38,7 +38,7 @@ rewriting it into a hosted AI platform or a generic assistant product.
 
 ## First-success flow
 
-1. Acquire `notesctl` first using `references/install-and-attach.md`.
+1. Acquire `notesctl` first using `references/INSTALL.md`.
 2. Prove the operator lane first:
    - `./notesctl run --no-status`
    - `./notesctl install --minutes 30 --load`
@@ -103,5 +103,10 @@ If those fail, call it a local snapshot preflight problem, not an MCP bug.
 
 ## Read next
 
-- `references/install-and-attach.md`
-- `references/usage-and-proof.md`
+- `references/README.md`
+- `references/INSTALL.md`
+- `references/OPENHANDS_MCP_CONFIG.json`
+- `references/OPENCLAW_MCP_CONFIG.json`
+- `references/CAPABILITIES.md`
+- `references/DEMO.md`
+- `references/TROUBLESHOOTING.md`

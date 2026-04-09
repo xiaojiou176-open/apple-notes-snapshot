@@ -8,7 +8,7 @@ class RegistryLaneUnitTests(unittest.TestCase):
     def setUp(self):
         self.repo_root = Path(__file__).resolve().parents[2]
 
-    def test_server_json_uses_mcpb_release_lane(self):
+    def test_server_json_uses_mcpb_companion_release_lane(self):
         payload = json.loads((self.repo_root / "server.json").read_text(encoding="utf-8"))
         self.assertEqual(payload["name"], "io.github.xiaojiou176-open/apple-notes-snapshot")
         self.assertEqual(payload["version"], "0.1.12")
@@ -53,8 +53,21 @@ class RegistryLaneUnitTests(unittest.TestCase):
                 r"--version 1.0.2 --tags apple-notes,local-first,backup,mcp"
             ),
         )
-        self.assertIn("references/install-and-attach.md", manifest_text)
-        self.assertIn("references/usage-and-proof.md", manifest_text)
+        self.assertIn("references/README.md", manifest_text)
+        self.assertIn("references/INSTALL.md", manifest_text)
+        self.assertIn("references/DEMO.md", manifest_text)
+        self.assertIn("references/TROUBLESHOOTING.md", manifest_text)
+
+    def test_public_skill_packet_drops_legacy_reference_filenames(self):
+        references_dir = (
+            self.repo_root
+            / "examples"
+            / "public-skills"
+            / "notes-snapshot-control-room"
+            / "references"
+        )
+        self.assertFalse((references_dir / "install-and-attach.md").exists())
+        self.assertFalse((references_dir / "usage-and-proof.md").exists())
 
     def test_glama_claim_metadata_exists_without_docker_runtime_claim(self):
         payload = json.loads((self.repo_root / "glama.json").read_text(encoding="utf-8"))

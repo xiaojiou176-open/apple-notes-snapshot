@@ -1,6 +1,9 @@
 # Apple Notes Snapshot Control-Room Bundle
 
 This directory is the repo-owned plugin-grade bundle for local coding hosts.
+Treat it as a host-shaped companion surface after the local control room, the
+stdio-first MCP lane, and the standalone public skill packet already make
+sense.
 
 What it includes:
 
@@ -38,7 +41,7 @@ claude mcp add -s project apple-notes-snapshot -- /absolute/path/to/notesctl mcp
 claude mcp list
 ```
 
-### Codex live attach proof
+### Codex local attach proof
 
 ```bash
 codex mcp add apple-notes-snapshot -- /absolute/path/to/notesctl mcp
@@ -53,7 +56,7 @@ directory where public third-party entries are still marked "coming soon". This
 bundle gives you the local plugin-grade surface while keeping that boundary
 honest.
 
-### OpenClaw live attach proof
+### OpenClaw local attach proof
 
 ```bash
 openclaw mcp set apple-notes-snapshot '{"command":"/absolute/path/to/notesctl","args":["mcp"]}'
