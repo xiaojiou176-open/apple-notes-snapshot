@@ -1,7 +1,11 @@
 # Apple Notes Snapshot Control-Room
 
-This folder is the public skill packet for Apple Notes Snapshot's local-first
-backup control room.
+This folder is the public skill packet for Apple Notes Snapshot's secondary
+public lane.
+
+The flagship story is still the local backup control room plus its stdio-first
+MCP surface. This packet exists so a reviewer or host can learn that workflow
+without inventing a hosted-service or plugin-marketplace story.
 
 ## What this skill teaches an agent
 
@@ -14,9 +18,8 @@ backup control room.
 ## First-success path
 
 1. Read `SKILL.md`
-2. Open `references/install-and-attach.md`
-3. Acquire `notesctl`, then run the proof path from
-   `references/usage-and-proof.md`
+2. Open `references/INSTALL.md`
+3. Acquire `notesctl`, then run the proof path from `references/DEMO.md`
 4. Only then attach the MCP lane or explain host-specific boundaries
 
 ## Demo / proof links
@@ -47,12 +50,36 @@ backup control room.
 
 ## Best fit
 
-- operators who want a calmer Apple Notes backup loop on their own Mac
+- operators who want a bounded Apple Notes backup loop on their own Mac
 - repo-scoped guidance for hosts that consume a stdio-first MCP server
 - public skill-folder distribution lanes that need an honest control-room story
 
 ## What this skill does not claim
 
+- no flagship plugin or `.mcpb` lane claim for the full product
+- no live ClawHub or OpenHands skill listing without fresh host-side read-back
 - no hosted runtime or Docker lane for the full product
 - no universal attach proof on every machine
-- no official marketplace listing unless a host-side read-back confirms it
+
+## What this packet includes
+
+- `SKILL.md`
+  - the agent-facing workflow entry
+- `README.md`
+  - the human-facing packet overview
+- `manifest.yaml`
+  - registry-style metadata for host skill registries
+- `references/README.md`
+  - the local index for every supporting file
+- `references/INSTALL.md`
+  - install and host wiring guidance
+- `references/OPENHANDS_MCP_CONFIG.json`
+  - a ready-to-edit `mcpServers` snippet
+- `references/OPENCLAW_MCP_CONFIG.json`
+  - a ready-to-edit `mcp.servers` snippet
+- `references/CAPABILITIES.md`
+  - the MCP capability map and safe-first order
+- `references/DEMO.md`
+  - the first-success walkthrough and expected output shape
+- `references/TROUBLESHOOTING.md`
+  - the first places to check when preflight or attach fails

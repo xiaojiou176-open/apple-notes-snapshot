@@ -3,7 +3,7 @@
   "name": "apple-notes-snapshot",
   "display_name": "Apple Notes Snapshot",
   "version": "0.1.12",
-  "description": "Local-first Apple Notes backup control room for macOS with a read-only MCP surface.",
+  "description": "Companion .mcpb packaging for the Apple Notes Snapshot local-first MCP control room on macOS.",
   "author": {
     "name": "Apple Notes Snapshot Maintainers"
   },
