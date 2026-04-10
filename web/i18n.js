@@ -85,9 +85,16 @@
       ui: {
         title: "Notes Snapshot Console",
         badgeLocal: "LOCAL",
-        heroSummary: "Deterministic local Web console for Apple Notes exports, without requiring a bundled desktop app.",
+        heroSummary: "Run one snapshot, install launchd, then verify the loop before you read deeper diagnostics or builder lanes.",
         refresh: "Refresh",
         lastUpdate: "Last update",
+        operatorLane: "Run -> Install -> Verify",
+        operatorStepOne: "Step 1",
+        operatorStepTwo: "Step 2",
+        operatorStepThree: "Step 3",
+        operatorStepRunTitle: "Run one snapshot",
+        operatorStepInstallTitle: "Install the scheduler",
+        operatorStepVerifyTitle: "Verify before diagnostics",
         firstRunGuidance: "First-Run Guidance",
         snapshotStatus: "Snapshot Status",
         logHealth: "Log Health",
@@ -100,6 +107,12 @@
         vendorSync: "Vendor Sync",
         logViewer: "Log Viewer",
         actionOutput: "Action Output",
+        operatorFocusDeck: "Operator Focus Deck",
+        nextMovePill: "next move",
+        currentNextMove: "Current next move",
+        readOrder: "Read order",
+        controlRoomSignals: "Control-room signals",
+        latestActionTranscript: "Latest action transcript",
         healthSummary: "Health Summary",
         stateLayers: "State Layers",
         healthReasonCodes: "Health Reason Codes",
@@ -193,11 +206,71 @@
         apiUnavailable: "Unable to reach local API. If this persists, ensure Web UI server is running.",
         runningAction: "Running {action}...",
         actionFailed: "Action failed: {detail}",
-        firstRunSummary: "Build one successful snapshot first, then treat the rest of the control room as ongoing operations.",
+        operatorLaneSummary: "Treat the first healthy loop like a three-step lane: build one baseline, install the schedule, then verify before you read deeper telemetry.",
+        operatorStepRun: "Use Run Snapshot first so macOS can show permissions and the local ledger can record a real baseline.",
+        operatorStepInstall: "Use the Scheduler card once the first run succeeds so the loop becomes repeatable instead of manual.",
+        operatorStepVerify: "Verify first, then use Doctor, Recent Runs, and Log Health only when the loop still looks wrong.",
+        operatorLaneHintHtml:
+          'Need the guided version? Open the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a>, then the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/">troubleshooting guide</a>, and keep the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/">proof page</a> for after the first verified loop.',
+        operatorFocusDeckSummary:
+          "Read this strip like a control-tower handoff: it tells you what to do next, why that move is safest, and which panel to open before you chase raw logs.",
+        focusReconnectNext: "Reconnect the control room",
+        focusReconnectReason:
+          "The live status feed is not visible yet, so the safest move is to refresh before you trust any deeper panel.",
+        focusReconnectReadOrder: "Refresh -> Snapshot Status -> Recent Runs",
+        focusReconnectGuidance:
+          "Once status is back, read the top health card first and only then drop into diagnostics or raw output.",
+        focusReadonlyNext: "Stay read-only and inspect proof",
+        focusReadonlyReason:
+          "This console is currently locked to observation, so use Status, Recent Runs, and Proof before you expect any action buttons to change local state.",
+        focusReadonlyReadOrder: "Snapshot Status -> Recent Runs -> Proof page",
+        focusReadonlyGuidance:
+          "Treat this like an audit deck: read the health picture first, then the proof trail, and avoid chasing action output as if writes were available.",
+        focusFirstRunNext: "Run one snapshot",
+        focusFirstRunReason:
+          "You do not have a verified baseline yet, so every deeper surface is still describing a first-run setup problem instead of an operating loop.",
+        focusFirstRunReadOrder: "Run Snapshot -> Snapshot Status -> Scheduler",
+        focusFirstRunGuidance:
+          "After the first successful run lands, come back here, confirm the baseline, then install launchd and only after that read the proof or diagnostics surfaces.",
+        focusInstallNext: "Install the scheduler",
+        focusInstallReason:
+          "The manual baseline already exists, but the repeatable loop is not loaded yet, so the next safest move is to turn the snapshot into a visible rhythm.",
+        focusInstallReadOrder: "Scheduler -> Snapshot Status -> Recent Runs",
+        focusInstallGuidance:
+          "Use Install after the successful baseline exists, then refresh Status so the loop reads like a schedule instead of a one-off export.",
+        focusVerifyNext: "Verify the loop, then open Doctor",
+        focusVerifyReason:
+          "The control room is already pointing at drift or failure, so you want to confirm the health contract first and only then open dependency or recovery detail.",
+        focusVerifyReadOrder: "Snapshot Status -> Doctor -> Log Viewer -> Action Output",
+        focusVerifyGuidance:
+          "Think of this like triage: confirm the loop is unhealthy, read the doctor summary, then use logs and raw action output as receipts instead of as your first clue.",
+        focusRecoveryWatchNext: "Read Recent Runs before you take another action",
+        focusRecoveryWatchReason:
+          "The latest pattern shows a repeated or watch-level drift, so you should understand the run trend before you add another manual intervention.",
+        focusRecoveryWatchReadOrder: "Recent Runs -> Snapshot Status -> Log Viewer",
+        focusRecoveryWatchGuidance:
+          "Use Recent Runs to see whether the loop is wobbling in one repeated way, then confirm the current state card before you trigger a fix.",
+        focusSteadyNext: "Confirm steady state, then capture proof",
+        focusSteadyReason:
+          "The baseline, scheduler, and health surface look steady, so the safest operator move is to confirm freshness and then use proof-facing surfaces only as a receipt.",
+        focusSteadyReadOrder: "Snapshot Status -> Recent Runs -> Proof page",
+        focusSteadyGuidance:
+          "When the loop is calm, keep the order short: confirm the latest state, check that the recent run trend is still steady, and only then open proof or builder lanes.",
+        focusSignalHealthLevel: "Health level: {value}",
+        focusSignalLaunchdState: "Launchd state: {value}",
+        focusSignalRecentAttention: "Recent run attention: {value}",
+        focusSignalDoctorWarnings: "Doctor warnings: {count}",
+        focusSignalAccessMode: "Access mode: {value}",
+        focusAccessReadonly: "readonly",
+        focusAccessActive: "active",
+        quickActionsSummary: "Start with Run Snapshot, then return here only if permissions or recovery work still blocks the baseline.",
+        schedulerSummary: "This is the install step. Use it after one successful run so the loop becomes repeatable.",
+        metricsSummary: "Metrics stay here for deeper drift analysis after the baseline already exists. They should not be your first stop on day one.",
+        firstRunSummary: "Build one successful snapshot, install the scheduler, then verify the loop before you treat the rest of the control room as ongoing operations.",
         firstRunHint: "Need the full checklist? Open the quickstart or the troubleshooting guide.",
         firstRunHintHtml:
           'Need the full checklist? Open the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a> or the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/">troubleshooting guide</a>.',
-        firstRunExplanation: "This is a normal first-run or cleaned-checkout state. Build one successful snapshot baseline before you read this as an active failure.",
+        firstRunExplanation: "This is a normal first-run or cleaned-checkout state. Build one successful snapshot baseline, install the scheduler, then verify before you read this as an active failure.",
         logHealthLastStatus: "last_status: {status}",
         outputOk: "OK",
         actionFileLabel: "file: {path}",
@@ -208,11 +281,27 @@
         bannerFailureCluster: "Recent runs still point to an active failure cluster: {reason}",
         bannerRecoveryWatch: "The latest run recovered, but keep watching the next run before you call the loop stable.",
         bannerStale: "The snapshot loop looks stale. Refresh it before you treat this as a deeper runtime incident.",
+        focusWaitingSignals: "Waiting for live status.",
+        outputWaitingContext: "Waiting for the first live receipt",
+        outputWaitingGuidance:
+          "Refresh first, then use this transcript to confirm what the console actually changed instead of guessing from stale output.",
+        outputFirstRunContext: "Watch for the first successful baseline",
+        outputFirstRunGuidance:
+          "The next useful transcript should show one clean Run Snapshot receipt. After that, move back to Scheduler and Status before reading deeper logs.",
+        outputFailureContext: "Read the failure receipt before taking another action",
+        outputFailureGuidance:
+          "Use this panel like a signed receipt: look for the failing command and the local state it changed, then go back to Doctor or Recent Runs instead of firing a second fix blindly.",
+        outputSteadyContext: "Latest action transcript",
+        outputSteadyGuidance:
+          "Successful actions should read like a short receipt: command first, then the changed local state.",
+        outputGuidanceSummary:
+          "Successful actions should read like a short receipt: command first, then the changed local state.",
+        outputMetaHint: "Read the summary strip above before you drop into raw output.",
       },
       onboarding: {
         stepRun: "Run ./notesctl run --no-status so macOS can surface the first permission prompts.",
-        stepVerify: "Run ./notesctl verify to confirm the local state ledger now has a successful baseline.",
-        stepDoctor: "Run ./notesctl doctor if the state still looks empty or warnings remain.",
+        stepInstall: "Run ./notesctl install --minutes 30 --load once the first snapshot succeeds so the loop becomes repeatable.",
+        stepVerify: "Run ./notesctl verify to confirm the local state ledger and scheduler now agree on a healthy baseline.",
       },
       backend: {
         status: {
@@ -411,9 +500,16 @@
       ui: {
         title: "Notes Snapshot 控制台",
         badgeLocal: "本地",
-        heroSummary: "用于 Apple Notes 导出的确定性本地 Web 控制台，无需打包桌面应用。",
+        heroSummary: "先运行一次快照，再安装 launchd，然后先校验循环，再去读更深的诊断或 builder 分层。",
         refresh: "刷新",
         lastUpdate: "最后更新",
+        operatorLane: "运行 -> 安装 -> 校验",
+        operatorStepOne: "步骤 1",
+        operatorStepTwo: "步骤 2",
+        operatorStepThree: "步骤 3",
+        operatorStepRunTitle: "先跑一次快照",
+        operatorStepInstallTitle: "安装调度器",
+        operatorStepVerifyTitle: "先校验，再看诊断",
         firstRunGuidance: "首次运行指引",
         snapshotStatus: "快照状态",
         logHealth: "日志健康度",
@@ -426,6 +522,12 @@
         vendorSync: "Vendor 同步",
         logViewer: "日志查看器",
         actionOutput: "操作输出",
+        operatorFocusDeck: "操作员聚焦甲板",
+        nextMovePill: "下一步",
+        currentNextMove: "当前下一步",
+        readOrder: "阅读顺序",
+        controlRoomSignals: "控制室信号",
+        latestActionTranscript: "最近一次操作回执",
         healthSummary: "健康摘要",
         stateLayers: "状态分层",
         healthReasonCodes: "健康原因代码",
@@ -519,11 +621,71 @@
         apiUnavailable: "无法连接本地 API。若一直如此，请确认 Web UI 服务器正在运行。",
         runningAction: "正在执行 {action}...",
         actionFailed: "操作失败：{detail}",
-        firstRunSummary: "先完成一次成功快照，再把控制室里的其他信息当成持续运维状态来看。",
+        operatorLaneSummary: "把第一次健康循环理解成三步主线：先建立一次基线，再安装调度，最后先校验通过，再去读更深层的遥测。",
+        operatorStepRun: "先用“运行快照”让 macOS 弹出权限提示，并让本地状态账本记录到真实基线。",
+        operatorStepInstall: "等第一次运行成功后，再用调度器卡片把循环装起来，让它从手动动作变成可重复节奏。",
+        operatorStepVerify: "先校验，再在循环看起来仍不对时去看诊断、最近运行和日志健康度。",
+        operatorLaneHintHtml:
+          '想看带路版？先打开 <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a>，再看 <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/">troubleshooting guide</a>；<a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/">proof page</a> 留到第一次校验通过之后再读。',
+        operatorFocusDeckSummary:
+          "把这一条当作控制塔交接条：它会先告诉你下一步该做什么、为什么这一步最安全，以及在你追原始日志之前该先开哪个面板。",
+        focusReconnectNext: "先恢复控制室连接",
+        focusReconnectReason:
+          "当前还看不到实时状态，所以最安全的动作是先刷新并确认控制室重新连上，再去相信更深层面板。",
+        focusReconnectReadOrder: "刷新 -> 快照状态 -> 最近运行",
+        focusReconnectGuidance:
+          "状态一旦回来，先读顶部健康卡片，再决定是否进入诊断或原始输出。",
+        focusReadonlyNext: "保持只读，先看 proof",
+        focusReadonlyReason:
+          "当前控制室处于只读观察态，所以先用状态、最近运行和 proof 理清现场，不要期待按钮会修改本地状态。",
+        focusReadonlyReadOrder: "快照状态 -> 最近运行 -> Proof page",
+        focusReadonlyGuidance:
+          "把它当审计面板来读：先看健康面，再看 proof 证据，别把 action output 当成还能写入的操作台。",
+        focusFirstRunNext: "先跑一次快照",
+        focusFirstRunReason:
+          "你还没有一个验证过的基线，所以更深的面板现在描述的仍是首次运行问题，而不是已经进入日常运维的循环。",
+        focusFirstRunReadOrder: "运行快照 -> 快照状态 -> 调度器",
+        focusFirstRunGuidance:
+          "第一次成功运行落下后，再回来确认基线、安装 launchd，然后才去看 proof 或诊断分层。",
+        focusInstallNext: "安装调度器",
+        focusInstallReason:
+          "手动基线已经存在，但可重复循环还没有加载，所以最安全的下一步是把快照装成一个看得见节奏的循环。",
+        focusInstallReadOrder: "调度器 -> 快照状态 -> 最近运行",
+        focusInstallGuidance:
+          "先完成安装，再刷新状态，让这个系统读起来像有节奏的循环，而不是一次性导出。",
+        focusVerifyNext: "先校验循环，再打开诊断",
+        focusVerifyReason:
+          "控制室已经在提示漂移或失败，所以你应该先确认健康契约，再去看依赖、恢复线索和原始输出。",
+        focusVerifyReadOrder: "快照状态 -> Doctor -> 日志查看器 -> 操作输出",
+        focusVerifyGuidance:
+          "把它理解成分诊：先确认循环确实不健康，再读 doctor 摘要，最后把日志和原始输出当回执，而不是第一条线索。",
+        focusRecoveryWatchNext: "先读最近运行，再决定要不要继续操作",
+        focusRecoveryWatchReason:
+          "最近的模式说明循环在反复抖动或仍处在观察期，所以应先看趋势，再决定是否手动干预。",
+        focusRecoveryWatchReadOrder: "最近运行 -> 快照状态 -> 日志查看器",
+        focusRecoveryWatchGuidance:
+          "先看最近运行是否在重复同一种问题，再回到状态卡确认当前面貌，然后再触发修复动作。",
+        focusSteadyNext: "确认稳定，再取 proof",
+        focusSteadyReason:
+          "基线、调度和健康面看起来都稳定，所以最安全的 operator 动作是先确认新鲜度，再把 proof 当作回执，而不是当作排障入口。",
+        focusSteadyReadOrder: "快照状态 -> 最近运行 -> Proof page",
+        focusSteadyGuidance:
+          "循环平稳时，阅读顺序尽量短：先确认最新状态，再看趋势仍然稳定，最后才打开 proof 或 builder 分层。",
+        focusSignalHealthLevel: "健康等级：{value}",
+        focusSignalLaunchdState: "Launchd 状态：{value}",
+        focusSignalRecentAttention: "最近运行关注态：{value}",
+        focusSignalDoctorWarnings: "Doctor 警告数：{count}",
+        focusSignalAccessMode: "访问模式：{value}",
+        focusAccessReadonly: "只读",
+        focusAccessActive: "可操作",
+        quickActionsSummary: "先从“运行快照”开始；只有当权限或恢复动作仍挡住基线时，再回到这里做补救。",
+        schedulerSummary: "这里就是安装步骤。先有一次成功运行，再来把循环装成可重复的调度。",
+        metricsSummary: "指标留给更深的漂移分析。没有基线之前，不要把它当成第一站。",
+        firstRunSummary: "先完成一次成功快照，再安装调度器，最后先校验循环，再把控制室里的其他信息当成持续运维状态来看。",
         firstRunHint: "需要完整清单？打开 quickstart 或 troubleshooting 指南。",
         firstRunHintHtml:
           '想看完整清单？打开 <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a> 或 <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/">troubleshooting guide</a>。',
-        firstRunExplanation: "这通常是首次运行或刚清理后的正常状态。先建立一次成功快照基线，再判断它是否属于主动故障。",
+        firstRunExplanation: "这通常是首次运行或刚清理后的正常状态。先建立一次成功快照基线，再安装调度器并完成校验，然后再判断它是否属于主动故障。",
         logHealthLastStatus: "last_status：{status}",
         outputOk: "完成",
         actionFileLabel: "文件：{path}",
@@ -534,11 +696,27 @@
         bannerFailureCluster: "最近运行仍指向一个活跃失败簇：{reason}",
         bannerRecoveryWatch: "最新一次运行已经恢复，但还需要再观察下一次运行，才能判断循环是否真的稳定。",
         bannerStale: "当前更像是快照循环变旧了。先刷新快照，再判断是不是更深层的运行事故。",
+        focusWaitingSignals: "等待实时状态。",
+        outputWaitingContext: "等待第一份实时回执",
+        outputWaitingGuidance:
+          "先刷新；状态回来后，再把这个面板当成动作回执，而不是拿旧输出猜现在发生了什么。",
+        outputFirstRunContext: "盯住第一次成功基线",
+        outputFirstRunGuidance:
+          "下一份真正有价值的输出应该是一张“运行快照成功”的回执。之后先回到调度器和状态，再去读更深日志。",
+        outputFailureContext: "先读失败回执，再决定下一步",
+        outputFailureGuidance:
+          "把这里当签收单：先看失败命令和它改了哪些本地状态，再回到 Doctor 或最近运行，而不是盲目点第二个修复按钮。",
+        outputSteadyContext: "最近一次操作回执",
+        outputSteadyGuidance:
+          "成功动作应该读起来像短回执：先是命令，再是本地状态变化。",
+        outputGuidanceSummary:
+          "成功动作应该读起来像一张短回执：先是命令，再是本地状态变化。",
+        outputMetaHint: "先看上面的摘要条，再进入原始输出。",
       },
       onboarding: {
         stepRun: "运行 ./notesctl run --no-status，让 macOS 先弹出首次权限提示。",
-        stepVerify: "运行 ./notesctl verify，确认本地状态账本已经记录到成功基线。",
-        stepDoctor: "如果状态仍然空白或还有警告，再运行 ./notesctl doctor。",
+        stepInstall: "第一次快照成功后，运行 ./notesctl install --minutes 30 --load，把循环装成可重复的调度。",
+        stepVerify: "运行 ./notesctl verify，确认本地状态账本和调度器现在都已经对齐到健康基线。",
       },
       backend: {
         status: {

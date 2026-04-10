@@ -53,8 +53,9 @@
         </div>
         <div class="site-nav__links">
           <a href="./quickstart/">Quickstart</a>
-          <a href="./compare/">Compare</a>
+          <a href="./troubleshooting/">Troubleshooting</a>
           <a href="./proof/">Proof</a>
+          <a href="./compare/">Compare</a>
           <a href="./releases/">Releases</a>
           <a href="./support/">Support</a>
           <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot">GitHub</a>
@@ -72,30 +73,35 @@
             `launchd` scheduling, visible health checks, and a calmer recovery path when something drifts.
           </p>
           <p>
-            Start with the 3-step operator quickstart, compare it to upstream if you need context,
-            and only then open AI Diagnose, the Local Web API, or the read-only MCP lane. Those
-            builder surfaces are real, but they should feel like an upgrade path, not the first puzzle.
+            Start with one successful run, install the scheduler, then verify the loop before
+            you read deeper telemetry. The Web console, proof page, AI Diagnose, the Local Web API,
+            and the read-only MCP lane are real, but they should feel like second shelves after the
+            operator contract already clicks.
+          </p>
+          <p>
+            The console now leads with an operator focus deck before the raw action transcript, so
+            the next safe move and the reading order stay visible when the loop drifts.
           </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="./quickstart/">Start the 3-step quickstart</a>
+          <a class="btn btn--secondary" href="./troubleshooting/">First-run troubleshooting</a>
           <a class="btn btn--secondary" href="./proof/">Open the proof page</a>
-          <a class="btn btn--secondary" href="./compare/">Compare with upstream</a>
         </div>
           <div class="hero-curation">
             <article class="curation-card">
-              <span class="eyebrow-inline">3-minute proof</span>
-              <strong>Confirm the local loop before you touch anything fancier.</strong>
-              <p>One run, one install, one verify pass: that is enough to prove the path, the scheduler, and the health surface.</p>
+              <span class="eyebrow-inline">Step 1</span>
+              <strong>Run one snapshot and let macOS show the real permission prompts.</strong>
+              <p>Build a first successful baseline before you ask the project to explain anything more complicated.</p>
             </article>
             <article class="curation-card">
-              <span class="eyebrow-inline">Visible by design</span>
-              <strong>See the status, proof, and recovery story without guessing.</strong>
-              <p>The same control room shows destination, freshness, launchd state, logs, and recovery clues instead of hiding them in scripts.</p>
+              <span class="eyebrow-inline">Step 2</span>
+              <strong>Install the loop so backups stop depending on your memory.</strong>
+              <p>Use the built-in `launchd` lane once the first run works, then let the control room keep the rhythm visible.</p>
             </article>
             <article class="curation-card">
-              <span class="eyebrow-inline">Builder second lane</span>
-              <strong>Bring AI, Web, and MCP in only after the operator story clicks.</strong>
-              <p>The repo still ships AI Diagnose, the Local Web API, and the read-only MCP lane, but none of them are allowed to outrun the operator contract.</p>
+              <span class="eyebrow-inline">Step 3</span>
+              <strong>Verify the loop, then open proof and diagnostics with context.</strong>
+              <p>Once `verify` passes, the status, logs, proof page, and builder surfaces describe a loop you already proved instead of a mystery you still need to solve.</p>
             </article>
           </div>
           <div class="hero__stats">
@@ -108,8 +114,8 @@
               Review the path, run one snapshot, then install and verify the loop.
             </div>
             <div class="hero__stat">
-              <strong>1 proof page</strong>
-              The shortest external audit path lives on one page instead of across scattered notes.
+              <strong>2 support pages</strong>
+              Quickstart gets you moving and troubleshooting catches first-run snags before you drown in telemetry.
             </div>
             <div class="hero__stat">
               <strong>Builder later</strong>
@@ -149,6 +155,14 @@
             <p>
               `status`, `verify`, `doctor`, log rotation, and metrics make the workflow
               observable instead of mysterious.
+            </p>
+          </article>
+          <article class="card">
+            <span class="eyebrow-inline">Operator guidance</span>
+            <h3>Read the next move before you read raw output.</h3>
+            <p>
+              The control room now puts a next-step deck above the transcript so operators can
+              verify the right panel order before they trigger another fix.
             </p>
           </article>
           <article class="card">
@@ -214,8 +228,8 @@
 
       <section class="section">
         <div class="section__header">
-          <span class="section__eyebrow">Go deeper</span>
-          <h2>Open the next shelf only after Quickstart, Compare, and Proof make sense.</h2>
+          <span class="section__eyebrow">After the first verified loop</span>
+          <h2>Open the next shelf only after Run, Install, and Verify already make sense.</h2>
         </div>
         <div class="cards cards--routes">
           <article class="card card--accent">
@@ -224,19 +238,19 @@
             <p><a href="./troubleshooting/">Open troubleshooting</a></p>
           </article>
           <article class="card">
+            <h3>Compare with upstream</h3>
+            <p>Read this next when you want product context for why this repo adds scheduling, health checks, and a calmer control room.</p>
+            <p><a href="./compare/">Open compare</a></p>
+          </article>
+          <article class="card">
             <h3>Release history</h3>
             <p>Read the tagged public story version by version when you want release truth instead of workshop notes.</p>
             <p><a href="./releases/">Browse release history</a></p>
           </article>
           <article class="card card--warm">
             <h3>For Agents</h3>
-            <p>Open the builder shelf only after the control-room contract is clear and you want the truthful Web, AI, or MCP split.</p>
+            <p>Open the builder shelf last, after the control-room contract is clear and you want the truthful Web, AI, or MCP split.</p>
             <p><a href="./for-agents/">Open the builder lane</a></p>
-          </article>
-          <article class="card">
-            <h3>Support and community</h3>
-            <p>Use the routing pages when you need the right lane for Q&amp;A, ideas, workflow sharing, or announcements.</p>
-            <p><a href="./support/">Support</a> | <a href="./community/">Community</a></p>
           </article>
         </div>
       </section>
