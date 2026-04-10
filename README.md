@@ -12,9 +12,10 @@ can inspect the same local backup state without turning the workflow into a
 hosted service.
 
 [Start the 3-step quickstart](https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/) |
+[First-run troubleshooting](https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/) |
+[Open the proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/) |
 [Compare with upstream](https://xiaojiou176-open.github.io/apple-notes-snapshot/compare/) |
 [Browse release history](https://xiaojiou176-open.github.io/apple-notes-snapshot/releases/) |
-[Open the proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/) |
 [Get support or routing help](https://xiaojiou176-open.github.io/apple-notes-snapshot/support/)
 
 [![Trusted CI](https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml/badge.svg)](https://github.com/xiaojiou176-open/apple-notes-snapshot/actions/workflows/trusted-ci.yml)
@@ -29,6 +30,8 @@ hosted service.
   Use `launchd` to schedule repeatable snapshots instead of babysitting manual exports.
 - **See health before you guess**
   Check freshness, failure reasons, logs, and recovery clues when the loop drifts.
+- **Read the next safe move first**
+  The Web console now surfaces an operator focus deck above the raw transcript so you can see the next move, the reason, and the reading order before diving into action output.
 
 > Category: local-first Apple Notes backup control room.
 > AI/agent hook: AI-assisted diagnostics plus a token-gated Local Web API and
@@ -53,7 +56,26 @@ If you want the shortest public evidence trail after that first pass, open the
 It collects the repo-owned gates, the GitHub-controlled release and Pages
 evidence, and the current same-machine boundary in one place.
 
-## Current lane order
+## Start with Run -> Install -> Verify
+
+Treat the first healthy loop like a three-stop checklist, not like a dashboard
+to decode all at once.
+
+1. **Run**
+   Use `./notesctl run --no-status` once so macOS can surface permissions and
+   the local ledger can record a first successful baseline.
+2. **Install**
+   Use `./notesctl install --minutes 30 --load` after that first run so the
+   workflow becomes a repeatable `launchd` loop instead of a manual chore.
+3. **Verify**
+   Use `./notesctl verify` first, then `./notesctl doctor` only if warnings or
+   empty state remain.
+
+After that verified loop exists, the Web console, proof page, AI Diagnose,
+Local Web API, and MCP surfaces become much easier to read because they are all
+describing a baseline you already proved.
+
+## Builder and maintainer lanes after the operator path
 
 Treat Apple Notes Snapshot like a local control room with a few adapter boxes
 around it:
@@ -182,12 +204,14 @@ clear snapshot paths, and easier recovery when something fails.
 
 ## What the Web console shows
 
-The local Web console is optional, but it is the fastest way to understand what
-the workflow is doing at a glance.
+The local Web console is optional, and it makes the most sense after you have
+already completed the first `run -> install -> verify` pass. Use it to watch
+the loop you just proved, not as a replacement for that first proof.
 
 It surfaces:
 
 - snapshot health, last success, launchd state, and failure reason
+- an operator focus deck that says what to do next and which panel to open first
 - doctor warnings and dependency readiness
 - recent metrics and trigger sources
 - log-health summaries

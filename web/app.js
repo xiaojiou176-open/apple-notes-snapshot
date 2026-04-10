@@ -31,8 +31,11 @@ const connection = $("connection-status");
 const outputPane = $("action-output");
 const actionAnnouncer = $("action-announcer");
 const outputPill = $("output-pill");
+const outputContext = $("output-context");
+const outputGuidance = $("output-guidance");
 const actionsPill = $("actions-pill");
 const accessPill = $("access-pill");
+const operatorFocusPill = $("operator-focus-pill");
 const metricsFilterInput = $("metrics-run-id");
 const localeSwitcher = $("locale-switcher");
 
@@ -48,6 +51,77 @@ const uiState = {
   bannerKey: "",
   renderedLocale: null,
 };
+
+function getOperatorFocusCopy(locale) {
+  return {
+    signalsWaiting: "message.focusWaitingSignals",
+    reconnect: {
+      next: "message.focusReconnectNext",
+      reason: "message.focusReconnectReason",
+      readOrder: "message.focusReconnectReadOrder",
+      guidance: "message.focusReconnectGuidance",
+    },
+    readonly: {
+      next: "message.focusReadonlyNext",
+      reason: "message.focusReadonlyReason",
+      readOrder: "message.focusReadonlyReadOrder",
+      guidance: "message.focusReadonlyGuidance",
+    },
+    firstRun: {
+      next: "message.focusFirstRunNext",
+      reason: "message.focusFirstRunReason",
+      readOrder: "message.focusFirstRunReadOrder",
+      guidance: "message.focusFirstRunGuidance",
+    },
+    install: {
+      next: "message.focusInstallNext",
+      reason: "message.focusInstallReason",
+      readOrder: "message.focusInstallReadOrder",
+      guidance: "message.focusInstallGuidance",
+    },
+    verify: {
+      next: "message.focusVerifyNext",
+      reason: "message.focusVerifyReason",
+      readOrder: "message.focusVerifyReadOrder",
+      guidance: "message.focusVerifyGuidance",
+    },
+    recoveryWatch: {
+      next: "message.focusRecoveryWatchNext",
+      reason: "message.focusRecoveryWatchReason",
+      readOrder: "message.focusRecoveryWatchReadOrder",
+      guidance: "message.focusRecoveryWatchGuidance",
+    },
+    steady: {
+      next: "message.focusSteadyNext",
+      reason: "message.focusSteadyReason",
+      readOrder: "message.focusSteadyReadOrder",
+      guidance: "message.focusSteadyGuidance",
+    },
+    signalHealth: "message.focusSignalHealthLevel",
+    signalLaunchd: "message.focusSignalLaunchdState",
+    signalAttention: "message.focusSignalRecentAttention",
+    signalDoctorWarnings: "message.focusSignalDoctorWarnings",
+    signalAccessMode: "message.focusSignalAccessMode",
+    accessReadonly: "message.focusAccessReadonly",
+    accessActive: "message.focusAccessActive",
+    outputWaiting: {
+      context: "message.outputWaitingContext",
+      guidance: "message.outputWaitingGuidance",
+    },
+    outputFirstRun: {
+      context: "message.outputFirstRunContext",
+      guidance: "message.outputFirstRunGuidance",
+    },
+    outputFailure: {
+      context: "message.outputFailureContext",
+      guidance: "message.outputFailureGuidance",
+    },
+    outputSteady: {
+      context: "message.outputSteadyContext",
+      guidance: "message.outputSteadyGuidance",
+    },
+  };
+}
 
 function authHeaders() {
   if (!authToken) return {};
@@ -457,7 +531,7 @@ function renderOnboarding(data) {
   setPill(pill, "ONBOARDING");
   summary.textContent = i18n.t("message.firstRunExplanation");
   steps.innerHTML = "";
-  ["onboarding.stepRun", "onboarding.stepVerify", "onboarding.stepDoctor"].forEach((key) => {
+  ["onboarding.stepRun", "onboarding.stepInstall", "onboarding.stepVerify"].forEach((key) => {
     const li = document.createElement("li");
     li.textContent = i18n.t(key);
     steps.appendChild(li);
@@ -644,6 +718,126 @@ function renderAccess(data) {
     li.textContent = localizeActionName(action);
     list.appendChild(li);
   });
+}
+
+function renderOperatorFocus(status, recentRuns, doctor, access) {
+  const nextStepEl = $("operator-focus-next-step");
+  const reasonEl = $("operator-focus-reason");
+  const readOrderEl = $("operator-focus-read-order");
+  const guidanceEl = $("operator-focus-guidance");
+  const signalsEl = $("operator-focus-signals");
+  if (!nextStepEl || !reasonEl || !readOrderEl || !guidanceEl || !signalsEl) return;
+
+  const summary = recentRuns?.summary || {};
+  const ledgerStatus = status?.state_layers?.ledger?.status || "";
+  const launchdState = status?.state_layers?.launchd?.status || status?.launchd || "";
+  const healthLevel = String(status?.health_level || "").toUpperCase();
+  const doctorWarnings = Array.isArray(doctor?.warnings) ? doctor.warnings.length : 0;
+  const accessMode = access?.readonly ? "readonly" : "active";
+  const copy = getOperatorFocusCopy(i18n.getLocale());
+  const localizedHealthLevel = healthLevel
+    ? i18n.translateDisplay("healthLevel", healthLevel) || healthLevel
+    : i18n.t("common.unknown");
+  const localizedLaunchdState = launchdState
+    ? i18n.translateStateLayerStatus(launchdState) || launchdState
+    : i18n.t("common.unknown");
+  const signals = [];
+
+  let tone = "warn";
+  let nextStep = i18n.t(copy.reconnect.next);
+  let reason = i18n.t(copy.reconnect.reason);
+  let readOrder = i18n.t(copy.reconnect.readOrder);
+  let guidance = i18n.t(copy.reconnect.guidance);
+
+  if (status) {
+    if (accessMode === "readonly") {
+      nextStep = i18n.t(copy.readonly.next);
+      reason = i18n.t(copy.readonly.reason);
+      readOrder = i18n.t(copy.readonly.readOrder);
+      guidance = i18n.t(copy.readonly.guidance);
+    } else if (!status.last_success_iso || ledgerStatus === "needs_first_run") {
+      nextStep = i18n.t(copy.firstRun.next);
+      reason = i18n.t(copy.firstRun.reason);
+      readOrder = i18n.t(copy.firstRun.readOrder);
+      guidance = i18n.t(copy.firstRun.guidance);
+    } else if (launchdState === "not_loaded") {
+      nextStep = i18n.t(copy.install.next);
+      reason = i18n.t(copy.install.reason);
+      readOrder = i18n.t(copy.install.readOrder);
+      guidance = i18n.t(copy.install.guidance);
+    } else if (healthLevel === "FAIL" || ledgerStatus === "stale" || status.failure_reason) {
+      tone = "fail";
+      nextStep = i18n.t(copy.verify.next);
+      reason = i18n.t(copy.verify.reason);
+      readOrder = i18n.t(copy.verify.readOrder);
+      guidance = i18n.t(copy.verify.guidance);
+    } else if (summary.attention_state === "failure_cluster" || summary.attention_state === "recovery_watch") {
+      nextStep = i18n.t(copy.recoveryWatch.next);
+      reason = i18n.t(copy.recoveryWatch.reason);
+      readOrder = i18n.t(copy.recoveryWatch.readOrder);
+      guidance = i18n.t(copy.recoveryWatch.guidance);
+    } else {
+      tone = "ok";
+      nextStep = i18n.t(copy.steady.next);
+      reason = i18n.t(copy.steady.reason);
+      readOrder = i18n.t(copy.steady.readOrder);
+      guidance = i18n.t(copy.steady.guidance);
+    }
+
+    signals.push(i18n.t(copy.signalHealth, { value: localizedHealthLevel || i18n.t("common.unknown") }));
+    signals.push(i18n.t(copy.signalLaunchd, { value: localizedLaunchdState || i18n.t("common.unknown") }));
+    signals.push(i18n.t(copy.signalAttention, { value: summary.attention_state || i18n.t("common.none") }));
+    signals.push(i18n.t(copy.signalDoctorWarnings, { count: doctorWarnings }));
+    signals.push(
+      i18n.t(copy.signalAccessMode, {
+        value: i18n.t(accessMode === "readonly" ? copy.accessReadonly : copy.accessActive),
+      })
+    );
+  }
+
+  nextStepEl.textContent = nextStep;
+  reasonEl.textContent = reason;
+  readOrderEl.textContent = readOrder;
+  guidanceEl.textContent = guidance;
+  setSubPill(operatorFocusPill, nextStep, tone === "ok" ? "" : tone);
+
+  signalsEl.innerHTML = "";
+  if (!signals.length) {
+    const li = document.createElement("li");
+    li.textContent = i18n.t(copy.signalsWaiting);
+    signalsEl.appendChild(li);
+  } else {
+    signals.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      signalsEl.appendChild(li);
+    });
+  }
+}
+
+function renderOutputMeta(status, recentRuns) {
+  if (!outputContext || !outputGuidance) return;
+  const copy = getOperatorFocusCopy(i18n.getLocale());
+  if (!status) {
+    outputContext.textContent = i18n.t(copy.outputWaiting.context);
+    outputGuidance.textContent = i18n.t(copy.outputWaiting.guidance);
+    return;
+  }
+
+  if (!status.last_success_iso || status.state_layers?.ledger?.status === "needs_first_run") {
+    outputContext.textContent = i18n.t(copy.outputFirstRun.context);
+    outputGuidance.textContent = i18n.t(copy.outputFirstRun.guidance);
+    return;
+  }
+
+  if (status.failure_reason || recentRuns?.summary?.attention_state === "failure_cluster") {
+    outputContext.textContent = i18n.t(copy.outputFailure.context);
+    outputGuidance.textContent = i18n.t(copy.outputFailure.guidance);
+    return;
+  }
+
+  outputContext.textContent = i18n.t(copy.outputSteady.context);
+  outputGuidance.textContent = i18n.t(copy.outputSteady.guidance);
 }
 
 function updateLastUpdated() {
@@ -838,6 +1032,8 @@ function rerenderLocalizedView() {
     setPill(accessPill, "WARN");
   }
 
+  renderOperatorFocus(uiState.status, uiState.recentRuns, uiState.doctor, uiState.access);
+  renderOutputMeta(uiState.status, uiState.recentRuns);
   syncOutputForLocale();
   syncToolPills();
   setBanner(computeBannerMessage(uiState.status, uiState.recentRuns, uiState.access));
