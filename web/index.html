@@ -19,7 +19,7 @@
         <div class="brand">
           <div class="badge" data-i18n="ui.badgeLocal">LOCAL</div>
           <h1 data-i18n="ui.title">Notes Snapshot Console</h1>
-          <p data-i18n="ui.heroSummary">Deterministic local Web console for Apple Notes exports, without requiring a bundled desktop app.</p>
+          <p data-i18n="ui.heroSummary">Run one snapshot, install launchd, then verify the loop before you read deeper diagnostics or builder lanes.</p>
         </div>
         <div class="actions">
           <label class="locale-picker" for="locale-switcher">
@@ -39,6 +39,43 @@
       </header>
       <div class="banner banner--hidden" id="system-banner" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="sr-only" id="action-announcer" aria-live="polite" aria-atomic="true"></div>
+      <section class="card card--wide" id="operator-lane-card">
+        <div class="card__header">
+          <h2 data-i18n="ui.operatorLane">Run -> Install -> Verify</h2>
+          <span class="pill pill--sub" data-i18n="pill.onboarding">ONBOARDING</span>
+        </div>
+        <p class="card__intro" data-i18n="message.operatorLaneSummary">
+          Treat the first healthy loop like a three-step lane: build one baseline, install the schedule, then verify before you read deeper telemetry.
+        </p>
+        <div class="metrics">
+          <div class="metric metric--step">
+            <span data-i18n="ui.operatorStepOne">Step 1</span>
+            <strong data-i18n="ui.operatorStepRunTitle">Run one snapshot</strong>
+            <p class="metric__body" data-i18n="message.operatorStepRun">
+              Use Run Snapshot first so macOS can show permissions and the local ledger can record a real baseline.
+            </p>
+          </div>
+          <div class="metric metric--step">
+            <span data-i18n="ui.operatorStepTwo">Step 2</span>
+            <strong data-i18n="ui.operatorStepInstallTitle">Install the scheduler</strong>
+            <p class="metric__body" data-i18n="message.operatorStepInstall">
+              Use the Scheduler card once the first run succeeds so the loop becomes repeatable instead of manual.
+            </p>
+          </div>
+          <div class="metric metric--step">
+            <span data-i18n="ui.operatorStepThree">Step 3</span>
+            <strong data-i18n="ui.operatorStepVerifyTitle">Verify before diagnostics</strong>
+            <p class="metric__body" data-i18n="message.operatorStepVerify">
+              Verify first, then use Doctor, Recent Runs, and Log Health only when the loop still looks wrong.
+            </p>
+          </div>
+        </div>
+        <div class="hint" data-i18n-html="message.operatorLaneHintHtml">
+          Need the guided version? Open the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a>, then the
+          <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/">troubleshooting guide</a>, and keep the
+          <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/">proof page</a> for after the first verified loop.
+        </div>
+      </section>
       <section class="card card--wide" id="onboarding-card" hidden>
         <div class="card__header">
           <h2 id="onboarding-title" data-i18n="ui.firstRunGuidance">First-Run Guidance</h2>
@@ -49,8 +86,8 @@
         </p>
         <ol class="list" id="onboarding-steps">
           <li data-i18n="onboarding.stepRun">Run ./notesctl run --no-status so macOS can surface the first permission prompts.</li>
-          <li data-i18n="onboarding.stepVerify">Run ./notesctl verify to confirm the local state ledger now has a successful baseline.</li>
-          <li data-i18n="onboarding.stepDoctor">Run ./notesctl doctor if the state still looks empty or warnings remain.</li>
+          <li data-i18n="onboarding.stepInstall">Run ./notesctl install --minutes 30 --load once the first snapshot succeeds so the loop becomes repeatable.</li>
+          <li data-i18n="onboarding.stepVerify">Run ./notesctl verify to confirm the local state ledger and scheduler now agree on a healthy baseline.</li>
         </ol>
         <div class="hint" id="onboarding-hint" data-i18n-html="message.firstRunHintHtml">
           Need the full checklist? Open the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a> or the
@@ -58,7 +95,88 @@
         </div>
       </section>
 
+      <section class="card card--wide card--focus" id="operator-focus-card">
+        <div class="card__header">
+          <div>
+            <h2 data-i18n="ui.operatorFocusDeck">Operator Focus Deck</h2>
+            <p class="card__intro" data-i18n="message.operatorFocusDeckSummary">
+              Read this strip like a control-tower handoff: it tells you what to do next, why that move is safest, and which panel to open before you chase raw logs.
+            </p>
+          </div>
+          <span class="pill pill--sub" id="operator-focus-pill" data-i18n="ui.nextMovePill">next move</span>
+        </div>
+        <div class="focus-grid">
+          <article class="focus-card focus-card--priority">
+            <span class="focus-card__label" data-i18n="ui.currentNextMove">Current next move</span>
+            <strong class="focus-card__value" id="operator-focus-next-step">--</strong>
+            <p class="focus-card__body" id="operator-focus-reason">--</p>
+          </article>
+          <article class="focus-card">
+            <span class="focus-card__label" data-i18n="ui.readOrder">Read order</span>
+            <strong class="focus-card__value" id="operator-focus-read-order">--</strong>
+            <p class="focus-card__body" id="operator-focus-guidance">--</p>
+          </article>
+          <article class="focus-card">
+            <span class="focus-card__label" data-i18n="ui.controlRoomSignals">Control-room signals</span>
+            <ul class="list focus-list" id="operator-focus-signals">
+              <li data-i18n="message.focusWaitingSignals">Waiting for live status.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
       <section class="grid">
+        <article class="card" id="actions-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.quickActions">Quick Actions</h2>
+            <span class="pill pill--sub" id="actions-pill" data-i18n="pill.ready">ready</span>
+          </div>
+          <p class="card__intro" data-i18n="message.quickActionsSummary">
+            Start with Run Snapshot, then return here only if permissions or recovery work still blocks the baseline.
+          </p>
+          <div class="button-grid">
+            <button class="btn btn--ghost" data-action="run" data-i18n="ui.runSnapshot">Run Snapshot</button>
+            <button class="btn btn--ghost" data-action="verify" data-i18n="ui.verify">Verify</button>
+            <button class="btn btn--ghost" data-action="permissions" data-i18n="ui.permissions">Permissions</button>
+            <button class="btn btn--ghost" data-action="fix" data-i18n="ui.fastFix">Fast Fix</button>
+            <button class="btn btn--ghost" data-action="self-heal" data-i18n="ui.selfHeal">Self Heal</button>
+            <button class="btn btn--ghost" data-action="setup" data-i18n="ui.perfectSetup">Perfect Setup</button>
+          </div>
+        </article>
+
+        <article class="card" id="schedule-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.scheduler">Scheduler</h2>
+            <span class="pill pill--sub" id="schedule-pill" data-i18n="pill.launchd">launchd</span>
+          </div>
+          <p class="card__intro" data-i18n="message.schedulerSummary">
+            This is the install step. Use it after one successful run so the loop becomes repeatable.
+          </p>
+          <div class="form-grid">
+            <label>
+              <span data-i18n="ui.minutes">Minutes</span>
+              <input id="install-minutes" type="number" min="1" max="120" value="30" />
+            </label>
+            <label>
+              <span data-i18n="ui.intervalSec">Interval (sec)</span>
+              <input id="install-interval" type="number" min="60" max="7200" placeholder="optional" data-i18n-placeholder="ui.placeholderOptional" />
+            </label>
+            <label class="toggle">
+              <input id="install-load" type="checkbox" checked />
+              <span data-i18n="ui.loadAfterInstall">Load after install</span>
+            </label>
+            <label class="toggle">
+              <input id="install-web" type="checkbox" checked />
+              <span data-i18n="ui.keepWebAlive">Keep Web UI alive</span>
+            </label>
+          </div>
+          <div class="button-row">
+            <button class="btn btn--ghost" data-action="install" data-i18n="ui.install">Install</button>
+            <button class="btn btn--ghost" data-action="ensure" data-i18n="ui.ensure">Ensure</button>
+            <button class="btn btn--ghost" data-action="unload" data-i18n="ui.unload">Unload</button>
+          </div>
+        </article>
+
         <article class="card card--wide" id="status-card">
           <div class="card__header">
             <h2 data-i18n="ui.snapshotStatus">Snapshot Status</h2>
@@ -132,44 +250,6 @@
           <div class="phases" id="phases-bars"></div>
         </article>
 
-        <article class="card" id="log-health-card">
-          <div class="card__header">
-            <h2 data-i18n="ui.logHealth">Log Health</h2>
-            <span class="pill pill--sub" id="log-health-pill">--</span>
-          </div>
-          <div class="metrics">
-            <div class="metric">
-              <span data-i18n="ui.totalErrors">Total Errors</span>
-              <strong id="log-errors-total">--</strong>
-            </div>
-            <div class="metric">
-              <span data-i18n="ui.stdout">Stdout</span>
-              <strong id="log-errors-stdout">--</strong>
-            </div>
-            <div class="metric">
-              <span data-i18n="ui.stderr">Stderr</span>
-              <strong id="log-errors-stderr">--</strong>
-            </div>
-            <div class="metric">
-              <span data-i18n="ui.launchdErr">Launchd Err</span>
-              <strong id="log-errors-launchd">--</strong>
-            </div>
-            <div class="metric">
-              <span data-i18n="ui.pattern">Pattern</span>
-              <strong id="log-pattern">--</strong>
-            </div>
-            <div class="metric">
-              <span data-i18n="ui.tailLines">Tail Lines</span>
-              <strong id="log-tail-lines">--</strong>
-            </div>
-            <div class="metric">
-              <span data-i18n="ui.tailConfig">Tail Config</span>
-              <input id="log-health-tail" type="number" min="50" max="2000" value="200" data-i18n-aria-label="ui.tailConfig" aria-label="Tail Config" />
-            </div>
-          </div>
-          <div class="hint" id="log-health-hint"></div>
-        </article>
-
         <article class="card" id="doctor-card">
           <div class="card__header">
             <h2 data-i18n="ui.doctor">Doctor</h2>
@@ -202,20 +282,6 @@
               <strong id="doctor-state">--</strong>
             </div>
           </div>
-        </article>
-
-        <article class="card card--wide" id="metrics-card">
-          <div class="card__header">
-            <h2 data-i18n="ui.recentMetrics">Recent Metrics</h2>
-            <span class="pill pill--sub" id="metrics-pill">--</span>
-          </div>
-          <div class="form-grid form-grid--wide">
-            <label>
-              <span data-i18n="ui.runIdFilter">Run ID Filter</span>
-              <input id="metrics-run-id" type="text" placeholder="run_id contains..." data-i18n-placeholder="ui.placeholderRunIdContains" />
-            </label>
-          </div>
-          <div class="table" id="metrics-table"></div>
         </article>
 
         <article class="card" id="recent-runs-card">
@@ -267,6 +333,44 @@
           </div>
         </article>
 
+        <article class="card" id="log-health-card">
+          <div class="card__header">
+            <h2 data-i18n="ui.logHealth">Log Health</h2>
+            <span class="pill pill--sub" id="log-health-pill">--</span>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <span data-i18n="ui.totalErrors">Total Errors</span>
+              <strong id="log-errors-total">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.stdout">Stdout</span>
+              <strong id="log-errors-stdout">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.stderr">Stderr</span>
+              <strong id="log-errors-stderr">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.launchdErr">Launchd Err</span>
+              <strong id="log-errors-launchd">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.pattern">Pattern</span>
+              <strong id="log-pattern">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.tailLines">Tail Lines</span>
+              <strong id="log-tail-lines">--</strong>
+            </div>
+            <div class="metric">
+              <span data-i18n="ui.tailConfig">Tail Config</span>
+              <input id="log-health-tail" type="number" min="50" max="2000" value="200" data-i18n-aria-label="ui.tailConfig" aria-label="Tail Config" />
+            </div>
+          </div>
+          <div class="hint" id="log-health-hint"></div>
+        </article>
+
         <article class="card" id="access-card">
           <div class="card__header">
             <h2 data-i18n="ui.accessPolicy">Access Policy</h2>
@@ -311,49 +415,21 @@
           </div>
         </article>
 
-        <article class="card" id="actions-card">
+        <article class="card card--wide" id="metrics-card">
           <div class="card__header">
-            <h2 data-i18n="ui.quickActions">Quick Actions</h2>
-            <span class="pill pill--sub" id="actions-pill" data-i18n="pill.ready">ready</span>
+            <h2 data-i18n="ui.recentMetrics">Recent Metrics</h2>
+            <span class="pill pill--sub" id="metrics-pill">--</span>
           </div>
-          <div class="button-grid">
-            <button class="btn btn--ghost" data-action="setup" data-i18n="ui.perfectSetup">Perfect Setup</button>
-            <button class="btn btn--ghost" data-action="run" data-i18n="ui.runSnapshot">Run Snapshot</button>
-            <button class="btn btn--ghost" data-action="verify" data-i18n="ui.verify">Verify</button>
-            <button class="btn btn--ghost" data-action="fix" data-i18n="ui.fastFix">Fast Fix</button>
-            <button class="btn btn--ghost" data-action="self-heal" data-i18n="ui.selfHeal">Self Heal</button>
-            <button class="btn btn--ghost" data-action="permissions" data-i18n="ui.permissions">Permissions</button>
-          </div>
-        </article>
-
-        <article class="card" id="schedule-card">
-          <div class="card__header">
-            <h2 data-i18n="ui.scheduler">Scheduler</h2>
-            <span class="pill pill--sub" id="schedule-pill" data-i18n="pill.launchd">launchd</span>
-          </div>
-          <div class="form-grid">
+          <p class="card__intro" data-i18n="message.metricsSummary">
+            Metrics stay here for deeper drift analysis after the baseline already exists. They should not be your first stop on day one.
+          </p>
+          <div class="form-grid form-grid--wide">
             <label>
-              <span data-i18n="ui.minutes">Minutes</span>
-              <input id="install-minutes" type="number" min="1" max="120" value="30" />
-            </label>
-            <label>
-              <span data-i18n="ui.intervalSec">Interval (sec)</span>
-              <input id="install-interval" type="number" min="60" max="7200" placeholder="optional" data-i18n-placeholder="ui.placeholderOptional" />
-            </label>
-            <label class="toggle">
-              <input id="install-load" type="checkbox" checked />
-              <span data-i18n="ui.loadAfterInstall">Load after install</span>
-            </label>
-            <label class="toggle">
-              <input id="install-web" type="checkbox" checked />
-              <span data-i18n="ui.keepWebAlive">Keep Web UI alive</span>
+              <span data-i18n="ui.runIdFilter">Run ID Filter</span>
+              <input id="metrics-run-id" type="text" placeholder="run_id contains..." data-i18n-placeholder="ui.placeholderRunIdContains" />
             </label>
           </div>
-          <div class="button-row">
-            <button class="btn btn--ghost" data-action="install" data-i18n="ui.install">Install</button>
-            <button class="btn btn--ghost" data-action="ensure" data-i18n="ui.ensure">Ensure</button>
-            <button class="btn btn--ghost" data-action="unload" data-i18n="ui.unload">Unload</button>
-          </div>
+          <div class="table" id="metrics-table"></div>
         </article>
 
         <article class="card card--wide" id="vendor-card">
@@ -426,6 +502,17 @@
           <div class="card__header">
             <h2 data-i18n="ui.actionOutput">Action Output</h2>
             <span class="pill pill--sub" id="output-pill" data-i18n="pill.idle">idle</span>
+          </div>
+          <div class="console-meta">
+            <div class="console-meta__copy">
+              <strong id="output-context" data-i18n="ui.latestActionTranscript">Latest action transcript</strong>
+              <p id="output-guidance" data-i18n="message.outputGuidanceSummary">
+                Successful actions should read like a short receipt: command first, then the changed local state.
+              </p>
+            </div>
+            <div class="console-meta__hint">
+              <span data-i18n="message.outputMetaHint">Read the summary strip above before you drop into raw output.</span>
+            </div>
           </div>
           <pre class="console" id="action-output" tabindex="0" data-i18n="emptyState.noActionsYet">No actions yet.</pre>
         </article>
