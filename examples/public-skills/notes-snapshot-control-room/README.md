@@ -57,7 +57,8 @@ without inventing a hosted-service or plugin-marketplace story.
 ## What this skill does not claim
 
 - no flagship plugin or `.mcpb` lane claim for the full product
-- no live ClawHub or OpenHands skill listing without fresh host-side read-back
+- no live OpenHands skill listing without fresh host-side read-back
+- no universal attach proof just because the secondary ClawHub packet listing is live
 - no hosted runtime or Docker lane for the full product
 - no universal attach proof on every machine
 
