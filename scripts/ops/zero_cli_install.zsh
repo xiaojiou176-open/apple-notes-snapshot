@@ -38,7 +38,7 @@ APP_PATH="${ZERO_CLI_APP_PATH:-}"
 ADD_LOGIN_ITEM="${ZERO_CLI_ADD_LOGIN_ITEM:-0}"
 
 notify() {
-  /usr/bin/osascript -e "display notification \"$1\" with title \"Apple Notes Snapshot\"" >/dev/null 2>&1 || true
+  printf '[zero_cli_install] %s\n' "$1" >&2
 }
 
 touch "$NOTES_SNAPSHOT_LOG_DIR/zero_cli_install.log" || true
@@ -47,13 +47,7 @@ notify "Installing launchd services..."
 "$REPO_ROOT/notesctl" install --minutes "$NOTES_SNAPSHOT_INTERVAL_MINUTES" --load --web >> "$NOTES_SNAPSHOT_LOG_DIR/zero_cli_install.log" 2>&1
 
 if [[ -n "$APP_PATH" && "$ADD_LOGIN_ITEM" -eq 1 ]]; then
-  /usr/bin/osascript <<EOF_OSA >/dev/null 2>&1
-    tell application "System Events"
-      if not (exists login item "Notes Snapshot Console") then
-        make login item at end with properties {path:"$APP_PATH", hidden:true}
-      end if
-    end tell
-EOF_OSA
+  printf '%s\n' "[zero_cli_install] Skipping login-item automation for host safety. Add \"$APP_PATH\" manually if you still want it at login." >> "$NOTES_SNAPSHOT_LOG_DIR/zero_cli_install.log"
 fi
 
 notify "Opening Web UI..."
