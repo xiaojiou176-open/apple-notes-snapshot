@@ -43,8 +43,17 @@ class RegistryLaneUnitTests(unittest.TestCase):
         self.assertIn("name: notes-snapshot-control-room", manifest_text)
         self.assertIn('display_name: Apple Notes Snapshot Control-Room', manifest_text)
         self.assertIn("version: 1.0.2", manifest_text)
-        self.assertIn("status: ready-but-not-listed", manifest_text)
-        self.assertIn("No live ClawHub listing exists yet", manifest_text)
+        self.assertIn("status: listed-live", manifest_text)
+        self.assertIn("status: submission-done-platform-not-accepted-yet", manifest_text)
+        self.assertIn("review_state: changes-requested", manifest_text)
+        self.assertIn("official_listing_state: mixed-live-and-submission-done", manifest_text)
+        self.assertIn("ClawHub listing is live today for notes-snapshot-control-room.", manifest_text)
+        self.assertIn(
+            "OpenHands/extensions #150 is submitted with changes requested and is not accepted or listed live.",
+            manifest_text,
+        )
+        self.assertNotIn("status: ready-but-not-listed", manifest_text)
+        self.assertNotIn("No live ClawHub listing exists yet", manifest_text)
         self.assertRegex(
             manifest_text,
             re.compile(
