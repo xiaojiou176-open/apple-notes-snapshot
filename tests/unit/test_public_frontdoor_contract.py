@@ -8,6 +8,9 @@ class PublicFrontDoorContractTests(unittest.TestCase):
         cls.repo_root = Path(__file__).resolve().parents[2]
         cls.readme = (cls.repo_root / "README.md").read_text(encoding="utf-8")
         cls.docs_index = (cls.repo_root / "docs" / "index.html").read_text(encoding="utf-8")
+        cls.public_skills_index = (
+            cls.repo_root / "docs" / "for-agents" / "public-skills" / "index.html"
+        ).read_text(encoding="utf-8")
         cls.web_index = (cls.repo_root / "web" / "index.html").read_text(encoding="utf-8")
 
     def assert_order(self, content, earlier, later):
@@ -28,6 +31,7 @@ class PublicFrontDoorContractTests(unittest.TestCase):
         self.assertIn("[Get support or routing help]", self.readme)
         self.assertIn("## Builder and maintainer lanes after the operator path", self.readme)
         self.assertIn("Secondary builder reads after the first healthy loop:", self.readme)
+        self.assertIn("[Distribution and listing boundaries](./DISTRIBUTION.md)", self.readme)
         self.assertIn("[For Codex / Claude Code builders]", self.readme)
 
         self.assert_order(
@@ -57,6 +61,12 @@ class PublicFrontDoorContractTests(unittest.TestCase):
         self.assertIn(">For Agents<", self.docs_index)
         self.assertIn("Open the builder lane", self.docs_index)
         self.assertIn("Open the builder shelf last", self.docs_index)
+        self.assertIn("Distribution boundary", self.docs_index)
+        self.assertIn("Open the distribution ledger", self.docs_index)
+        self.assertIn(
+            "https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/DISTRIBUTION.md",
+            self.docs_index,
+        )
 
         self.assert_order(
             self.docs_index,
@@ -96,6 +106,15 @@ class PublicFrontDoorContractTests(unittest.TestCase):
         self.assert_order(self.web_index, "troubleshooting guide", "proof page")
         self.assert_order(self.web_index, "Run ./notesctl run --no-status", "Run ./notesctl install --minutes 30 --load")
         self.assert_order(self.web_index, "Run ./notesctl install --minutes 30 --load", "Run ./notesctl verify")
+
+    def test_public_skills_page_points_back_to_root_distribution_ledger(self):
+        self.assertIn("DISTRIBUTION.md", self.public_skills_index)
+        self.assertIn("root-level convergence ledger", self.public_skills_index)
+        self.assertIn("companion <code>.mcpb</code> package", self.public_skills_index)
+        self.assertIn(
+            "https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/DISTRIBUTION.md",
+            self.public_skills_index,
+        )
 
 
 if __name__ == "__main__":
