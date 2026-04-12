@@ -67,6 +67,23 @@ class RegistryLaneUnitTests(unittest.TestCase):
         self.assertIn("references/DEMO.md", manifest_text)
         self.assertIn("references/TROUBLESHOOTING.md", manifest_text)
 
+    def test_root_distribution_surface_converges_descriptor_package_and_skill_lanes(self):
+        distribution_text = (self.repo_root / "DISTRIBUTION.md").read_text(encoding="utf-8")
+        self.assertIn("Run -> Install -> Verify", distribution_text)
+        self.assertIn("server.json", distribution_text)
+        self.assertIn("packaging/mcpb/manifest.json", distribution_text)
+        self.assertIn(
+            "examples/public-skills/notes-snapshot-control-room/manifest.yaml",
+            distribution_text,
+        )
+        self.assertIn("ClawHub is live today", distribution_text)
+        self.assertIn(
+            "OpenHands/extensions `#150` remains submitted with changes requested",
+            distribution_text,
+        )
+        self.assertIn("external-only / review-pending", distribution_text)
+        self.assertNotIn("the `.mcpb` package proves a hosted runtime", distribution_text.split("## Allowed Claims", 1)[0])
+
     def test_public_skill_packet_drops_legacy_reference_filenames(self):
         references_dir = (
             self.repo_root

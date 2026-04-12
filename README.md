@@ -106,6 +106,7 @@ Secondary builder reads after the first healthy loop:
 [AI Diagnose](https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/) |
 [Local Web API](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/) |
 [MCP Provider](https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/) |
+[Distribution and listing boundaries](./DISTRIBUTION.md) |
 [For Codex / Claude Code builders](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/)
 
 ## Quickstart
