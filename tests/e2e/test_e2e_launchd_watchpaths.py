@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import subprocess
@@ -126,6 +127,10 @@ exit 0
                     check=check,
                 )
 
+            def status_payload():
+                result = run_cmd(["status", "--json"], check=True)
+                return json.loads(result.stdout)
+
             def run_log_lines(path: Path) -> int:
                 if not path.exists():
                     return 0
@@ -135,30 +140,51 @@ exit 0
                 return len(content)
 
             run_log = root_dir / "run_log.txt"
+            state_json = state_dir / "state.json"
 
             try:
                 run_cmd(["install", "--minutes", "60", "--load", "--no-web"], check=True)
 
                 deadline = time.time() + 20
                 first_count = 0
+                baseline_payload = None
                 while time.time() < deadline:
                     first_count = run_log_lines(run_log)
-                    if first_count >= 1:
+                    payload = status_payload() if state_json.exists() else None
+                    if (
+                        first_count >= 1
+                        and payload
+                        and payload.get("status") == "success"
+                        and payload.get("last_success_iso") not in (None, "", "unknown")
+                    ):
+                        baseline_payload = payload
                         break
                     time.sleep(1)
                 self.assertGreaterEqual(first_count, 1, "initial launchd run did not complete")
+                self.assertIsNotNone(baseline_payload, "initial launchd run did not settle to success")
+                baseline_last_success = baseline_payload["last_success_iso"]
 
                 trigger_file = watch_dir / "trigger.txt"
                 trigger_file.write_text(str(time.time()), encoding="utf-8")
 
                 deadline = time.time() + 40
-                second_run = False
+                second_payload = None
                 while time.time() < deadline:
-                    if run_log_lines(run_log) >= first_count + 1:
-                        second_run = True
+                    current = status_payload() if state_json.exists() else None
+                    if (
+                        run_log_lines(run_log) >= first_count + 1
+                        and current
+                        and current.get("status") == "success"
+                        and current.get("last_success_iso")
+                        not in (None, "", "unknown", baseline_last_success)
+                    ):
+                        second_payload = current
                         break
                     time.sleep(2)
-                self.assertTrue(second_run, "WatchPaths did not trigger a run")
+                self.assertIsNotNone(second_payload, "WatchPaths did not trigger a completed successful run")
+                self.assertEqual(second_payload.get("status"), "success")
+                self.assertNotEqual(second_payload.get("last_success_iso"), baseline_last_success)
+                self.assertEqual(second_payload.get("trigger_source"), "launchd")
             finally:
                 run_cmd(["install", "--unload", "--no-web"], check=False)
                 subprocess.run(["launchctl", "bootout", domain, str(plist_path)], capture_output=True)

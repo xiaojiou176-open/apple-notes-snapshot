@@ -21,4 +21,9 @@ mkdir -p "${REPO_ROOT}/.runtime-cache/coverage"
 # previous run from a different interpreter/schema does not taint the current gate.
 rm -f "${COVERAGE_FILE}" "${COVERAGE_FILE}".*
 
-"${PYTHON_BIN}" -m pytest tests/unit "$@"
+"${PYTHON_BIN}" -m pytest \
+  --cov=scripts/ops \
+  --cov-report=term-missing \
+  --cov-fail-under=90 \
+  tests/unit \
+  "$@"

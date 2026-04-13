@@ -129,6 +129,10 @@ exit 0
                     check=False,
                 )
 
+            def status_payload():
+                result = run_cmd(["status", "--json"], check=True)
+                return json.loads(result.stdout)
+
             def run_log_lines(path: Path) -> int:
                 if not path.exists():
                     return 0
@@ -137,40 +141,69 @@ exit 0
                     return 0
                 return len(content)
 
+            def wait_for(condition, timeout_sec: int, interval_sec: float, message: str):
+                deadline = time.monotonic() + timeout_sec
+                latest = None
+                while time.monotonic() < deadline:
+                    latest = condition()
+                    if latest:
+                        return latest
+                    time.sleep(interval_sec)
+                self.fail(message)
+                raise AssertionError(message)
+
             run_log = root_dir / "run_log.txt"
             state_json = state_dir / "state.json"
 
             try:
                 run_cmd(["install", "--minutes", "1", "--load", "--no-web"], check=True)
 
-                # Wait for initial kickstart run
-                deadline = time.time() + 20
-                first_count = 0
-                while time.time() < deadline:
-                    first_count = run_log_lines(run_log)
-                    if first_count >= 1 and state_json.exists():
-                        break
-                    time.sleep(1)
+                # Wait for initial kickstart run to fully settle. The exporter writes
+                # its marker before the wrapper flips state.json from running to success.
+                baseline_payload = wait_for(
+                    lambda: (
+                        payload
+                        if (
+                            run_log_lines(run_log) >= 1
+                            and state_json.exists()
+                            and (payload := status_payload()).get("status") == "success"
+                            and payload.get("last_success_iso")
+                            not in (None, "", "unknown")
+                        )
+                        else None
+                    ),
+                    timeout_sec=20,
+                    interval_sec=1,
+                    message="initial launchd run did not settle to success",
+                )
+                first_count = run_log_lines(run_log)
                 self.assertGreaterEqual(first_count, 1, "initial launchd run did not complete")
+                baseline_last_success = baseline_payload["last_success_iso"]
 
-                # Wait for scheduled second run (StartInterval)
-                max_wait_sec = 90
-                deadline = time.time() + max_wait_sec
-                second_run = False
-                while time.time() < deadline:
-                    if run_log_lines(run_log) >= first_count + 1:
-                        second_run = True
-                        break
-                    time.sleep(2)
-                self.assertTrue(second_run, f"launchd did not trigger within {max_wait_sec}s")
-
-                # Verify status json after scheduled run
-                result = run_cmd(["status", "--json"], check=True)
-                payload = json.loads(result.stdout)
+                # Wait for the scheduled second run to finish, not merely start.
+                payload = wait_for(
+                    lambda: (
+                        current
+                        if (
+                            run_log_lines(run_log) >= first_count + 1
+                            and (current := status_payload()).get("status") == "success"
+                            and current.get("last_success_iso")
+                            not in (None, "", "unknown", baseline_last_success)
+                        )
+                        else None
+                    ),
+                    timeout_sec=90,
+                    interval_sec=2,
+                    message="launchd did not complete a second successful run within 90s",
+                )
                 self.assertEqual(payload.get("status"), "success")
+                self.assertNotEqual(payload.get("last_success_iso"), baseline_last_success)
+                self.assertEqual(payload.get("trigger_source"), "launchd")
                 if state_json.exists():
                     data = json.loads(state_json.read_text(encoding="utf-8"))
                     self.assertEqual(data.get("trigger_source"), "launchd")
+                    self.assertEqual(data.get("status"), "success")
+                    self.assertNotEqual(data.get("last_success_iso"), baseline_last_success)
 
                 info = launchctl_print()
                 self.assertEqual(info.returncode, 0, info.stderr)
