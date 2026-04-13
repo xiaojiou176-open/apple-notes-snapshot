@@ -78,11 +78,21 @@ class RegistryLaneUnitTests(unittest.TestCase):
         )
         self.assertIn("ClawHub is live today", distribution_text)
         self.assertIn(
+            "Goose Skills Marketplace submission is review-pending on `block/Agent-Skills#27`",
+            distribution_text,
+        )
+        self.assertIn(
+            "the community index submission is review-pending on `heilcheng/awesome-agent-skills#183`",
+            distribution_text,
+        )
+        self.assertIn(
             "OpenHands/extensions `#150` remains submitted with changes requested",
             distribution_text,
         )
         self.assertIn("external-only / review-pending", distribution_text)
         self.assertNotIn("the `.mcpb` package proves a hosted runtime", distribution_text.split("## Allowed Claims", 1)[0])
+        self.assertNotIn("Goose Skills Marketplace is listed live", distribution_text.split("## Allowed Claims", 1)[0])
+        self.assertNotIn("agent-skill.co is live", distribution_text.split("## Allowed Claims", 1)[0])
 
     def test_public_skill_packet_drops_legacy_reference_filenames(self):
         references_dir = (
