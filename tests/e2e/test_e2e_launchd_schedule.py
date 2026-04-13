@@ -150,6 +150,7 @@ exit 0
                         return latest
                     time.sleep(interval_sec)
                 self.fail(message)
+                raise AssertionError(message)
 
             run_log = root_dir / "run_log.txt"
             state_json = state_dir / "state.json"
