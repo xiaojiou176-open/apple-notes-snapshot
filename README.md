@@ -5,11 +5,11 @@ macOS. Keep the upstream `notes-exporter` engine, then add path-aware exports,
 `launchd` scheduling, visible health checks, and a calmer recovery path when
 the local backup loop drifts.
 
-If you want builder-facing surfaces after the control room already makes sense,
-the repo also ships **AI-assisted diagnostics**, a **token-gated Local Web
-API**, and a **stdio-first MCP surface** so humans and MCP-aware coding agents
-can inspect the same local backup state without turning the workflow into a
-hosted service.
+Second ring only: after the control room already makes sense, the repo also
+ships **AI-assisted diagnostics**, a **token-gated Local Web API**, and a
+**stdio-first MCP surface** so humans and MCP-aware coding agents can inspect
+the same local backup state without turning the workflow into a hosted
+service.
 
 [Start the 3-step quickstart](https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/) |
 [First-run troubleshooting](https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/) |
@@ -44,6 +44,19 @@ hosted service.
 > Not the goal: cloud sync, team collaboration, or two-way write-back into
 > Apple Notes.
 
+## At A Glance
+
+If you only want the shortest truthful filter before reading deeper, use this
+table first:
+
+| What you need to know | Current answer |
+| --- | --- |
+| Product thesis | a local-first Apple Notes backup control room for macOS |
+| First success | `./notesctl run --no-status` -> `./notesctl install --minutes 30 --load` -> `./notesctl verify` |
+| First proof surface | the proof page after one healthy local loop exists |
+| Second ring only | AI Diagnose, Local Web API, and MCP come after the operator path already makes sense |
+| What it must never be reduced to | a hosted Notes service, cloud sync product, or generic AI dashboard |
+
 ### What you can prove in one local pass
 
 - **The destination is obvious**: you can review or override the snapshot path before anything writes.
@@ -77,13 +90,17 @@ describing a baseline you already proved.
 
 ## Builder and maintainer lanes after the operator path
 
-Treat Apple Notes Snapshot like a local control room with a few adapter boxes
-around it:
+The public product front door is still the local backup control room. The lanes
+below are for builders after the first healthy loop exists; they do not replace
+`Run -> Install -> Verify`.
 
-- **Primary current lane: pure MCP**
+- **Public product front door: backup control room**
+  - the main story is still the local path review, the first snapshot run, the
+    `launchd` loop, and the health check surface on your own Mac
+- **Second ring builder protocol lane: pure MCP**
   - the repo's main machine-facing surface is the local stdio MCP flow behind
     `./notesctl mcp` and the root [`server.json`](./server.json)
-- **Secondary current lane: pure skills**
+- **Second ring builder packet lane: pure skills**
   - the public skill packet at
     [`examples/public-skills/notes-snapshot-control-room/`](./examples/public-skills/notes-snapshot-control-room/)
     teaches hosts how to attach to that same local control room
@@ -99,8 +116,7 @@ around it:
     read-back
   - no cross-machine attach guarantee
 
-Star or follow releases if you want a visible, reviewable local backup control
-room instead of another opaque automation snippet.
+Use the builder links below only after the operator loop already makes sense.
 
 Secondary builder reads after the first healthy loop:
 [AI Diagnose](https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/) |
