@@ -108,6 +108,9 @@
         logViewer: "Log Viewer",
         actionOutput: "Action Output",
         operatorFocusDeck: "Operator Focus Deck",
+        sectionOperateEyebrow: "Operate first",
+        sectionDiagnoseEyebrow: "Diagnose with context",
+        sectionReceiptsEyebrow: "Read the receipts last",
         nextMovePill: "next move",
         currentNextMove: "Current next move",
         readOrder: "Read order",
@@ -214,6 +217,12 @@
           'Need the guided version? Open the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a>, then the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/">troubleshooting guide</a>, and keep the <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/">proof page</a> for after the first verified loop.',
         operatorFocusDeckSummary:
           "Read this strip like a control-tower handoff: it tells you what to do next, why that move is safest, and which panel to open before you chase raw logs.",
+        sectionOperate:
+          "These panels should feel like the active flight deck: establish or repair the loop here before you study deeper telemetry.",
+        sectionDiagnose:
+          "Read these cards after the loop exists or after a failure is confirmed. They explain patterns, health drift, and policy boundaries.",
+        sectionReceipts:
+          "Logs and action transcripts are the raw evidence layer. Use them to confirm a theory, not to discover the first one.",
         focusReconnectNext: "Reconnect the control room",
         focusReconnectReason:
           "The live status feed is not visible yet, so the safest move is to refresh before you trust any deeper panel.",
@@ -523,6 +532,9 @@
         logViewer: "日志查看器",
         actionOutput: "操作输出",
         operatorFocusDeck: "操作员聚焦甲板",
+        sectionOperateEyebrow: "先操作",
+        sectionDiagnoseEyebrow: "带着上下文再诊断",
+        sectionReceiptsEyebrow: "最后再读回执",
         nextMovePill: "下一步",
         currentNextMove: "当前下一步",
         readOrder: "阅读顺序",
@@ -629,6 +641,12 @@
           '想看带路版？先打开 <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/">quickstart</a>，再看 <a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/">troubleshooting guide</a>；<a href="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/">proof page</a> 留到第一次校验通过之后再读。',
         operatorFocusDeckSummary:
           "把这一条当作控制塔交接条：它会先告诉你下一步该做什么、为什么这一步最安全，以及在你追原始日志之前该先开哪个面板。",
+        sectionOperate:
+          "这些面板属于主动操作层。先在这里建立或修复循环，再去研究更深的遥测信息。",
+        sectionDiagnose:
+          "只有在循环已经存在，或者你已经确认失败之后，再来读这些卡片。它们负责解释模式、健康漂移和策略边界。",
+        sectionReceipts:
+          "日志和操作输出属于原始证据层。用它们来确认一个判断，而不是拿它们当第一条线索。",
         focusReconnectNext: "先恢复控制室连接",
         focusReconnectReason:
           "当前还看不到实时状态，所以最安全的动作是先刷新并确认控制室重新连上，再去相信更深层面板。",
