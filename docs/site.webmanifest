@@ -2,7 +2,7 @@
   "id": "/apple-notes-snapshot/",
   "name": "Apple Notes Snapshot",
   "short_name": "Notes Snapshot",
-  "description": "Local-first Apple Notes backup control room for macOS with a token-gated Local Web API, AI Diagnose, and a read-only MCP surface.",
+  "description": "Apple Notes backup control room for macOS with a token-gated Local Web API, AI Diagnose, and a read-only MCP surface.",
   "start_url": "/apple-notes-snapshot/",
   "scope": "/apple-notes-snapshot/",
   "display": "standalone",

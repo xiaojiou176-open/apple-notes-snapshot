@@ -6,7 +6,7 @@
     <title>Proof and trust boundary | Apple Notes Snapshot</title>
     <meta
       name="description"
-      content="See the Apple Notes Snapshot proof stack: repo-owned gates, GitHub-controlled release evidence, live Web and MCP surface checks, and the current same-machine boundary."
+      content="See the Apple Notes Snapshot proof stack: repo-owned gates, GitHub-controlled release evidence, live Web and MCP surface checks, and the current access boundary."
     />
     <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/" />
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
@@ -16,7 +16,7 @@
     <meta property="og:title" content="Proof and trust boundary | Apple Notes Snapshot" />
     <meta
       property="og:description"
-      content="See the repo-owned gates, GitHub-controlled release evidence, live Web and MCP checks, and the current same-machine boundary for Apple Notes Snapshot."
+      content="See the repo-owned gates, GitHub-controlled release evidence, live Web and MCP checks, and the current access boundary for Apple Notes Snapshot."
     />
     <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/" />
     <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
@@ -25,7 +25,7 @@
     <meta name="twitter:title" content="Proof and trust boundary | Apple Notes Snapshot" />
     <meta
       name="twitter:description"
-      content="See the Apple Notes Snapshot proof stack: repo gates, release evidence, live Web and MCP checks, and the current same-machine boundary."
+      content="See the Apple Notes Snapshot proof stack: repo gates, release evidence, live Web and MCP checks, and the current access boundary."
     />
     <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
     <link rel="stylesheet" href="../styles.css" />
@@ -68,7 +68,7 @@
         <h1>See why this control room is worth trusting without reading every workflow by hand.</h1>
         <p>
           This page collects the shortest truthful evidence trail for Apple Notes Snapshot. It
-          separates repo-owned gates, GitHub-controlled delivery facts, live same-machine surface
+          separates repo-owned gates, GitHub-controlled delivery facts, live Web/API/MCP surface
           checks, and the places where a real host or macOS permission prompt still becomes the
           final boundary.
         </p>
@@ -87,8 +87,8 @@
         </article>
         <article class="signal-card">
           <span class="eyebrow-inline">Ledger 3</span>
-          <strong>Live same-machine proof</strong>
-          <p>Web and MCP are real, but they stay local and read-only-first in spirit.</p>
+          <strong>Live access proof</strong>
+          <p>Web and MCP are real, but they stay tightly bounded and read-only-first in spirit.</p>
         </article>
         <article class="signal-card">
           <span class="eyebrow-inline">Ledger 4</span>
@@ -109,10 +109,10 @@
           </p>
         </article>
         <article class="callout">
-          <span class="eyebrow-inline">Same-machine boundary</span>
+          <span class="eyebrow-inline">Access boundary</span>
           <h3>Web and MCP are real, but they do not become a hosted platform.</h3>
           <p>
-            The Local Web API stays token-gated and same-machine. MCP stays stdio-first and
+            The Local Web API stays token-gated and machine-bounded. MCP stays stdio-first and
             read-only-first. The repo still does not claim a public OpenAPI, hosted API, or
             write-capable agent platform.
           </p>
@@ -150,7 +150,7 @@
       </section>
 
       <section class="page-card">
-        <h2>Live same-machine proof</h2>
+        <h2>Live access proof</h2>
         <ul>
           <li><strong>Local Web API</strong>: token-gated requests to <code>/api/health</code>, <code>/api/access</code>, and <code>/api/status</code> were re-run against a local <code>./notesctl web</code> process.</li>
           <li><strong>MCP</strong>: stdio <code>initialize</code> and <code>tools/list</code> were re-run against <code>./notesctl mcp</code>, confirming the read-only-first tool surface still advertises the current contract.</li>
@@ -175,9 +175,9 @@
       <section class="page-card page-card--warm">
         <h2>What this page does not do for you</h2>
         <p>
-          This page is a trust ledger, not a shortcut around the local-first reality. It does not
+          This page is a trust ledger, not a shortcut around the real access boundary. It does not
           replace Quickstart, it does not skip Apple Notes permissions, and it does not turn the
-          same-machine Web/API/MCP surfaces into a hosted platform promise.
+          Web/API/MCP surfaces on your machine into a hosted platform promise.
         </p>
       </section>
 
@@ -194,8 +194,8 @@
       </main>
 
       <footer class="footer">
-        Proof here means evidence plus boundary, not hype. The control room stays local-first, the
-        Web/API lane stays same-machine and token-gated, and MCP stays read-only-first unless the
+        Proof here means evidence plus boundary, not hype. The control room stays user-controlled, the
+        Web/API lane stays token-gated on your machine, and MCP stays read-only-first unless the
         repo proves a different contract in a future tag.
       </footer>
     </div>

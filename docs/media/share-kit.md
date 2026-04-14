@@ -10,7 +10,7 @@ Use upstream for the engine. Use this repo for the local control room.
 Optional truthful hooks you can add when the audience cares:
 
 - AI Diagnose = operator next-step explanation layer
-- Local Web API = token-gated same-machine browser/API lane
+- Local Web API = token-gated host-local browser/API surface
 - MCP Provider = read-only agent-facing substrate
 
 ## 10-second demo

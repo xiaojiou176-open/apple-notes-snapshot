@@ -6,7 +6,7 @@
     <title>Common Apple Notes Snapshot questions answered | FAQ</title>
     <meta
       name="description"
-      content="Answers to common Apple Notes Snapshot questions about local-first behavior, launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
+      content="Answers to common Apple Notes Snapshot questions about launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
     />
     <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/faq/" />
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
@@ -16,16 +16,16 @@
     <meta property="og:title" content="FAQ | Apple Notes Snapshot" />
     <meta
       property="og:description"
-      content="Answers to common Apple Notes Snapshot questions about local-first behavior, launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
+      content="Answers to common Apple Notes Snapshot questions about launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
     />
     <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/faq/" />
     <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
-    <meta property="og:image:alt" content="Apple Notes Snapshot FAQ card answering common questions about the local-first backup control room" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot FAQ card answering common questions about the backup control room" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Common Apple Notes Snapshot questions answered" />
     <meta
       name="twitter:description"
-      content="Answers to common Apple Notes Snapshot questions about local-first behavior, launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
+      content="Answers to common Apple Notes Snapshot questions about launchd scheduling, the Local Web API, AI Diagnose, MCP, privacy, and upstream notes-exporter."
     />
     <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
     <link rel="stylesheet" href="../styles.css" />
@@ -81,7 +81,7 @@
             "name": "What is the difference between the Local Web API and MCP?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The Local Web API comes from ./notesctl web and is a token-gated same-machine browser and HTTP surface. MCP comes from ./notesctl mcp and is a stdio-first host-to-tooling contract for MCP-aware agents. Neither is a public OpenAPI or hosted control plane."
+              "text": "The Local Web API comes from ./notesctl web and is a token-gated browser and HTTP surface on your own machine. MCP comes from ./notesctl mcp and is a stdio-first host-to-tooling contract for MCP-aware agents. Neither is a public OpenAPI or hosted control plane."
             }
           },
           {
@@ -166,7 +166,7 @@
           <h3>What is the difference between the Local Web API and MCP?</h3>
           <p>
             The <a href="../local-api/">Local Web API</a> comes from <code>./notesctl web</code>
-            and is a token-gated same-machine browser and HTTP surface. The
+            and is a token-gated browser and HTTP surface on this Mac. The
             <a href="../mcp/">MCP Provider</a> comes from <code>./notesctl mcp</code> and is a
             stdio-first host-to-tooling contract for MCP-aware agents. Neither one is a public
             OpenAPI or hosted control plane.
@@ -202,8 +202,9 @@
         <article class="faq-item">
           <h3>Can I expose the Web console remotely?</h3>
           <p>
-            The project is designed to stay local-first. If you deliberately bind it beyond loopback,
-            set a strong token, review the action allowlist, and read the security summary first.
+            The project is designed to stay loopback-first. If you deliberately bind it beyond
+            loopback, set a strong token, review the action allowlist, and read the security
+            summary first.
           </p>
         </article>
       </section>
@@ -231,7 +232,7 @@
       <footer class="footer">
         If your question is really "should I use this or upstream?", go to the
         <a href="../compare/">comparison page</a>. If your question is "how do I start?",
-        use the <a href="../quickstart/">quickstart</a>. If your question is "which builder/API
+        use the <a href="../quickstart/">quickstart</a>. If your question is "which integration/API
         surface fits me?", open <a href="../local-api/">Local Web API</a> or
         <a href="../for-agents/">For Agents</a>. If your question is "what should I post next?",
         use the <a href="../media/external-launch-prep/">external launch prep packet</a>.
