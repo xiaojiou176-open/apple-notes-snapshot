@@ -1,15 +1,13 @@
 # Apple Notes Snapshot
 
-Apple Notes Snapshot is the local-first backup control room for Apple Notes on
+Apple Notes Snapshot is the backup control room for Apple Notes on
 macOS. Keep the upstream `notes-exporter` engine, then add path-aware exports,
 `launchd` scheduling, visible health checks, and a calmer recovery path when
 the local backup loop drifts.
 
-Second ring only: after the control room already makes sense, the repo also
-ships **AI-assisted diagnostics**, a **token-gated Local Web API**, and a
-**stdio-first MCP surface** so humans and MCP-aware coding agents can inspect
-the same local backup state without turning the workflow into a hosted
-service.
+After the control room already makes sense, the repo also ships extra builder
+and diagnostics surfaces so humans and coding agents can inspect the same
+backup state without turning the workflow into a hosted service.
 
 [Start the 3-step quickstart](https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/) |
 [First-run troubleshooting](https://xiaojiou176-open.github.io/apple-notes-snapshot/troubleshooting/) |
@@ -33,9 +31,8 @@ service.
 - **Read the next safe move first**
   The Web console now surfaces an operator focus deck above the raw transcript so you can see the next move, the reason, and the reading order before diving into action output.
 
-> Category: local-first Apple Notes backup control room.
-> AI/agent hook: AI-assisted diagnostics plus a token-gated Local Web API and
-> a read-only MCP surface for MCP-aware coding agents.
+> Category: Apple Notes backup control room.
+> AI/agent hook: AI-assisted diagnostics plus optional coding-agent access once the operator workflow is already clear.
 > Result: a calmer, more reviewable backup workflow on your own Mac.
 
 > Best fit: people who already rely on Apple Notes and want a calmer,
@@ -51,7 +48,7 @@ table first:
 
 | What you need to know | Current answer |
 | --- | --- |
-| Product thesis | a local-first Apple Notes backup control room for macOS |
+| Product thesis | an Apple Notes backup control room for macOS |
 | First success | `./notesctl run --no-status` -> `./notesctl install --minutes 30 --load` -> `./notesctl verify` |
 | First proof surface | the proof page after one healthy local loop exists |
 | Second ring only | AI Diagnose, Local Web API, and MCP come after the operator path already makes sense |
@@ -62,12 +59,12 @@ table first:
 - **The destination is obvious**: you can review or override the snapshot path before anything writes.
 - **The loop is real**: one manual run plus `launchd` turns a one-off export into a repeatable local rhythm.
 - **The control room is inspectable**: `status`, `verify`, `doctor`, logs, and proof pages all stay on the same local facts.
-- **Builder surfaces are optional**: AI Diagnose, the Local Web API, and MCP all stay behind the operator story instead of replacing it.
+- **Integration surfaces are optional**: AI Diagnose, the Local Web API, and MCP all stay behind the operator story instead of replacing it.
 
 If you want the shortest public evidence trail after that first pass, open the
 [proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/).
 It collects the repo-owned gates, the GitHub-controlled release and Pages
-evidence, and the current same-machine boundary in one place.
+evidence, and the current access boundary in one place.
 
 ## Start with Run -> Install -> Verify
 
@@ -88,7 +85,7 @@ After that verified loop exists, the Web console, proof page, AI Diagnose,
 Local Web API, and MCP surfaces become much easier to read because they are all
 describing a baseline you already proved.
 
-## Builder and maintainer lanes after the operator path
+## Integration and maintainer routes after the operator path
 
 The public product front door is still the local backup control room. The lanes
 below are for builders after the first healthy loop exists; they do not replace
@@ -116,14 +113,14 @@ below are for builders after the first healthy loop exists; they do not replace
     read-back
   - no cross-machine attach guarantee
 
-Use the builder links below only after the operator loop already makes sense.
+Use the integration links below only after the operator loop already makes sense.
 
-Secondary builder reads after the first healthy loop:
+Secondary integration reads after the first healthy loop:
 [AI Diagnose](https://xiaojiou176-open.github.io/apple-notes-snapshot/ai-diagnose/) |
 [Local Web API](https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/) |
 [MCP Provider](https://xiaojiou176-open.github.io/apple-notes-snapshot/mcp/) |
 [Distribution and listing boundaries](./DISTRIBUTION.md) |
-[For Codex / Claude Code builders](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/)
+[For Codex / Claude Code integrations](https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/)
 
 ## Quickstart
 
@@ -199,8 +196,8 @@ Apple Notes Snapshot wraps the upstream exporter with:
 
 ## What you get over upstream notes-exporter
 
-Think of upstream as the engine and this repository as the local control room
-around it. The wrapper stays local-first, tells you where snapshots will land,
+Think of upstream as the engine and this repository as the control room
+around it. The wrapper tells you where snapshots will land,
 and makes the schedule and health surface easier to inspect when something
 breaks.
 
@@ -262,8 +259,8 @@ replace `notesctl` or the deterministic runtime checks.
 
 ## How AI and agents fit
 
-Use this mental model if you care about Codex, Claude Code, MCP, or other local
-builder ecosystems.
+Use this mental model if you care about Codex, Claude Code, MCP, or other
+host-local integration ecosystems.
 
 Natural fit:
 
@@ -277,18 +274,18 @@ Natural fit:
   - It exposes the same local backup state to MCP-aware hosts.
   - It does not turn the project into a hosted agent platform or write-capable
     remote control plane.
-- **Local Web API = token-gated browser/API lane**
+- **Local Web API = token-gated browser/API surface**
   - It serves the local Web console plus JSON endpoints like `status`,
     `doctor`, `recent-runs`, and `access`.
-  - It is meant for same-machine browser or local HTTP workflows, not as a
+  - It is meant for browser or local HTTP workflows on your own machine, not as a
     public OpenAPI promise.
-- **`notesctl` + `state.json` + aggregate summaries + token-gated Web API = current local substrate**
+- **`notesctl` + `state.json` + aggregate summaries + token-gated Web API = current substrate**
   - This repository does not ship a public OpenAPI, generated client, or SDK
     today.
-  - The truthful builder entry points are the CLI contract, the token-gated
-    local Web API, and the read-only MCP surface.
+  - The truthful integration entry points are the CLI contract, the web/API
+    surface, and the read-only MCP surface.
 
-The builder lane has its own shelves now, so this README does not need to carry
+Integration-facing docs have their own shelves now, so this README does not need to carry
 every host-specific setup detail:
 
 - Open the public
@@ -367,8 +364,8 @@ required for the first successful snapshot.
 
 If you want the shorter public-facing evidence page first, open the
 [proof page](https://xiaojiou176-open.github.io/apple-notes-snapshot/proof/).
-It keeps the repo-side gates, GitHub-controlled delivery facts, and live
-same-machine boundary in one place. The ladder below remains the
+It keeps the repo-side gates, GitHub-controlled delivery facts, and the
+current access boundary in one place. The ladder below remains the
 maintainer-grade verification contract.
 
 Default local maintainer lane:
@@ -590,7 +587,7 @@ Read the pyramid as:
 
 ## Security and privacy
 
-This project is intentionally local-first:
+This project is intentionally user-controlled on your own machine:
 
 - your Apple Notes content stays in your own Apple Notes account and export
   destination

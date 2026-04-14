@@ -16,11 +16,11 @@
     <meta property="og:title" content="For Codex, Claude Code, and other MCP-aware hosts | Apple Notes Snapshot" />
     <meta
       property="og:description"
-      content="Apple Notes Snapshot is a local-first Apple Notes backup control room with a local Web API, AI Diagnose, and a read-only MCP surface for Codex, Claude Code, and other MCP-aware hosts."
+      content="Apple Notes Snapshot is an Apple Notes backup control room with a Local Web API, AI Diagnose, and a read-only MCP surface for Codex, Claude Code, and other MCP-aware hosts."
     />
     <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/" />
     <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
-    <meta property="og:image:alt" content="Apple Notes Snapshot for agents page describing the AI Diagnose sidecar and MCP provider" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot for agents page describing AI Diagnose and the MCP provider" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="For Codex, Claude Code, and other MCP-aware hosts | Apple Notes Snapshot" />
     <meta
@@ -65,12 +65,12 @@
 
       <main id="main-content">
       <section class="page-hero">
-        <span class="page-hero__eyebrow">Builder lane, still downstream of the control room</span>
-        <h1>Give local coding hosts the same backup facts as a human operator.</h1>
+        <span class="page-hero__eyebrow">Coding-host route, still downstream of the control room</span>
+        <h1>Give coding hosts the same backup facts as a human operator.</h1>
         <p>
           The project is not a hosted agent platform. It is a local Apple Notes backup control room
-          with three truthful builder surfaces: a token-gated same-machine Local Web API, an
-          advisory AI diagnosis sidecar, and a stdio-first, read-only-first MCP provider.
+          with three truthful host surfaces: a token-gated Local Web API for this Mac, an advisory
+          AI Diagnose surface, and a stdio-first, read-only-first MCP provider.
         </p>
       </section>
 
@@ -78,7 +78,7 @@
         <article class="curation-card">
           <span class="eyebrow-inline">Step 1</span>
           <strong>Understand the control room.</strong>
-          <p>Builder work starts from the deterministic CLI and state ledger, not from agent marketing language.</p>
+          <p>Host integration starts from the deterministic CLI and state ledger, not from agent marketing language.</p>
         </article>
         <article class="curation-card">
           <span class="eyebrow-inline">Step 2</span>
@@ -87,7 +87,7 @@
         </article>
         <article class="curation-card">
           <span class="eyebrow-inline">Step 3</span>
-          <strong>Choose the right builder surface.</strong>
+          <strong>Choose the right host surface.</strong>
           <p>Local Web API, AI Diagnose, and MCP each solve a different problem. This page exists to keep them separate.</p>
         </article>
       </section>
@@ -98,14 +98,14 @@
           Start with the <a href="../quickstart/">quickstart</a>, the
           <a href="../compare/">compare page</a>, or the
           <a href="../proof/">proof page</a> if you still need the control-room contract first.
-          This page is the builder second lane, not the first thing every visitor needs to open.
+          This page is the integration second lane, not the first thing every visitor needs to open.
         </p>
       </section>
 
       <section class="page-card page-card--warm">
         <h2>Start here by goal</h2>
         <ul>
-          <li><strong>Need the shared host matrix first?</strong> Open the <a href="./integration-pack/">Builder Integration Pack</a>.</li>
+          <li><strong>Need the shared host matrix first?</strong> Open the <a href="./integration-pack/">Integration Pack</a>.</li>
           <li><strong>Need the shortest install path?</strong> Open the Codex, Claude Code, or OpenClaw starter pack that matches your host.</li>
           <li><strong>Need reusable prompt or listing-safe guidance?</strong> Open the <a href="./public-skills/">public skills pack</a> and the standalone skill packet.</li>
         </ul>
@@ -121,7 +121,7 @@
           <li><strong>Comparison-only</strong>: this repo mentions the host only to mark scope and avoid overclaiming.</li>
         </ul>
         <p>
-          Read this legend first, then use the <a href="./integration-pack/">Builder Integration Pack</a>
+          Read this legend first, then use the <a href="./integration-pack/">Integration Pack</a>
           or the host-specific starter packs so you do not accidentally upgrade guidance into a
           support claim.
         </p>
@@ -176,7 +176,7 @@
         <h2>Current builder entry points you can trust</h2>
         <ul>
           <li><strong>Deterministic CLI reads</strong>: <code>./notesctl status --json</code>, <code>./notesctl doctor --json</code>, <code>./notesctl log-health --json</code>, and <code>./notesctl aggregate --tail N</code></li>
-          <li><strong>Token-gated local browser/API lane</strong>: <code>./notesctl web</code> when your local workflow wants the Web console plus the same-machine JSON endpoints behind a local token gate</li>
+          <li><strong>Token-gated local browser/API lane</strong>: <code>./notesctl web</code> when your local workflow wants the Web console plus JSON endpoints on this Mac behind a local token gate</li>
           <li><strong>Advisory CLI layer</strong>: <code>./notesctl ai-diagnose --json</code> when you want a calmer explanation around the same local facts</li>
           <li><strong>Agent substrate</strong>: <code>./notesctl mcp</code> when your host can launch stdio MCP servers</li>
         </ul>
@@ -195,8 +195,8 @@
       <section class="page-card page-card--warm">
         <h2>Need the copy-paste pack?</h2>
         <p>
-          Open the <a href="./integration-pack/">Builder Integration Pack</a> when you want one
-          page with the capability matrix, same-machine contract, host status table, repo-owned
+          Open the <a href="./integration-pack/">Integration Pack</a> when you want one
+          page with the capability matrix, host-local contract, host status table, repo-owned
           copyable examples, and a short post-attach checklist that separates repo-side proof from
           host-side proof.
         </p>
@@ -232,7 +232,7 @@
           <li><code>./notesctl help mcp</code> for the narrow MCP contract</li>
           <li><code>./notesctl help web</code> for the browser plus Local Web API contract</li>
           <li><code>./notesctl help audit</code> for token, scope, allowlist, readonly, and rate-limit rules</li>
-          <li><code>./notesctl help ai-diagnose</code> for the advisory AI sidecar contract</li>
+          <li><code>./notesctl help ai-diagnose</code> for the advisory AI Diagnose contract</li>
         </ul>
       </section>
 
@@ -265,7 +265,7 @@
       <section class="page-card">
         <h2>Where to start</h2>
         <ul>
-          <li>Read <a href="./integration-pack/">Builder Integration Pack</a> if you want the copyable host matrix and setup examples first</li>
+          <li>Read <a href="./integration-pack/">Integration Pack</a> if you want the copyable host matrix and setup examples first</li>
           <li>Read <a href="./codex-starter-pack/">Codex Starter Pack</a> if you want the narrow project-scoped Codex setup surface</li>
           <li>Read <a href="./claude-code-starter-pack/">Claude Code Starter Pack</a> if you want the project-scoped versus user-scoped Claude setup surface</li>
           <li>Read <a href="./openclaw-starter-pack/">OpenClaw Starter Pack</a> if you want the narrow MCP registry path for OpenClaw</li>

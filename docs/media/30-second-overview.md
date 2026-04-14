@@ -10,7 +10,7 @@ It keeps the upstream exporter, then adds a local control room around it:
 - log rotation and log-health summaries
 - state files and metrics
 - an optional local Web console
-- a token-gated Local Web API for same-machine browser/API workflows
+- a token-gated Local Web API for host-local browser/API workflows
 - AI Diagnose as an advisory explanation layer
 - a read-only MCP Provider for MCP-aware coding agents
 
@@ -22,4 +22,5 @@ Need the reusable compare card or the 10-second run-flow demo? Open the public
 share kit in `docs/media/share-kit/`.
 
 It is not a cloud service, not a team notes platform, not a public OpenAPI,
-and not a two-way sync engine. It is a local-first snapshot workflow for macOS.
+and not a two-way sync engine. It is a macOS snapshot workflow with a local
+control room.

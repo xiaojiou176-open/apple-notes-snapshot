@@ -6,7 +6,7 @@
     <title>Local Web API | Apple Notes Snapshot</title>
     <meta
       name="description"
-      content="Use the Apple Notes Snapshot Local Web API as a token-gated same-machine HTTP surface for status, doctor, log health, recent runs, and access policy without pretending it is a public OpenAPI."
+      content="Use the Apple Notes Snapshot Local Web API as a token-gated HTTP surface on your own machine for status, doctor, log health, recent runs, and access policy without pretending it is a public OpenAPI."
     />
     <link rel="canonical" href="https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/" />
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
@@ -16,16 +16,16 @@
     <meta property="og:title" content="Local Web API | Apple Notes Snapshot" />
     <meta
       property="og:description"
-      content="Token-gated same-machine HTTP surface for the Apple Notes Snapshot control room, backed by notesctl and the local state ledger."
+      content="Token-gated HTTP surface for the Apple Notes Snapshot control room on your own machine, backed by notesctl and the local state ledger."
     />
     <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/local-api/" />
     <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
-    <meta property="og:image:alt" content="Apple Notes Snapshot Local Web API page for the token-gated same-machine HTTP surface" />
+    <meta property="og:image:alt" content="Apple Notes Snapshot Local Web API page for the token-gated HTTP surface on your own machine" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Local Web API | Apple Notes Snapshot" />
     <meta
       name="twitter:description"
-      content="Token-gated same-machine HTTP surface for status, doctor, recent runs, and access policy in Apple Notes Snapshot."
+      content="Token-gated HTTP surface for status, doctor, recent runs, and access policy in Apple Notes Snapshot on your own machine."
     />
     <meta name="twitter:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
     <link rel="stylesheet" href="../styles.css" />
@@ -67,8 +67,8 @@
 
       <main id="main-content">
       <section class="page-hero">
-        <span class="page-hero__eyebrow">Same-machine, token-gated, and local-first</span>
-        <h1>Use the Local Web API when you want the Web control room plus a small same-machine HTTP surface.</h1>
+        <span class="page-hero__eyebrow">Token-gated and loopback-first</span>
+        <h1>Use the Local Web API when you want the Web control room plus a small HTTP surface on this Mac.</h1>
         <p>
           <code>./notesctl web</code> does two things at once: it serves the local browser control
           room and exposes a token-gated JSON API over the same local process. This is a real local
@@ -82,7 +82,7 @@
         <pre><code>export NOTES_SNAPSHOT_WEB_TOKEN="a-long-random-token"
 ./notesctl web --host 127.0.0.1 --port 8787</code></pre>
         <p>
-          The default fit is same-machine use on <code>127.0.0.1</code>. Keep the token gate on
+          The default fit is use on <code>127.0.0.1</code> on your own machine. Keep the token gate on
           unless you have a deliberate local-only reason to relax it.
         </p>
       </section>
@@ -91,7 +91,7 @@
         <h2>What it is good for</h2>
         <ul>
           <li><strong>Browser-backed operator workflows</strong>: open the Web console and inspect health, state layers, recent runs, and access policy</li>
-          <li><strong>Same-machine HTTP consumers</strong>: local tools that already speak HTTP can read the same local facts without screen-scraping</li>
+          <li><strong>Host-local HTTP consumers</strong>: local tools that already speak HTTP can read the same local facts without screen-scraping</li>
           <li><strong>Builder debugging</strong>: inspect token, readonly, scope, allowlist, and cooldown policy from one place</li>
         </ul>
       </section>
@@ -124,16 +124,16 @@
       </section>
 
       <section class="page-card">
-        <h2>Stable builder contract today</h2>
+        <h2>Stable integration contract today</h2>
         <ul>
-          <li><code>./notesctl help web</code> is the narrow contract summary for the browser plus Local Web API lane</li>
+          <li><code>./notesctl help web</code> is the narrow contract summary for the browser plus Local Web API surface</li>
           <li><code>./notesctl help audit</code> is the narrow contract summary for token, scope, allowlist, readonly, and rate-limit policy</li>
           <li><strong>Safest builder starting point</strong>: read endpoints plus <code>/api/access</code></li>
-          <li><strong>Action routes</strong>: same-machine operator controls first; verify the current safety boundary before you treat them as reusable automation hooks</li>
+          <li><strong>Action routes</strong>: operator controls on your own machine come first; verify the current safety boundary before you treat them as reusable automation hooks</li>
         </ul>
         <p>
           Need the host matrix and copyable setup examples? Open the
-          <a href="../for-agents/integration-pack/">Builder Integration Pack</a>.
+          <a href="../for-agents/integration-pack/">Integration Pack</a>.
         </p>
         <p>
           Need the repo-owned post-attach checklist? Start with
@@ -143,7 +143,7 @@
       </section>
 
       <section class="page-card">
-        <h2>Minimal same-machine request shape</h2>
+        <h2>Minimal request shape on your own machine</h2>
         <pre><code>curl -H "Authorization: Bearer $NOTES_SNAPSHOT_WEB_TOKEN" \
   http://127.0.0.1:8787/api/status
 
@@ -154,7 +154,7 @@ curl -H "Authorization: Bearer $NOTES_SNAPSHOT_WEB_TOKEN" \
       <section class="page-card">
         <h2>How it differs from MCP</h2>
         <ul>
-          <li><strong>Local Web API</strong>: browser and same-machine HTTP surface behind <code>./notesctl web</code></li>
+          <li><strong>Local Web API</strong>: browser and HTTP surface behind <code>./notesctl web</code> on your own machine</li>
           <li><strong>MCP</strong>: stdio-first host-to-tooling contract behind <code>./notesctl mcp</code></li>
           <li><strong>Shared truth</strong>: both reuse the same deterministic local state surfaces</li>
         </ul>
@@ -176,7 +176,8 @@ curl -H "Authorization: Bearer $NOTES_SNAPSHOT_WEB_TOKEN" \
       </main>
 
       <footer class="footer">
-        Keep the naming honest: local control room first, local Web API second, public platform claims out of scope.
+        Keep the naming honest: control room first, Local Web API when you need it, public
+        platform claims out of scope.
       </footer>
     </div>
   </body>

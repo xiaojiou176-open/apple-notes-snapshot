@@ -24,34 +24,34 @@ class PublicFrontDoorContractTests(unittest.TestCase):
             f"expected {earlier!r} to appear before {later!r}",
         )
 
-    def test_readme_keeps_run_install_verify_before_builder_lane(self):
+    def test_readme_keeps_run_install_verify_before_integration_lane(self):
         self.assertIn("## Start with Run -> Install -> Verify", self.readme)
         self.assertIn("[Start the 3-step quickstart]", self.readme)
         self.assertIn("[Open the proof page]", self.readme)
         self.assertIn("[Get support or routing help]", self.readme)
-        self.assertIn("## Builder and maintainer lanes after the operator path", self.readme)
-        self.assertIn("Secondary builder reads after the first healthy loop:", self.readme)
+        self.assertIn("## Integration and maintainer routes after the operator path", self.readme)
+        self.assertIn("Secondary integration reads after the first healthy loop:", self.readme)
         self.assertIn("[Distribution and listing boundaries](./DISTRIBUTION.md)", self.readme)
-        self.assertIn("[For Codex / Claude Code builders]", self.readme)
+        self.assertIn("[For Codex / Claude Code integrations]", self.readme)
 
         self.assert_order(
             self.readme,
             "## Start with Run -> Install -> Verify",
-            "## Builder and maintainer lanes after the operator path",
+            "## Integration and maintainer routes after the operator path",
         )
         self.assert_order(
             self.readme,
             "[Get support or routing help]",
-            "Secondary builder reads after the first healthy loop:",
+            "Secondary integration reads after the first healthy loop:",
         )
         self.assert_order(
             self.readme,
-            "Secondary builder reads after the first healthy loop:",
-            "[For Codex / Claude Code builders]",
+            "Secondary integration reads after the first healthy loop:",
+            "[For Codex / Claude Code integrations]",
         )
 
-    def test_docs_front_door_keeps_first_success_ctas_ahead_of_builder_lane(self):
-        self.assertIn("Operator first. Builder-ready only after the loop feels obvious.", self.docs_index)
+    def test_docs_front_door_keeps_first_success_ctas_ahead_of_integration_lane(self):
+        self.assertIn("Operator first. Integration-ready only after the loop feels obvious.", self.docs_index)
         self.assertIn("Start the 3-step quickstart", self.docs_index)
         self.assertIn("First-run troubleshooting", self.docs_index)
         self.assertIn("Open the proof page", self.docs_index)
@@ -59,8 +59,8 @@ class PublicFrontDoorContractTests(unittest.TestCase):
         self.assertIn(">Install the loop so backups stop depending on your memory.<", self.docs_index)
         self.assertIn(">Verify the loop, then open proof and diagnostics with context.<", self.docs_index)
         self.assertIn(">For Agents<", self.docs_index)
-        self.assertIn("Open the builder lane", self.docs_index)
-        self.assertIn("Open the builder shelf last", self.docs_index)
+        self.assertIn("Open the integration guides", self.docs_index)
+        self.assertIn("Open the integration shelf last", self.docs_index)
         self.assertIn("Distribution boundary", self.docs_index)
         self.assertIn("Open the distribution ledger", self.docs_index)
         self.assertIn(
@@ -71,12 +71,12 @@ class PublicFrontDoorContractTests(unittest.TestCase):
         self.assert_order(
             self.docs_index,
             "Start the 3-step quickstart",
-            "Open the builder lane",
+            "Open the integration guides",
         )
         self.assert_order(
             self.docs_index,
             "Open the proof page",
-            "Open the builder lane",
+            "Open the integration guides",
         )
         self.assert_order(
             self.docs_index,
@@ -92,7 +92,7 @@ class PublicFrontDoorContractTests(unittest.TestCase):
     def test_web_console_preserves_the_same_first_success_spine(self):
         self.assertIn('data-i18n="ui.operatorLane">Run -> Install -> Verify</h2>', self.web_index)
         self.assertIn(
-            'Run one snapshot, install launchd, then verify the loop before you read deeper diagnostics or builder lanes.',
+            'Run one snapshot, install launchd, then verify the loop before you read deeper diagnostics or integration surfaces.',
             self.web_index,
         )
         self.assertIn("Open the <a href=\"https://xiaojiou176-open.github.io/apple-notes-snapshot/quickstart/\">quickstart</a>", self.web_index)

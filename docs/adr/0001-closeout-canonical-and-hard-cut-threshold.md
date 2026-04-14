@@ -5,7 +5,7 @@
 
 ## Context
 
-Apple Notes Snapshot is a local-first wrapper around a vendored upstream engine.
+Apple Notes Snapshot is a local backup wrapper around a vendored upstream engine.
 The repository currently ships a CLI contract, a token-gated local Web API, a
 read-only MCP surface, and public documentation, but it does **not** ship a
 public OpenAPI, generated SDK, or public schema package.

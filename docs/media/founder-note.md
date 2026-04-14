@@ -20,7 +20,7 @@ That operations layer now includes three truthful optional surfaces on top of
 the same local substrate:
 
 - AI Diagnose for calmer operator explanations
-- Local Web API for token-gated same-machine browser/API reads
+- Local Web API for token-gated browser/API reads on this Mac
 - MCP Provider for read-only agent access
 
 The shortest public version is:

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Builder Integration Pack | Apple Notes Snapshot</title>
+    <title>Integration Pack | Apple Notes Snapshot</title>
     <meta
       name="description"
       content="Choose the right Apple Notes Snapshot surface and copy minimal setup examples for Codex, Claude Code, MCP, and the Local Web API."
@@ -13,16 +13,16 @@
     <link rel="manifest" href="../../site.webmanifest" />
     <meta name="theme-color" content="#0e7c74" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Builder Integration Pack | Apple Notes Snapshot" />
+    <meta property="og:title" content="Integration Pack | Apple Notes Snapshot" />
     <meta
       property="og:description"
-      content="Capability matrix, same-machine contract, and copyable setup examples for Codex, Claude Code, MCP-aware hosts, and the Local Web API."
+      content="Capability matrix, host-local contract, and copyable setup examples for Codex, Claude Code, MCP-aware hosts, and the Local Web API."
     />
     <meta property="og:url" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/for-agents/integration-pack/" />
     <meta property="og:image" content="https://xiaojiou176-open.github.io/apple-notes-snapshot/assets/social-preview.png" />
     <meta property="og:image:alt" content="Apple Notes Snapshot builder integration pack page with capability matrix and host setup examples" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Builder Integration Pack | Apple Notes Snapshot" />
+    <meta name="twitter:title" content="Integration Pack | Apple Notes Snapshot" />
     <meta
       name="twitter:description"
       content="Copyable, truthful setup examples for the Apple Notes Snapshot CLI, Local Web API, AI Diagnose, and MCP surfaces."
@@ -47,7 +47,7 @@
       <nav class="site-nav" aria-label="Primary">
         <div class="site-nav__brand">
           <span class="site-nav__eyebrow">Apple Notes Snapshot</span>
-          <span class="site-nav__title">Builder Integration Pack</span>
+          <span class="site-nav__title">Integration Pack</span>
         </div>
         <div class="site-nav__links">
           <a href="../../">Home</a>
@@ -65,18 +65,18 @@
         <span class="page-context__divider" aria-hidden="true">/</span>
         <a href="../">For Agents</a>
         <span class="page-context__divider" aria-hidden="true">/</span>
-        <span aria-current="page">Builder Integration Pack</span>
+        <span aria-current="page">Integration Pack</span>
       </nav>
 
 
       <main id="main-content">
       <section class="page-hero">
-        <span class="page-hero__eyebrow">Copyable, same-machine, and truthful</span>
+        <span class="page-hero__eyebrow">Copyable, host-local, and truthful</span>
         <h1>Use this pack when you want the shortest honest path into a local coding host.</h1>
         <p>
           This pack does not invent a hosted platform story. It packages what the repository
           already ships today: deterministic CLI reads, an advisory AI Diagnose layer, a
-          token-gated same-machine Local Web API, and a stdio-first, read-only-first MCP surface.
+          token-gated Local Web API for this Mac, and a stdio-first, read-only-first MCP surface.
         </p>
       </section>
 
@@ -86,7 +86,7 @@
           <li>Review <code>config/notes_snapshot.env</code> so the repo knows where snapshots and state should live.</li>
           <li>Run <code>./notesctl run --no-status</code> at least once so Apple Notes permissions and the first local state record exist.</li>
           <li>Run <code>./notesctl verify</code> and <code>./notesctl doctor --json</code> so your host is reading real local state, not a first-run missing-state wrapper.</li>
-          <li>Choose the builder lane that matches your workflow shape: CLI, Local Web API, AI Diagnose, or MCP.</li>
+          <li>Choose the host surface that matches your workflow shape: CLI, Local Web API, AI Diagnose, or MCP.</li>
         </ol>
       </section>
 
@@ -123,7 +123,7 @@
             <tr>
               <td><strong>Local Web API</strong></td>
               <td><code>./notesctl web --host 127.0.0.1 --port 8080</code></td>
-              <td>Same-machine HTTP behind a token gate</td>
+              <td>Host-local HTTP behind a token gate</td>
               <td>Browser-backed local tooling and local HTTP consumers</td>
               <td>Read endpoints plus access-policy reads are the safest builder contract today</td>
               <td>No public OpenAPI, no hosted API, no default remote exposure</td>
@@ -214,10 +214,10 @@
             <tr>
               <td><strong>Browser-backed or HTTP-shaped local tool</strong></td>
               <td>Yes</td>
-              <td>Repo-side proven for same-machine reads</td>
+              <td>Repo-side proven for host-local reads</td>
               <td><code>./notesctl web</code> plus a local token</td>
               <td><a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/local-web-api.env.example">Local Web API env example</a> and <a href="https://github.com/xiaojiou176-open/apple-notes-snapshot/blob/main/examples/integration-pack/local-web-api.curl.sh">curl example</a></td>
-              <td>That you keep the surface same-machine, token-gated, and loopback-first</td>
+              <td>That you keep the surface host-local, token-gated, and loopback-first</td>
             </tr>
           </tbody>
         </table>
@@ -226,7 +226,7 @@
       <section class="page-card">
         <h2>Repo proof vs host-side proof</h2>
         <ul>
-          <li><strong>Repo-side already proven here</strong>: the CLI contract, the same-machine Local Web API contract, the stdio MCP launch shape, and the current read-only tool/resource surface.</li>
+          <li><strong>Repo-side already proven here</strong>: the CLI contract, the Local Web API contract for this Mac, the stdio MCP launch shape, and the current read-only tool/resource surface.</li>
           <li><strong>Named-host status today</strong>: Claude Code, Codex, and OpenClaw each have a tagged host-proof trail in <a href="../../releases/v0.1.12/">v0.1.12</a>; OpenCode stays template-only and OpenHands stays comparison-only.</li>
           <li><strong>Host-side still yours to verify on another machine</strong>: where your host stores config, whether attach succeeds in that host build, and any extra host-specific options or UI steps outside the current verified machine.</li>
           <li><strong>Truthful attach rule</strong>: keep OpenCode template-only and OpenHands comparison-only, and do not generalize one tagged named-host proof trail into a universal guarantee for every machine or release.</li>
@@ -311,7 +311,7 @@
             <tr>
               <td><strong>Generic MCP examples</strong></td>
               <td>Any host that speaks stdio MCP</td>
-              <td>Launch shape, checklist, and same-machine contract</td>
+              <td>Launch shape, checklist, and host-local contract</td>
               <td>No hosted runtime, no remote MCP, no write-capable automation platform</td>
             </tr>
           </tbody>
@@ -324,7 +324,7 @@
           <li><code>./notesctl help mcp</code> for the narrow MCP contract</li>
           <li><code>./notesctl help web</code> for the browser plus Local Web API contract</li>
           <li><code>./notesctl help audit</code> for token, scope, allowlist, readonly, and rate-limit rules</li>
-          <li><code>./notesctl help ai-diagnose</code> for the advisory AI sidecar contract</li>
+          <li><code>./notesctl help ai-diagnose</code> for the advisory AI Diagnose contract</li>
         </ul>
       </section>
 
@@ -397,8 +397,8 @@
       </main>
 
       <footer class="footer">
-        Keep the story narrow and honest: same-machine backup control room first, builder-friendly
-        integration pack second, hosted platform claims out of scope.
+        Keep the story narrow and honest: backup control room first, host integration pack second,
+        hosted platform claims out of scope.
       </footer>
     </div>
   </body>
